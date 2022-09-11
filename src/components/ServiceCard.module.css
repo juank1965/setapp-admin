@@ -1,0 +1,11 @@
+.margen {
+  margin: 5px;
+}
+
+.resaltar {
+  color: blue;
+}
+
+.pie {
+  justify-content: space-between;
+}
