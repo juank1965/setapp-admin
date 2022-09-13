@@ -23,11 +23,11 @@ function LoadingPage() {
 
       {cargando ? (
         <div className="loader">
-          <Loader type="cylon" color="#ffff" />
+          <Loader type="cylon" color="#ea042c" />
         </div>
       ) : (
         <div>
-          <h2>CARS FINDER</h2>
+          <h2>Bienvenido a SET APP</h2>
           <h3>Panel de Administración</h3>
           <Login />
         </div>

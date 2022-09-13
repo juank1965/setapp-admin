@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import carsFinderLogo from "../assets/CarsFinder.png";
+import Logo from "../assets/icon-512x512.png";
 import styles from "./Login.module.css";
 
 function Registro() {
@@ -14,7 +14,7 @@ function Registro() {
     <div className={styles.bordes}>
       <div>
         <img
-          src={carsFinderLogo}
+          src={Logo}
           alt="Logotipo"
           height="128px"
           width="128px"

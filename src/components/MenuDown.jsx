@@ -9,6 +9,7 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import NoCrashIcon from "@mui/icons-material/NoCrash";
 import CheckIcon from "@mui/icons-material/Check";
 import Paper from "@mui/material/Paper";
+import MapIcon from "@mui/icons-material/Map";
 
 export default function MenuDown() {
   const [value, setValue] = React.useState(0);
@@ -50,6 +51,12 @@ export default function MenuDown() {
             icon={<CheckIcon />}
             component={Link}
             to="/panel-control/confirmaciones"
+          />
+          <BottomNavigationAction
+            label="Mapa"
+            icon={<MapIcon />}
+            component={Link}
+            to="/panel-control/mapa"
           />
         </BottomNavigation>
       </Paper>
