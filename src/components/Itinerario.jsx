@@ -42,7 +42,7 @@ export default function Itinerario() {
   const handleCerrarCondiciones = () => setAbrirCondiciones(false);
 
   return (
-    <Card sx={{ maxWidth: 200 }} className="cardstyle">
+    <Card sx={{ maxWidth: 250 }} className="cardstyle">
       <CardActionArea component={Link} to="/panel-control/confirmaciones">
         <CardMedia
           component="img"
@@ -52,12 +52,13 @@ export default function Itinerario() {
         />
         <CardContent>
           <Typography gutterBottom variant="subtitle2" component="div">
-            SALIDAS CONFIRMADAS
+            PROGRAMACION DE SALIDAS
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Haciendo click aqui podes listar tus salidas confirmadas de los
-            vehiculos que hayas confirmado su reserva. Deberas cancelar el valor
-            restante del servicio programado
+            Haciendo click aqui podes coordinar con tu conductor la salida
+            programada, podrás dar intrucciones a tu conductor para precisar
+            condiciones de salida como la hora, la dirección de recogida y
+            algunas instrucciones adicionales que estimes conveniente.
           </Typography>
         </CardContent>
       </CardActionArea>

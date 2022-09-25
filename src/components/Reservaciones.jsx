@@ -8,15 +8,17 @@ function Reservaciones() {
   });
 
   return (
-    <div>
+    <div className="bodypanel bodycontent">
       <h3>Sus Reservaciones</h3>
-      {reservas.map((servicio) => {
-        return (
-          <div key={servicio.id}>
-            <ServiceCard info={servicio} />{" "}
-          </div>
-        );
-      })}
+      <div className="cardcontainerstyle">
+        {reservas?.map((servicio) => {
+          return (
+            <div key={servicio.id}>
+              <ServiceCard info={servicio} />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

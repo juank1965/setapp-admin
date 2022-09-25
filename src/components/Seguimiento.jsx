@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -23,17 +24,13 @@ const style = {
 };
 
 export default function Seguimiento() {
-  const [abrirSeguimiento, setAbrirSeguimiento] = React.useState(false);
-  const handleAbrirSeguimiento = () => setAbrirSeguimiento(true);
-  const handleCerrarSeguimiento = () => setAbrirSeguimiento(false);
-
   const [abrirCondiciones, setAbrirCondiciones] = React.useState(false);
   const handleAbrirCondiciones = () => setAbrirCondiciones(true);
   const handleCerrarCondiciones = () => setAbrirCondiciones(false);
 
   return (
-    <Card sx={{ maxWidth: 200 }} className="cardstyle">
-      <CardActionArea onClick={handleAbrirSeguimiento}>
+    <Card sx={{ maxWidth: 250 }} className="cardstyle">
+      <CardActionArea component={Link} to="/panel-control/mapa">
         <CardMedia component="img" height="100" image={mapa} alt="Mapa" />
         <CardContent>
           <Typography gutterBottom variant="subtitle2" component="div">
@@ -50,22 +47,6 @@ export default function Seguimiento() {
           Info
         </Button>
       </CardActions>
-      <Modal
-        open={abrirSeguimiento}
-        onClose={handleCerrarSeguimiento}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            NO DEBE ABRIR ESTE MODAL, ABRE EL MAPA
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Aqui va el componente que muestra la trazabilidad en tiempo real de
-            vehiculo en un mapa.
-          </Typography>
-        </Box>
-      </Modal>
       <Modal
         open={abrirCondiciones}
         onClose={handleCerrarCondiciones}

@@ -1,77 +1,203 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
-//import PersonIcon from "@mui/icons-material/Person";
+import Button from "@mui/material/Button";
+import GoogleIcon from "@mui/icons-material/Google";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import Stack from "@mui/material/Stack";
+import { useForm } from "react-hook-form";
+import { doc, setDoc } from "firebase/firestore";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import {
+  auth,
+  googleProvider,
+  facebookProvider,
+  db,
+} from "../assets/firebase/configuracion";
 
 function Login() {
   let navigate = useNavigate();
-  const handlerGoogleAuth = (e) => {
-    e.preventDefault();
-    navigate("/panel-control/buscar-vehiculos");
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const onSubmit = (data) => {
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        if (userCredential.user.emailVerified === true) {
+          // Signed in
+          const user = userCredential.user;
+          const { uid, displayName, email, photoURL } = user;
+          const usuarioDB = {
+            uid,
+            displayName,
+            email,
+            photoURL,
+            rating: 5,
+          };
+          setDoc(
+            doc(db, "admin", uid),
+            {
+              name: displayName,
+              email: email,
+              image: photoURL,
+              rating: 5,
+            },
+            {
+              merge: true,
+            }
+          );
+          localStorage.setItem("administrador", JSON.stringify(usuarioDB));
+          // Regresa a login
+          navigate("/panel-control/buscar-vehiculos");
+        } else {
+          alert("Por favor verifica tu correo");
+        }
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(`Codigo de Error: ${errorCode}, Error: ${errorMessage}`);
+      });
+  };
+
+  const handlerGoogleAuth = () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const usuario = result.user;
+        const { uid, displayName, email, photoURL } = usuario;
+        const usuarioDB = {
+          uid,
+          displayName,
+          email,
+          photoURL,
+          rating: 5,
+        };
+        setDoc(
+          doc(db, "admin", uid),
+          {
+            name: displayName,
+            email: email,
+            image: photoURL,
+            rating: 5,
+          },
+          {
+            merge: true,
+          }
+        );
+        localStorage.setItem("administrador", JSON.stringify(usuarioDB));
+        navigate("/panel-control/buscar-vehiculos");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(`Codigo de Error: ${errorCode}, Error: ${errorMessage}`);
+      });
+  };
+
+  const handlerFacebookAuth = () => {
+    signInWithPopup(auth, facebookProvider)
+      .then((result) => {
+        const usuario = result.user;
+        const { uid, displayName, email, photoURL } = usuario;
+        const usuarioDB = {
+          uid,
+          displayName,
+          email,
+          photoURL,
+          rating: 5,
+        };
+        setDoc(
+          doc(db, "admin", uid),
+          {
+            name: displayName,
+            email: email,
+            image: photoURL,
+            rating: 5,
+          },
+          {
+            merge: true,
+          }
+        );
+        localStorage.setItem("administrador", JSON.stringify(usuarioDB));
+        navigate("/panel-control/buscar-vehiculos");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(`Codigo de Error: ${errorCode}, Error: ${errorMessage}`);
+      });
   };
 
   return (
     <div className={styles.bordes}>
       <div>
-        <h2>Ingresar</h2>
-        <div>
-          <span>
-            <i className="fab fa-facebook-square"></i>
-          </span>
-          <span>
-            <i className="fab fa-google-plus-square"></i>
-          </span>
-          <span>
-            <i className="fab fa-twitter-square"></i>
-          </span>
-        </div>
+        <h2 className={styles.textcolor}>Ingresar</h2>
       </div>
       <div>
-        <form onSubmit={(e) => handlerGoogleAuth(e)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <div>
-              <span>
-                <i className="fas fa-user"></i>
-              </span>
-            </div>
             <input
               autoFocus
               type="email"
               className={styles.myInput}
               placeholder="email"
-              required
+              {...register("email", {
+                required: true,
+                pattern:
+                  /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/,
+              })}
             />
+            {errors.email && (
+              <p className={styles.errores}>Un email válido es requerido</p>
+            )}
           </div>
           <div>
-            <div>
-              <span>
-                <i className="fas fa-key"></i>
-              </span>
-            </div>
             <input
               type="password"
               className={styles.myInput}
               placeholder="contraseña"
-              required
+              {...register("password", { required: true })}
             />
-          </div>
-          <div>
-            <input type="checkbox" />
-            Recuerdame
+            {errors.password && (
+              <p className={styles.errores}>Contraseña requerida</p>
+            )}
           </div>
           <div>
             <input type="submit" value="Login" className={styles.myButton} />
           </div>
         </form>
+        <p className={styles.link}>-- ó --</p>
       </div>
-      <div>
-        <div>
+
+      <Stack direction="column" spacing={2}>
+        <Button
+          onClick={handlerGoogleAuth}
+          variant="contained"
+          color="inherit"
+          startIcon={<GoogleIcon />}
+        >
+          Ingresa con Google
+        </Button>
+        <Button
+          onClick={handlerFacebookAuth}
+          variant="contained"
+          startIcon={<FacebookIcon />}
+        >
+          Ingresa con Facebook
+        </Button>
+      </Stack>
+      <div className={styles.footer}>
+        <div className={styles.textcolor}>
           No tiene cuenta?{" "}
           <Link to="/registro" className={styles.link}>
             Regístrate aquí !
           </Link>
         </div>
-        <div>
+        <div className={styles.textcolor}>
           <Link to="/cambiar-password" className={styles.link}>
             Olvidaste tu contraseña?
           </Link>

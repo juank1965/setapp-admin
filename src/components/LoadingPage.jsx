@@ -8,7 +8,7 @@ function LoadingPage() {
   useEffect(() => {
     setTimeout(() => {
       setCargando(false);
-    }, 5000);
+    }, 3000);
   }, []);
 
   return (
@@ -16,19 +16,18 @@ function LoadingPage() {
       <img
         src={Logo}
         alt="Logotipo"
-        height="128px"
-        width="128px"
+        height="100px"
+        width="100px"
         className="logoCars"
       />
-
-      {cargando ? (
+      {cargando === true ? (
         <div className="loader">
-          <Loader type="cylon" color="#ea042c" />
+          <Loader type="spinningBubbles" color="#ea042c" />
         </div>
       ) : (
         <div>
           <h2>Bienvenido a SET APP</h2>
-          <h3>Panel de Administración</h3>
+          <h3>ADMINISTRACION DEL SISTEMA</h3>
           <Login />
         </div>
       )}

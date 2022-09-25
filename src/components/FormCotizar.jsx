@@ -1,8 +1,38 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./FormCotizar.module.css";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import { useForm } from "react-hook-form";
 
 export default function FormCotizar() {
+  let navigate = useNavigate();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    defaultValues: {
+      tipo: "",
+      clase: "",
+      ciudadorigen: "",
+      direccionorigen: "",
+      ciudaddestino: "",
+      direcciondestino: "",
+      fechasalida: "",
+      horasalida: "",
+      fecharegreso: "",
+      adultos: 1,
+      menores: 0,
+      bebes: 0,
+    },
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+    navigate("/panel-control/home");
+  };
+
   const handlerCotizacion = (e) => {
     e.preventDefault();
     // Maneja lo datos para enviarlos a la BD
@@ -10,111 +40,163 @@ export default function FormCotizar() {
     //history.push("/panel-control/home");
   };
   return (
-    <div className={styles.bookingform}>
-      <div className={styles.header}>
-        <h3 className={styles.titulo}>SOLICITAR PRESUPUESTO</h3>
-        <Link to="/panel-control/home">
-          <button className={styles.btnheader}>MENU</button>
-        </Link>
-      </div>
-      <form onSubmit={handlerCotizacion} className={styles.form}>
-        <div className={styles.formgroup}>
-          <div className={styles.formcheckbox}>
-            <label htmlFor="viaje-redondo">
-              <input type="radio" id="viaje-redondo" name="viaje-tipo" />
-              <span></span>Ida y Vuelta
-            </label>
-            <label htmlFor="solo-ida">
-              <input type="radio" id="solo-ida" name="viaje-tipo" />
-              <span></span>Solo Ida
-            </label>
-            <label htmlFor="multi-ciudad">
-              <input type="radio" id="multi-ciudad" name="viaje-tipo" />
-              <span></span>Multi-Destino
-            </label>
+    <Card sx={{ minWidth: 275 }} className={styles.margen}>
+      <CardContent className={styles.content}>
+        <div className={styles.bookingform}>
+          <div className={styles.header}>
+            <h3 className={styles.titulo}>Qué vehículo necesitas?</h3>
+            <Link to="/panel-control/home">
+              <button className={styles.btnheader}>MENU</button>
+            </Link>
           </div>
+          <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+            <div className={styles.divdata}>
+              <div className={styles.formgroup}>
+                <span className={styles.formlabel}>Tipo de vehículo</span>
+                <select
+                  {...register("tipo")}
+                  className={styles.formcontroltipo}
+                  autoFocus
+                >
+                  <option value="">Seleccione</option>
+                  <option value="Bus">Bus</option>
+                  <option value="Buseton">Busetón</option>
+                  <option value="Van">Van</option>
+                  <option value="Minivan">Mini Van</option>
+                  <option value="4x4">4 x 4</option>
+                  <option value="Automovil">Automóvil</option>
+                </select>
+                <span className={styles.selectarrow}></span>
+              </div>
+
+              <div className={styles.formgroup}>
+                <span className={styles.formlabel}>Tipo de servicio</span>
+                <select
+                  {...register("clase")}
+                  className={styles.formcontroltipo}
+                >
+                  <option value="">Seleccione</option>
+                  <option value="Pasadia">Pasadia</option>
+                  <option value="Ida y Regreso">Ida y Regreso</option>
+                  <option value="Multidestino">Varios destinos</option>
+                  <option value="2 dias">2 dias</option>
+                  <option value="Nacional">Nacional</option>
+                  <option value="otro">Otro</option>
+                </select>
+                <span className={styles.selectarrow}></span>
+              </div>
+            </div>
+            <div>
+              <div className={styles.formgroup}>
+                <span className={styles.formlabel}>Origen</span>
+                <input
+                  {...register("ciudadorigen", { required: true })}
+                  className={styles.formcontrol}
+                  type="text"
+                  placeholder="Ciudad de Origen"
+                />
+                <input
+                  {...register("direccionorigen", { required: true })}
+                  className={styles.formcontrol}
+                  type="text"
+                  placeholder="Dirección o lugar de Origen"
+                />
+              </div>
+
+              <div className={styles.formgroup}>
+                <span className={styles.formlabel}>Destino</span>
+                <input
+                  {...register("ciudaddestino", { required: true })}
+                  className={styles.formcontrol}
+                  type="text"
+                  placeholder="Ciudad de Destino"
+                />
+                <input
+                  {...register("direcciondestino", { required: true })}
+                  className={styles.formcontrol}
+                  type="text"
+                  placeholder="Dirección o lugar de Destino"
+                />
+              </div>
+            </div>
+
+            <div className={styles.divdata}>
+              <div className={styles.formgroup}>
+                <span className={styles.formlabel}>fecha salida:</span>
+                <input
+                  {...register("fechasalida", { required: true })}
+                  className={styles.formcontroldata}
+                  type="date"
+                />
+              </div>
+
+              <div className={styles.formgroup}>
+                <span className={styles.formlabel}>Hora salida</span>
+                <input
+                  {...register("horasalida", { required: true })}
+                  className={styles.formcontroltime}
+                  type="time"
+                />
+              </div>
+
+              <div className={styles.formgroup}>
+                <span className={styles.formlabel}>Regreso el día:</span>
+                <input
+                  {...register("fecharegreso", { required: true })}
+                  className={styles.formcontroldata}
+                  type="date"
+                />
+              </div>
+            </div>
+
+            <div className={styles.divdata}>
+              <div className={styles.formgroup}>
+                <span className={styles.formlabel}>Adultos (13+)</span>
+                <input
+                  {...register("adultos", { required: true })}
+                  className={styles.formcontroldata}
+                  type="number"
+                  placeholder={1}
+                  min="1"
+                  pattern="^[0-9]+"
+                  required
+                />
+              </div>
+
+              <div className={styles.formgroup}>
+                <span className={styles.formlabel}>Menores (3-13)</span>
+                <input
+                  {...register("menores", { required: true })}
+                  className={styles.formcontroldata}
+                  type="number"
+                  placeholder={0}
+                  min="0"
+                  pattern="^[0-9]+"
+                  required
+                />
+              </div>
+
+              <div className={styles.formgroup}>
+                <span className={styles.formlabel}>Bebés (-3)</span>
+                <input
+                  {...register("bebes", { required: true })}
+                  className={styles.formcontroldata}
+                  type="number"
+                  placeholder={0}
+                  min="0"
+                  pattern="^[0-9]+"
+                  required
+                />
+              </div>
+            </div>
+            <div className={styles.formbtn}>
+              <button type="submit" className={styles.submitbtn}>
+                Buscar
+              </button>
+            </div>
+          </form>
         </div>
-
-        <div>
-          <div className={styles.formgroup}>
-            <span className={styles.formlabel}>Dirección de salida</span>
-            <input
-              className={styles.formcontrol}
-              type="text"
-              placeholder="Dirección y Ciudad"
-            />
-          </div>
-
-          <div className={styles.formgroup}>
-            <span className={styles.formlabel}>Dirección de destino</span>
-            <input
-              className={styles.formcontrol}
-              type="text"
-              placeholder="Dirección y ciudad"
-            />
-          </div>
-        </div>
-
-        <div className={styles.divdata}>
-          <div className={styles.formgroup}>
-            <span className={styles.formlabel}>Salida el día:</span>
-            <input className={styles.formcontroldata} type="date" required />
-          </div>
-
-          <div className={styles.formgroup}>
-            <span className={styles.formlabel}>Hora salida</span>
-            <input className={styles.formcontroltime} type="time" required />
-          </div>
-
-          <div className={styles.formgroup}>
-            <span className={styles.formlabel}>Regreso el día:</span>
-            <input className={styles.formcontroldata} type="date" required />
-          </div>
-        </div>
-
-        <div className={styles.divdata}>
-          <div className={styles.formgroup}>
-            <span className={styles.formlabel}>Adultos (18+)</span>
-            <input
-              className={styles.formcontroldata}
-              type="number"
-              placeholder={0}
-              required
-            />
-          </div>
-
-          <div className={styles.formgroup}>
-            <span className={styles.formlabel}>Menores (0-17)</span>
-            <input
-              className={styles.formcontroldata}
-              type="number"
-              placeholder={0}
-              required
-            />
-          </div>
-        </div>
-
-        <div className={styles.formgroup}>
-          <span className={styles.formlabel}>Tipo de vehículo</span>
-          <select className={styles.formcontrol}>
-            <option>Bus</option>
-            <option>Busetón</option>
-            <option>Van</option>
-            <option>Mini Van</option>
-            <option>4 x 4</option>
-            <option>Automóvil</option>
-          </select>
-          <span className={styles.selectarrow}></span>
-        </div>
-
-        <div className={styles.formbtn}>
-          <Link to="/panel-control/home">
-            <button type="submit" className={styles.submitbtn}>
-              Buscar Ofertas
-            </button>
-          </Link>
-        </div>
-      </form>
-    </div>
+      </CardContent>
+    </Card>
   );
 }

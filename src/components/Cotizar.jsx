@@ -14,6 +14,7 @@ import PolicyIcon from "@mui/icons-material/Policy";
 import FormCotizar from "./FormCotizar";
 import styles from "./Cotizar.module.css";
 import presupuesto from "../assets/solicitar-presupuesto.png";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 
 const style = {
   position: "absolute",
@@ -49,7 +50,7 @@ export default function Cotizar() {
   const handleCerrarCondiciones = () => setAbrirCondiciones(false);
 
   return (
-    <Card sx={{ maxWidth: 200 }} className="cardstyle">
+    <Card sx={{ maxWidth: 250 }} className="cardstyle">
       <CardActionArea component={Link} to="/panel-control/cotizaciones">
         <CardMedia
           component="img"
@@ -59,11 +60,11 @@ export default function Cotizar() {
         />
         <CardContent>
           <Typography gutterBottom variant="subtitle2" component="div">
-            SELECCIONAR OFERTA
+            SELECCIONA LA MEJOR OFERTA
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Busca el mejor precio, selecciona el vehiculo adecuado a tus
-            necesidades y presupesto
+            necesidades y presupesto. HAZ TU RESERVA!
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -74,7 +75,7 @@ export default function Cotizar() {
         <Link to="/panel-control/cotizaciones">
           <IconButton aria-label="price">
             <StyledBadge badgeContent={2} color="secondary">
-              <PriceCheckIcon />
+              <MonetizationOnIcon />
             </StyledBadge>
           </IconButton>
         </Link>
@@ -90,9 +91,11 @@ export default function Cotizar() {
             Terminos y Condiciones
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Las cotizaciones tienen una validez de 24 a 48 horas de pendiendo de
-            el espacio de tiempo que haya hasta el inicio del viaje para
-            solicitudes de un dia debera reservar inmediatamente.
+            Las solicitudes de cotizaciones tienen una validez de 24 horas
+            despues de las cuales deberás realizar una nueva solicitud si no has
+            recibido alguna oferta o no has seleccionado alguna de la lista de
+            ofertas. Para garantizar el servicio deberas cancelar el 50% del
+            valor ofrecido por el vehículo seleccionado.
           </Typography>
         </Box>
       </Modal>

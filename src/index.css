@@ -5,8 +5,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: #fcfafade;
-  background-color: #404045;
+  color: rgb(74, 66, 66);
+  background-color: #f5f3f0;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,11 +17,11 @@
 
 a {
   font-weight: 500;
-  color: #4e92ec;
+  color: #b30221;
   text-decoration: inherit;
 }
 a:hover {
-  color: #4e92ec;
+  color: #b30221;
 }
 
 body {
@@ -57,7 +57,7 @@ button {
   -o-transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: rgb(24, 50, 82);
 }
 button:focus,
 button:focus-visible {

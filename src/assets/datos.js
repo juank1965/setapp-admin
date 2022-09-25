@@ -9,7 +9,7 @@ export const servicios = [
     adultos: 25,
     menores: 12,
     vehiculo: "Bus",
-    estado: "reservado",
+    estado: "confirmado",
   },
   {
     id: 2,
@@ -45,7 +45,7 @@ export const servicios = [
     adultos: 15,
     menores: 0,
     vehiculo: "Van",
-    estado: "reservado",
+    estado: "pendiente",
   },
   {
     id: 5,

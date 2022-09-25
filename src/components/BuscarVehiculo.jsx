@@ -3,8 +3,10 @@ import FormCotizar from "./FormCotizar";
 
 function BuscarVehiculo() {
   return (
-    <div>
-      <FormCotizar />
+    <div className="bodypanel bodycontent">
+      <div className="cardcontainerstyle">
+        <FormCotizar />
+      </div>
     </div>
   );
 }

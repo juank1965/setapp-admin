@@ -15,6 +15,7 @@ import Historial from "./components/Historial";
 import Perfil from "./components/Perfil";
 import Salir from "./components/Salir";
 import BuscarVehiculo from "./components/BuscarVehiculo";
+import MapLeaflet from "./components/MapLeaflet";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
         <Route path="/" element={<LoadingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
-        <Route path="/cambiar-password" element={<CambiarPassword />} />
+        <Route path="/cambiar-password" element={<CambiarPassword />} />        
         <Route path="panel-control" element={<PanelDeControl />}>
           <Route path="buscar-vehiculos" element={<BuscarVehiculo />} />
           <Route path="home" element={<Home />} />

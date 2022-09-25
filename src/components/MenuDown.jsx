@@ -10,6 +10,7 @@ import NoCrashIcon from "@mui/icons-material/NoCrash";
 import CheckIcon from "@mui/icons-material/Check";
 import Paper from "@mui/material/Paper";
 import MapIcon from "@mui/icons-material/Map";
+import styles from "./MenuDown.module.css";
 
 export default function MenuDown() {
   const [value, setValue] = React.useState(0);
@@ -18,7 +19,12 @@ export default function MenuDown() {
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
       <Paper
-        sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+        }}
         elevation={3}
       >
         <BottomNavigation
@@ -27,6 +33,7 @@ export default function MenuDown() {
           onChange={(event, newValue) => {
             setValue(newValue);
           }}
+          className={styles.fondo}
         >
           <BottomNavigationAction
             label="Cotizar"
@@ -41,7 +48,7 @@ export default function MenuDown() {
             to="/panel-control/cotizaciones"
           />
           <BottomNavigationAction
-            label="Tus Reservas"
+            label="Reservas"
             icon={<NoCrashIcon />}
             component={Link}
             to="/panel-control/reservaciones"

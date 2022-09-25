@@ -42,7 +42,7 @@ export default function Reservas() {
   const handleCerrarCondiciones = () => setAbrirCondiciones(false);
 
   return (
-    <Card sx={{ maxWidth: 200 }} className="cardstyle">
+    <Card sx={{ maxWidth: 250 }} className="cardstyle">
       <CardActionArea component={Link} to="/panel-control/reservaciones">
         <CardMedia
           component="img"
@@ -52,11 +52,13 @@ export default function Reservas() {
         />
         <CardContent>
           <Typography gutterBottom variant="subtitle2" component="div">
-            RESERVAS CONFIRMADAS
+            FINALIZA EL PROCESO DE RESERVA
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Haciendo click aqui podes confirmar tus reservas de los vehiculo que
-            hayas seleccionado al cotizar
+            Haciendo click aqui podes completar las reservas de los vehiculos
+            que hayas seleccionado al cotizar. Este proceso lo realizas maximo
+            48 horas antes del viaje programado para gestionar la cancelación
+            del 50% restante del servicio programado.
           </Typography>
         </CardContent>
       </CardActionArea>

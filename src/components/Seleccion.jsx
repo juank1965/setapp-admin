@@ -8,15 +8,17 @@ function Seleccion() {
   });
 
   return (
-    <div>
+    <div className="bodypanel bodycontent">
       <h3>Sevicios Con Vehiculo Seleccionado</h3>
-      {seleccionados.map((servicio) => {
-        return (
-          <div key={servicio.id}>
-            <ServiceCard info={servicio} />{" "}
-          </div>
-        );
-      })}
+      <div className="cardcontainerstyle">
+        {seleccionados.map((servicio) => {
+          return (
+            <div key={servicio.id}>
+              <ServiceCard info={servicio} />{" "}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

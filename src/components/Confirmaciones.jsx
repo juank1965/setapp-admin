@@ -8,15 +8,17 @@ function Confirmaciones() {
   });
 
   return (
-    <div>
+    <div className="bodypanel bodycontent">
       <h3>Sevicios confirmados</h3>
-      {confirmados.map((servicio) => {
-        return (
-          <div key={servicio.id}>
-            <ServiceCard info={servicio} />{" "}
-          </div>
-        );
-      })}
+      <div className="cardcontainerstyle">
+        {confirmados?.map((servicio) => {
+          return (
+            <div key={servicio.id}>
+              <ServiceCard info={servicio} />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

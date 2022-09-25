@@ -3,9 +3,17 @@
 }
 
 .resaltar {
-  color: blue;
+  color: rgb(122, 123, 124);
 }
 
 .pie {
   justify-content: space-between;
+  flex-direction: row-reverse;
+  padding: 5px;
+  margin: 5px;
+}
+
+.content {
+  background: white;
+  color: rgb(28, 27, 27);
 }

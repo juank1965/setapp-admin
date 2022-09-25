@@ -1,0 +1,7 @@
+.mapleaflet {
+  margin: 0px;
+  height: 100vmax;
+  width: auto;
+  position: relative;
+  z-index: 1000;
+}

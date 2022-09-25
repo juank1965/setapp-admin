@@ -8,14 +8,14 @@
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
-  background-color: #292a2c;
+  background-color: #7c8085;
   font-size: 12px;
 }
 
 .myButton {
   box-shadow: inset 0px 1px 3px 0px #91b8b3;
-  background: linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
-  background-color: #76768d;
+  background: linear-gradient(to bottom, #ac0120 5%, #eb042c 100%);
+  background-color: #ac0120;
   border-radius: 12px;
   border: 1px solid #575669;
   display: inline-block;
@@ -27,10 +27,14 @@
   padding: 8px 48px;
   text-decoration: none;
   text-shadow: 0px 5px 12px #2b665e;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
 }
 .myButton:hover {
-  background: linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
-  background-color: #6c7c7c;
+  background: linear-gradient(to bottom, #ac0120 5%, #eb042c 100%);
+  background-color: #ac0120;
 }
 .myButton:active {
   position: relative;
@@ -50,7 +54,7 @@
   text-shadow: 0px 0px 0px rgba(42, 42, 42, 0.51);
   box-shadow: 3px 3px 9px 0px rgba(140, 108, 140, 0.64);
   border-color: #66676b;
-  background-color: #bcbaf5;
+  background-color: #f1f1f8;
   -webkit-border-radius: 9px;
   -moz-border-radius: 9px;
   -ms-border-radius: 9px;
@@ -62,4 +66,17 @@
 
 .link {
   color: #dbe3f0;
+}
+
+.textcolor {
+  color: #131314;
+}
+
+.errores {
+  color: #eb042c;
+  margin: 0px;
+}
+
+.footer {
+  margin-top: 5px;
 }
