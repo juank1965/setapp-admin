@@ -2,23 +2,13 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/icon-512x512.png";
 import styles from "./Login.module.css";
-import Button from "@mui/material/Button";
-import GoogleIcon from "@mui/icons-material/Google";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import Stack from "@mui/material/Stack";
 import { useForm } from "react-hook-form";
 import { doc, setDoc } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
-  signInWithPopup,
   sendEmailVerification,
 } from "firebase/auth";
-import {
-  auth,
-  googleProvider,
-  facebookProvider,
-  db,
-} from "../assets/firebase/configuracion";
+import { auth, db } from "../assets/firebase/configuracion";
 
 function Registro() {
   let navigate = useNavigate();
@@ -41,13 +31,6 @@ function Registro() {
         console.log(user);
         // Crea usuario en la base de datos
         const { uid, displayName, email, photoURL } = user;
-        const usuarioDB = {
-          uid,
-          displayName,
-          email,
-          photoURL,
-          rating: 5,
-        };
         setDoc(
           doc(db, "admin", uid),
           {
@@ -55,6 +38,7 @@ function Registro() {
             email: email,
             image: photoURL,
             rating: 5,
+            perfil: false,
           },
           {
             merge: true,
@@ -63,82 +47,13 @@ function Registro() {
         alert(
           "Usuario creado correctamente, revisa tu bandeja de entrada de tu correo y validalo para garantizar el acceso a los servicios de SETAPP"
         );
-        localStorage.setItem("administrador", JSON.stringify(usuarioDB));
         // Regresa a login
         navigate("/");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(`Codigo de Error: ${errorCode}, Error: ${errorMessage}`); // ..
-      });
-  };
-
-  const handlerGoogleAuth = () => {
-    signInWithPopup(auth, googleProvider)
-      .then((result) => {
-        const usuario = result.user;
-        const { uid, displayName, email, photoURL } = usuario;
-        const usuarioDB = {
-          uid,
-          displayName,
-          email,
-          photoURL,
-          rating: 5,
-        };
-        setDoc(
-          doc(db, "admin", uid),
-          {
-            name: displayName,
-            email: email,
-            image: photoURL,
-            rating: 5,
-          },
-          {
-            merge: true,
-          }
-        );
-        localStorage.setItem("administrador", JSON.stringify(usuarioDB));
-        navigate("/panel-control/buscar-vehiculos");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(`Codigo de Error: ${errorCode}, Error: ${errorMessage}`);
-      });
-  };
-
-  const handlerFacebookAuth = () => {
-    signInWithPopup(auth, facebookProvider)
-      .then((result) => {
-        const usuario = result.user;
-        const { uid, displayName, email, photoURL } = usuario;
-        const usuarioDB = {
-          uid,
-          displayName,
-          email,
-          photoURL,
-          rating: 5,
-        };
-        setDoc(
-          doc(db, "admin", uid),
-          {
-            name: displayName,
-            email: email,
-            image: photoURL,
-            rating: 5,
-          },
-          {
-            merge: true,
-          }
-        );
-        localStorage.setItem("administrador", JSON.stringify(usuarioDB));
-        navigate("/panel-control/buscar-vehiculos");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(`Codigo de Error: ${errorCode}, Error: ${errorMessage}`);
+        alert(`Error: ${errorMessage}`); // ..
       });
   };
 
@@ -193,26 +108,7 @@ function Registro() {
             />
           </div>
         </form>
-        <p className={styles.link}>-- ó --</p>
       </div>
-
-      <Stack direction="column" spacing={2}>
-        <Button
-          onClick={handlerGoogleAuth}
-          variant="contained"
-          color="inherit"
-          startIcon={<GoogleIcon />}
-        >
-          Ingresa con Google
-        </Button>
-        <Button
-          onClick={handlerFacebookAuth}
-          variant="contained"
-          startIcon={<FacebookIcon />}
-        >
-          Ingresa con Facebook
-        </Button>
-      </Stack>
       <div>
         <div className={styles.textcolor}>
           Ya tiene una cuenta?

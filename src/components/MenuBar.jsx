@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -19,17 +19,15 @@ import ListItemText from "@mui/material/ListItemText";
 
 import Avatar from "@mui/material/Avatar";
 import { Link, useNavigate } from "react-router-dom";
-import ImgUser from "../assets/icon-512x512.png";
+import ImgUser from "../assets/avatar.jpg";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-
 import ManageHistoryIcon from "@mui/icons-material/ManageHistory";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
-
 import setapp from "../assets/set-app.png";
-import { auth, salir } from "../assets/firebase/configuracion";
-
-const user = auth.currentUser;
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db, salir } from "../assets/firebase/configuracion";
+import Alert from "@mui/material/Alert";
 
 const drawerWidth = 240;
 
@@ -80,7 +78,20 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function MenuBar() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [user, setUser] = useState(auth.currentUser);
+  const [imagen, setImagen] = useState(ImgUser);
+  const [dataUser, setDataUser] = useState(null);
+
+  console.log(user.uid);
+
+  useEffect(() => {
+    if (user && user.photoURL) {
+      setImagen(user.photoURL);
+      console.log(imagen);
+    }
+  }, []);
+  //console.log(dataUser);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -110,7 +121,7 @@ export default function MenuBar() {
           </IconButton>
           <img src={setapp} alt="logo" height="18px" width="80px" />
 
-          <Avatar alt="Nombre del Usuario" src={user.photoURL} />
+          <Avatar alt="Nombre del Usuario" src={`${imagen}`} />
         </Toolbar>
       </AppBar>
       <Drawer
@@ -181,7 +192,6 @@ export default function MenuBar() {
           </ListItem>
         </List>
       </Drawer>
-
       <Main open={open}>
         <DrawerHeader />
       </Main>

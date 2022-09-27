@@ -1,11 +1,18 @@
 import React from "react";
+import { AccountProfile } from "./AccountProfile";
+import { PerfilUsuario } from "./PerfilUsuario";
 
 function Perfil() {
   return (
     <div className="bodypanel bodycontent">
-      <h2>Componente para gestionar perfil</h2>
-      <div className="cardcontainerstyle">
-        <h3>Tabla que muestra el perfil del usuario</h3>
+      <h2>Cuenta</h2>
+      <div>
+        <div>
+          <AccountProfile />
+        </div>
+        <div>
+          <PerfilUsuario />
+        </div>
       </div>
     </div>
   );

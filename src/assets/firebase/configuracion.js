@@ -52,36 +52,12 @@ export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 export const facebookProvider = new FacebookAuthProvider();
 
-// Metodo para ingresar con boton Facebook
-export const signInWithFacebook = async () => {
-  await signInWithPopup(auth, facebookProvider)
-    .then((result) => {
-      const usuario = result.user;
-      const { uid, displayName, email, photoURL } = usuario;
-      const usuarioDB = {
-        uid,
-        displayName,
-        email,
-        photoURL,
-        rating: 3,
-      };
-      setDoc(
-        doc(db, "usuarios", uid),
-        {
-          name: displayName,
-          email: email,
-          image: photoURL,
-          rating: 3,
-        },
-        {
-          merge: true,
-        }
-      );
-      localStorage.setItem("usuario", JSON.stringify(usuarioDB));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+// Metodo para obtener usuario de la BD
+export const getUsuario = async (id) => {
+  const docRef = doc(db, "admin", id);
+  const docSnap = await getDoc(docRef);
+  const data = docSnap.data();
+  return data;
 };
 
 // Metodo para salir de la aplicacion

@@ -6,10 +6,10 @@ import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import Stack from "@mui/material/Stack";
 import { useForm } from "react-hook-form";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import {
-  auth,
+  auth,  
   googleProvider,
   facebookProvider,
   db,
@@ -28,31 +28,19 @@ function Login() {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         if (userCredential.user.emailVerified === true) {
-          // Signed in
-          const user = userCredential.user;
-          const { uid, displayName, email, photoURL } = user;
-          const usuarioDB = {
-            uid,
-            displayName,
-            email,
-            photoURL,
-            rating: 5,
-          };
-          setDoc(
-            doc(db, "admin", uid),
-            {
-              name: displayName,
-              email: email,
-              image: photoURL,
-              rating: 5,
-            },
-            {
-              merge: true,
+          // Signed in usuario existe
+          const refDoc = doc(db, "admin", userCredential.user.uid);
+          const userData = getDoc(refDoc);
+          userData.then((usuario) => {
+            // Ingresa al panel que corresponde
+            if (usuario.data().perfil) {
+              navigate("/panel-control/buscar-vehiculos");
+              alert("Bienvenido !");
+            } else {
+              navigate("/panel-control/perfil");
+              alert("Debes completar tu perfil");
             }
-          );
-          localStorage.setItem("administrador", JSON.stringify(usuarioDB));
-          // Regresa a login
-          navigate("/panel-control/buscar-vehiculos");
+          });
         } else {
           alert("Por favor verifica tu correo");
         }
@@ -60,7 +48,7 @@ function Login() {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(`Codigo de Error: ${errorCode}, Error: ${errorMessage}`);
+        alert(`${errorMessage}`);
       });
   };
 
@@ -68,33 +56,37 @@ function Login() {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         const usuario = result.user;
+        console.log(usuario.metadata);
         const { uid, displayName, email, photoURL } = usuario;
-        const usuarioDB = {
-          uid,
-          displayName,
-          email,
-          photoURL,
-          rating: 5,
-        };
-        setDoc(
-          doc(db, "admin", uid),
-          {
+        // Crea al usuario en la BD
+        if (usuario.metadata.creationTime === usuario.metadata.lastSignInTime) {
+          setDoc(doc(db, "admin", uid), {
             name: displayName,
             email: email,
             image: photoURL,
             rating: 5,
-          },
-          {
-            merge: true,
-          }
-        );
-        localStorage.setItem("administrador", JSON.stringify(usuarioDB));
-        navigate("/panel-control/buscar-vehiculos");
+            perfil: false,
+          });
+        }else {
+          // Signed in usuario existe
+          const refDoc = doc(db, "admin", uid);
+          const userData = getDoc(refDoc);
+          userData.then((usuario) => {
+            // Ingresa al panel que corresponde
+            if (usuario.data().perfil) {
+              navigate("/panel-control/buscar-vehiculos");
+              alert("Bienvenido !");
+            } else {
+              navigate("/panel-control/perfil");
+              alert("Debes completar tu perfil");
+            }
+          });
+        }
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(`Codigo de Error: ${errorCode}, Error: ${errorMessage}`);
+        alert(`${errorMessage}`);
       });
   };
 
@@ -103,32 +95,35 @@ function Login() {
       .then((result) => {
         const usuario = result.user;
         const { uid, displayName, email, photoURL } = usuario;
-        const usuarioDB = {
-          uid,
-          displayName,
-          email,
-          photoURL,
-          rating: 5,
-        };
-        setDoc(
-          doc(db, "admin", uid),
-          {
+        // Crea al usuario en  la BD
+        if (usuario.metadata.creationTime === usuario.metadata.lastSignInTime) {
+          setDoc(doc(db, "admin", uid), {
             name: displayName,
             email: email,
             image: photoURL,
             rating: 5,
-          },
-          {
-            merge: true,
-          }
-        );
-        localStorage.setItem("administrador", JSON.stringify(usuarioDB));
-        navigate("/panel-control/buscar-vehiculos");
+            perfil: false,
+          });
+        }else {
+          // Signed in usuario existe
+          const refDoc = doc(db, "admin", uid);
+          const userData = getDoc(refDoc);
+          userData.then((usuario) => {
+            // Ingresa al panel que corresponde
+            if (usuario.data().perfil) {
+              navigate("/panel-control/buscar-vehiculos");
+              alert("Bienvenido !");
+            } else {
+              navigate("/panel-control/perfil");
+              alert("Debes completar tu perfil");
+            }
+          });
+        }
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(`Codigo de Error: ${errorCode}, Error: ${errorMessage}`);
+        alert(`${errorMessage}`);
       });
   };
 
