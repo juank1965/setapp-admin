@@ -32,11 +32,17 @@ function Login() {
           const refDoc = doc(db, "admin", userCredential.user.uid);
           const userData = getDoc(refDoc);
           userData.then((usuario) => {
+          const userSigned = {
+              id: usuario.id,
+              datos: usuario.data(),
+            };
             // Ingresa al panel que corresponde
             if (usuario.data().perfil) {
+            localStorage.setItem("usuario", JSON.stringify(userSigned));
               navigate("/panel-control/buscar-vehiculos");
               alert("Bienvenido !");
             } else {
+            localStorage.setItem("usuario", JSON.stringify(userSigned));
               navigate("/panel-control/perfil");
               alert("Debes completar tu perfil");
             }
@@ -72,11 +78,17 @@ function Login() {
           const refDoc = doc(db, "admin", uid);
           const userData = getDoc(refDoc);
           userData.then((usuario) => {
+          const userSigned = {
+              id: usuario.id,
+              datos: usuario.data(),
+            };
             // Ingresa al panel que corresponde
             if (usuario.data().perfil) {
+            localStorage.setItem("usuario", JSON.stringify(userSigned));
               navigate("/panel-control/buscar-vehiculos");
               alert("Bienvenido !");
             } else {
+            localStorage.setItem("usuario", JSON.stringify(userSigned));
               navigate("/panel-control/perfil");
               alert("Debes completar tu perfil");
             }
@@ -109,11 +121,17 @@ function Login() {
           const refDoc = doc(db, "admin", uid);
           const userData = getDoc(refDoc);
           userData.then((usuario) => {
+          const userSigned = {
+              id: usuario.id,
+              datos: usuario.data(),
+            };
             // Ingresa al panel que corresponde
             if (usuario.data().perfil) {
+            localStorage.setItem("usuario", JSON.stringify(userSigned));
               navigate("/panel-control/buscar-vehiculos");
               alert("Bienvenido !");
             } else {
+            localStorage.setItem("usuario", JSON.stringify(userSigned));
               navigate("/panel-control/perfil");
               alert("Debes completar tu perfil");
             }

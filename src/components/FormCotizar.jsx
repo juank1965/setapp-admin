@@ -4,8 +4,13 @@ import styles from "./FormCotizar.module.css";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 export default function FormCotizar() {
+  const [dataUser, setDataUser] = useState(
+    JSON.parse(localStorage.getItem("usuario"))
+  );
+
   let navigate = useNavigate();
   const {
     register,
@@ -13,32 +18,24 @@ export default function FormCotizar() {
     handleSubmit,
   } = useForm({
     defaultValues: {
+      solicitante: dataUser.id,
       tipo: "",
       clase: "",
-      ciudadorigen: "",
-      direccionorigen: "",
-      ciudaddestino: "",
-      direcciondestino: "",
-      fechasalida: "",
-      horasalida: "",
-      fecharegreso: "",
+      ciudadOrigen: "",
+      direccionOrigen: "",
+      ciudadDestino: "",
+      direccionDestino: "",
+      fechaDalida: "",
+      horaDalida: "",
+      fechaRegreso: "",
       adultos: 1,
-      menores: 0,
-      bebes: 0,
     },
   });
-
   const onSubmit = (data) => {
     console.log(data);
     navigate("/panel-control/home");
   };
 
-  const handlerCotizacion = (e) => {
-    e.preventDefault();
-    // Maneja lo datos para enviarlos a la BD
-    alert("Datos enviados");
-    //history.push("/panel-control/home");
-  };
   return (
     <Card sx={{ minWidth: 275 }} className={styles.margen}>
       <CardContent className={styles.content}>
@@ -50,11 +47,19 @@ export default function FormCotizar() {
             </Link>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+            <input
+              {...register("solicitante")}
+              className={styles.formcontrol}
+              type="text"
+              disabled
+              hidden
+            />
+
             <div className={styles.divdata}>
               <div className={styles.formgroup}>
                 <span className={styles.formlabel}>Tipo de vehículo</span>
                 <select
-                  {...register("tipo")}
+                  {...register("tipo", { required: true })}
                   className={styles.formcontroltipo}
                   autoFocus
                 >
@@ -67,12 +72,14 @@ export default function FormCotizar() {
                   <option value="Automovil">Automóvil</option>
                 </select>
                 <span className={styles.selectarrow}></span>
+                {errors.tipo && (
+                  <p className={styles.errores}>Seleccione tipo de vehiculo</p>
+                )}
               </div>
-
               <div className={styles.formgroup}>
                 <span className={styles.formlabel}>Tipo de servicio</span>
                 <select
-                  {...register("clase")}
+                  {...register("clase", { required: true })}
                   className={styles.formcontroltipo}
                 >
                   <option value="">Seleccione</option>
@@ -84,39 +91,59 @@ export default function FormCotizar() {
                   <option value="otro">Otro</option>
                 </select>
                 <span className={styles.selectarrow}></span>
+                {errors.clase && (
+                  <p className={styles.errores}>Seleccione tour</p>
+                )}
               </div>
             </div>
+
             <div>
               <div className={styles.formgroup}>
                 <span className={styles.formlabel}>Origen</span>
                 <input
-                  {...register("ciudadorigen", { required: true })}
+                  {...register("ciudadOrigen", { required: true })}
                   className={styles.formcontrol}
                   type="text"
                   placeholder="Ciudad de Origen"
                 />
+                {errors.ciudadOrigen && (
+                  <p className={styles.errores}>De donde salimos?</p>
+                )}
                 <input
-                  {...register("direccionorigen", { required: true })}
+                  {...register("direccionOrigen", { required: true })}
                   className={styles.formcontrol}
                   type="text"
                   placeholder="Dirección o lugar de Origen"
                 />
+                {errors.direccionOrigen && (
+                  <p className={styles.errores}>
+                    Proporcione direccion de salida
+                  </p>
+                )}
               </div>
 
               <div className={styles.formgroup}>
                 <span className={styles.formlabel}>Destino</span>
                 <input
-                  {...register("ciudaddestino", { required: true })}
+                  {...register("ciudadDestino", { required: true })}
                   className={styles.formcontrol}
                   type="text"
                   placeholder="Ciudad de Destino"
                 />
+                {errors.ciudadDestino && (
+                  <p className={styles.errores}>A que ciudad vamos?</p>
+                )}
                 <input
-                  {...register("direcciondestino", { required: true })}
+                  {...register("direccionDestino", { required: true })}
                   className={styles.formcontrol}
                   type="text"
                   placeholder="Dirección o lugar de Destino"
                 />
+                {errors.direccionDestino && (
+                  <p className={styles.errores}>
+                    Proporcione direccion de llegada
+                  </p>
+                )}
               </div>
             </div>
 
@@ -124,36 +151,45 @@ export default function FormCotizar() {
               <div className={styles.formgroup}>
                 <span className={styles.formlabel}>fecha salida:</span>
                 <input
-                  {...register("fechasalida", { required: true })}
+                  {...register("fechaSalida", { required: true })}
                   className={styles.formcontroldata}
                   type="date"
                 />
+                {errors.fechaSalida && (
+                  <p className={styles.errores}>Fecha obligatoria</p>
+                )}
               </div>
 
               <div className={styles.formgroup}>
                 <span className={styles.formlabel}>Hora salida</span>
                 <input
-                  {...register("horasalida", { required: true })}
+                  {...register("horaSalida", { required: true })}
                   className={styles.formcontroltime}
                   type="time"
                 />
+                {errors.horaSalida && (
+                  <p className={styles.errores}>A que Hora?</p>
+                )}
               </div>
 
               <div className={styles.formgroup}>
                 <span className={styles.formlabel}>Regreso el día:</span>
                 <input
-                  {...register("fecharegreso", { required: true })}
+                  {...register("fechaRegreso", { required: true })}
                   className={styles.formcontroldata}
                   type="date"
                 />
+                {errors.fechaRegreso && (
+                  <p className={styles.errores}>Fecha obligatoria</p>
+                )}
               </div>
             </div>
 
             <div className={styles.divdata}>
               <div className={styles.formgroup}>
-                <span className={styles.formlabel}>Adultos (13+)</span>
+                <span className={styles.formlabel}>Pasajeros (2+)</span>
                 <input
-                  {...register("adultos", { required: true })}
+                  {...register("pasajeros", { required: true })}
                   className={styles.formcontroldata}
                   type="number"
                   placeholder={1}
@@ -161,32 +197,9 @@ export default function FormCotizar() {
                   pattern="^[0-9]+"
                   required
                 />
-              </div>
-
-              <div className={styles.formgroup}>
-                <span className={styles.formlabel}>Menores (3-13)</span>
-                <input
-                  {...register("menores", { required: true })}
-                  className={styles.formcontroldata}
-                  type="number"
-                  placeholder={0}
-                  min="0"
-                  pattern="^[0-9]+"
-                  required
-                />
-              </div>
-
-              <div className={styles.formgroup}>
-                <span className={styles.formlabel}>Bebés (-3)</span>
-                <input
-                  {...register("bebes", { required: true })}
-                  className={styles.formcontroldata}
-                  type="number"
-                  placeholder={0}
-                  min="0"
-                  pattern="^[0-9]+"
-                  required
-                />
+                {errors.pasajeros && (
+                  <p className={styles.errores}>Cuantos vamos?</p>
+                )}
               </div>
             </div>
             <div className={styles.formbtn}>

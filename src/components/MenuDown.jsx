@@ -11,6 +11,17 @@ import CheckIcon from "@mui/icons-material/Check";
 import Paper from "@mui/material/Paper";
 import MapIcon from "@mui/icons-material/Map";
 import styles from "./MenuDown.module.css";
+import Badge from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    right: -5,
+    top: 6,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: "0 4px",
+  },
+}));
 
 export default function MenuDown() {
   const [value, setValue] = React.useState(0);
@@ -43,7 +54,11 @@ export default function MenuDown() {
           />
           <BottomNavigationAction
             label="Ofertas"
-            icon={<MonetizationOnIcon />}
+            icon={
+              <StyledBadge badgeContent={4} color="secondary">
+                <MonetizationOnIcon />
+              </StyledBadge>
+            }
             component={Link}
             to="/panel-control/cotizaciones"
           />

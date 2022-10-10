@@ -81,13 +81,15 @@ export default function MenuBar() {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState(auth.currentUser);
   const [imagen, setImagen] = useState(ImgUser);
-  const [dataUser, setDataUser] = useState(null);
+  const [dataUser, setDataUser] = useState(
+    JSON.parse(localStorage.getItem("usuario"))
+  );
 
   console.log(user.uid);
 
   useEffect(() => {
-    if (user && user.photoURL) {
-      setImagen(user.photoURL);
+    if (dataUser && dataUser.datos.image !== null) {
+      setImagen(dataUser.datos.image);
       console.log(imagen);
     }
   }, []);
@@ -121,7 +123,7 @@ export default function MenuBar() {
           </IconButton>
           <img src={setapp} alt="logo" height="18px" width="80px" />
 
-          <Avatar alt="Nombre del Usuario" src={`${imagen}`} />
+          <Avatar alt="Nombre del Usuario" referrerPolicy="no-referrer" src={`${imagen}`} />
         </Toolbar>
       </AppBar>
       <Drawer
