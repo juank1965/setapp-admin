@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import SearchIcon from "@mui/icons-material/Search";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import NoCrashIcon from "@mui/icons-material/NoCrash";
 import CheckIcon from "@mui/icons-material/Check";
@@ -47,38 +47,38 @@ export default function MenuDown() {
           className={styles.fondo}
         >
           <BottomNavigationAction
-            label="Cotizar"
-            icon={<SearchIcon />}
+            label="Gestionar Usuarios"
+            icon={<ManageAccountsIcon />}
             component={Link}
-            to="/panel-control/buscar-vehiculos"
+            to="/panel-control/usuarios"
           />
           <BottomNavigationAction
-            label="Ofertas"
+            label="Gestionar Reservas"
+            icon={<NoCrashIcon />}
+            component={Link}
+            to="/panel-control/reservas"
+          />
+          <BottomNavigationAction
+            label="Gestionar Pagos"
             icon={
               <StyledBadge badgeContent={4} color="secondary">
                 <MonetizationOnIcon />
               </StyledBadge>
             }
             component={Link}
-            to="/panel-control/cotizaciones"
+            to="/panel-control/pagos"
           />
           <BottomNavigationAction
-            label="Reservas"
-            icon={<NoCrashIcon />}
-            component={Link}
-            to="/panel-control/reservaciones"
-          />
-          <BottomNavigationAction
-            label="Salidas"
+            label="Servicios en Curso"
             icon={<CheckIcon />}
             component={Link}
-            to="/panel-control/confirmaciones"
+            to="/panel-control/usuarios"
           />
           <BottomNavigationAction
             label="Mapa"
             icon={<MapIcon />}
             component={Link}
-            to="/panel-control/mapa"
+            to="/panel-control/usuarios"
           />
         </BottomNavigation>
       </Paper>

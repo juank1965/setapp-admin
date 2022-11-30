@@ -1,19 +1,9 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
-import Button from "@mui/material/Button";
-import GoogleIcon from "@mui/icons-material/Google";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import Stack from "@mui/material/Stack";
 import { useForm } from "react-hook-form";
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import {
-  auth,  
-  googleProvider,
-  facebookProvider,
-  db,
-} from "../assets/firebase/configuracion";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, getUsuario } from "../assets/firebase/configuracion";
 
 function Login() {
   let navigate = useNavigate();
@@ -29,113 +19,19 @@ function Login() {
       .then((userCredential) => {
         if (userCredential.user.emailVerified === true) {
           // Signed in usuario existe
-          const refDoc = doc(db, "admin", userCredential.user.uid);
-          const userData = getDoc(refDoc);
+          const userData = getUsuario(userCredential.user.uid);
           userData.then((usuario) => {
-          const userSigned = {
-              id: usuario.id,
-              datos: usuario.data(),
-            };
             // Ingresa al panel que corresponde
-            if (usuario.data().perfil) {
-            localStorage.setItem("usuario", JSON.stringify(userSigned));
-              navigate("/panel-control/buscar-vehiculos");
-              alert("Bienvenido !");
+            if (usuario.perfil) {
+              alert("Bievenido !!");
+              navigate("/panel-control/usuarios");
             } else {
-            localStorage.setItem("usuario", JSON.stringify(userSigned));
+              alert("Completa tu perfil");
               navigate("/panel-control/perfil");
-              alert("Debes completar tu perfil");
             }
           });
         } else {
           alert("Por favor verifica tu correo");
-        }
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(`${errorMessage}`);
-      });
-  };
-
-  const handlerGoogleAuth = () => {
-    signInWithPopup(auth, googleProvider)
-      .then((result) => {
-        const usuario = result.user;
-        console.log(usuario.metadata);
-        const { uid, displayName, email, photoURL } = usuario;
-        // Crea al usuario en la BD
-        if (usuario.metadata.creationTime === usuario.metadata.lastSignInTime) {
-          setDoc(doc(db, "admin", uid), {
-            name: displayName,
-            email: email,
-            image: photoURL,
-            rating: 5,
-            perfil: false,
-          });
-        }else {
-          // Signed in usuario existe
-          const refDoc = doc(db, "admin", uid);
-          const userData = getDoc(refDoc);
-          userData.then((usuario) => {
-          const userSigned = {
-              id: usuario.id,
-              datos: usuario.data(),
-            };
-            // Ingresa al panel que corresponde
-            if (usuario.data().perfil) {
-            localStorage.setItem("usuario", JSON.stringify(userSigned));
-              navigate("/panel-control/buscar-vehiculos");
-              alert("Bienvenido !");
-            } else {
-            localStorage.setItem("usuario", JSON.stringify(userSigned));
-              navigate("/panel-control/perfil");
-              alert("Debes completar tu perfil");
-            }
-          });
-        }
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(`${errorMessage}`);
-      });
-  };
-
-  const handlerFacebookAuth = () => {
-    signInWithPopup(auth, facebookProvider)
-      .then((result) => {
-        const usuario = result.user;
-        const { uid, displayName, email, photoURL } = usuario;
-        // Crea al usuario en  la BD
-        if (usuario.metadata.creationTime === usuario.metadata.lastSignInTime) {
-          setDoc(doc(db, "admin", uid), {
-            name: displayName,
-            email: email,
-            image: photoURL,
-            rating: 5,
-            perfil: false,
-          });
-        }else {
-          // Signed in usuario existe
-          const refDoc = doc(db, "admin", uid);
-          const userData = getDoc(refDoc);
-          userData.then((usuario) => {
-          const userSigned = {
-              id: usuario.id,
-              datos: usuario.data(),
-            };
-            // Ingresa al panel que corresponde
-            if (usuario.data().perfil) {
-            localStorage.setItem("usuario", JSON.stringify(userSigned));
-              navigate("/panel-control/buscar-vehiculos");
-              alert("Bienvenido !");
-            } else {
-            localStorage.setItem("usuario", JSON.stringify(userSigned));
-              navigate("/panel-control/perfil");
-              alert("Debes completar tu perfil");
-            }
-          });
         }
       })
       .catch((error) => {
@@ -186,23 +82,6 @@ function Login() {
         <p className={styles.link}>-- ó --</p>
       </div>
 
-      <Stack direction="column" spacing={2}>
-        <Button
-          onClick={handlerGoogleAuth}
-          variant="contained"
-          color="inherit"
-          startIcon={<GoogleIcon />}
-        >
-          Ingresa con Google
-        </Button>
-        <Button
-          onClick={handlerFacebookAuth}
-          variant="contained"
-          startIcon={<FacebookIcon />}
-        >
-          Ingresa con Facebook
-        </Button>
-      </Stack>
       <div className={styles.footer}>
         <div className={styles.textcolor}>
           No tiene cuenta?{" "}

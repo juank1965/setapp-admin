@@ -85,8 +85,6 @@ export default function MenuBar() {
     JSON.parse(localStorage.getItem("usuario"))
   );
 
-  console.log(user.uid);
-
   useEffect(() => {
     if (dataUser && dataUser.datos.image !== null) {
       setImagen(dataUser.datos.image);
@@ -123,7 +121,11 @@ export default function MenuBar() {
           </IconButton>
           <img src={setapp} alt="logo" height="18px" width="80px" />
 
-          <Avatar alt="Nombre del Usuario" referrerPolicy="no-referrer" src={`${imagen}`} />
+          <Avatar
+            alt="Nombre del Usuario"
+            referrerPolicy="no-referrer"
+            src={`${imagen}`}
+          />
         </Toolbar>
       </AppBar>
       <Drawer
@@ -150,31 +152,6 @@ export default function MenuBar() {
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItem
-            button
-            component={Link}
-            to="/panel-control/home"
-            onClick={handleDrawerClose}
-          >
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary="Panel De Operaciones" />
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem
-            button
-            component={Link}
-            to="/panel-control/historial"
-            onClick={handleDrawerClose}
-          >
-            <ListItemIcon>
-              <ManageHistoryIcon />
-            </ListItemIcon>
-            <ListItemText primary="Historial de Servicios" />
-          </ListItem>
           <ListItem
             button
             component={Link}

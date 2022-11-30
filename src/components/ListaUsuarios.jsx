@@ -4,15 +4,17 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions, IconButton } from "@mui/material";
+import { CardActionArea, CardActions, IconButton } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Badge from "@mui/material/Badge";
-import NoCrashIcon from "@mui/icons-material/NoCrash";
+import PriceCheckIcon from "@mui/icons-material/PriceCheck";
 import { styled } from "@mui/material/styles";
 import PolicyIcon from "@mui/icons-material/Policy";
+import FormCotizar from "./FormCotizar";
 import styles from "./Cotizar.module.css";
-import reservar from "../assets/reservar.jpeg";
+import presupuesto from "../assets/solicitar-presupuesto.png";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 
 const style = {
   position: "absolute",
@@ -25,6 +27,8 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  height: "75%",
+  overflow: "auto",
 };
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -36,37 +40,39 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export default function Reservas() {
+export default function ListaUsuarios() {
+  const [abrirCotizacion, setAbrirCotizacion] = React.useState(false);
+  const handleAbrirCotizacion = () => setAbrirCotizacion(true);
+  const handleCerrarCotizacion = () => setAbrirCotizacion(false);
+
   const [abrirCondiciones, setAbrirCondiciones] = React.useState(false);
   const handleAbrirCondiciones = () => setAbrirCondiciones(true);
   const handleCerrarCondiciones = () => setAbrirCondiciones(false);
 
   return (
     <Card sx={{ maxWidth: 250 }} className="cardstyle">
-      <CardActionArea component={Link} to="/panel-control/validar">
+      <CardActionArea component={Link} to="/panel-control/Operadores">
         <CardMedia
           component="img"
           height="100"
-          image={reservar}
-          alt="Reservaciones"
+          image={presupuesto}
+          alt="Presupuesto"
         />
         <CardContent>
           <Typography gutterBottom variant="subtitle2" component="div">
-            LISTA LOS SERVICIOS POR "VALIDAR" EL PAGO EFECTUADO AL RESERVAR
+            LISTADO DE OPERADORES TURISTICOS REGISTRADOS
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Haciendo click aqui podes completar las reservas de los vehiculos
-            que esten pendientes de validar su pago. Este proceso cruza la
-            informacion de el backend de epayco dando vlidez al pago realizado
-            por el cliente.
+            Aca podes listar los usuarios operadores turisticos registrados en
+            el sistema. Se puede modificar algunos datos segun requerimientos
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions className={styles.cardfooter}>
-        <Link to="/panel-control/validar">
-          <IconButton aria-label="crash">
+        <Link to="/panel-control/operadores">
+          <IconButton aria-label="price">
             <StyledBadge badgeContent={2} color="secondary">
-              <NoCrashIcon />
+              <MonetizationOnIcon />
             </StyledBadge>
           </IconButton>
         </Link>

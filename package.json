@@ -19,6 +19,7 @@
     "react-dom": "^18.2.0",
     "react-geolocated": "^4.0.3",
     "react-hook-form": "^7.36.0",
+    "react-hot-toast": "^2.4.0",
     "react-leaflet": "^4.0.2",
     "react-loading": "^2.0.3",
     "react-material-ui-carousel": "^3.4.2",
