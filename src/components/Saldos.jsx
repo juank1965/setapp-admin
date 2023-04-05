@@ -12,6 +12,8 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import toast from "react-hot-toast";
 import Divider from "@mui/material/Divider";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
 
 const style = {
   position: "absolute",
@@ -43,7 +45,8 @@ export default function Saldos() {
 
   const handlerSaldos = () => {
     if (info.id) {
-      totalPay(info.id, value);
+      const valorSaldoPagado = (info.pago / 1.13) * (0.6).toFixed(2);
+      totalPay(info.id, value, valorSaldoPagado);
       toast("Pago total del servicio registrado con exito");
     } else {
       toast.error("No se pudo hacer el registro del pago. Vuelva a intentar");
@@ -59,11 +62,14 @@ export default function Saldos() {
         mt: "50px",
       }}
     >
-      <h5 className="titulo">Servicios Por Pago de Saldo Final</h5>
+      <h5 className="titulo">
+        Servicios Por Pago de Saldo Final a CONDUCTORES
+      </h5>
       {saldos.length > 0 ? (
         saldos.map((saldo, i) => (
           <>
             <ListItem
+              alignItems="flex-start"
               key={i}
               disableGutters
               secondaryAction={
@@ -78,8 +84,11 @@ export default function Saldos() {
                 </IconButton>
               }
             >
+              <ListItemAvatar>
+                <Avatar alt="Foto del Conductor" src={saldo.imagenConductor} />
+              </ListItemAvatar>
               <ListItemText
-                primary={`Line item ${saldo.id}`}
+                primary={`Servicio No. ${saldo.id}`}
                 secondary={
                   <div>
                     <Typography
@@ -88,10 +97,18 @@ export default function Saldos() {
                       variant="body2"
                       color="text.primary"
                     >
-                      Ali Connors
+                      <b>
+                        Saldo pagadero a: Conductor : {saldo.conductor}
+                        vehiculo de placas:
+                        {saldo.placas}
+                      </b>
                     </Typography>
-                    {" — I'll be in your neighborhood doing errands this…"}
-                    <Typography>Hola </Typography>
+                    <Typography>
+                      <b>
+                        Transferir el valor de $
+                        {(saldo.pago / 1.13) * (0.6).toFixed(2)}
+                      </b>
+                    </Typography>
                   </div>
                 }
               />
@@ -112,9 +129,16 @@ export default function Saldos() {
           {info && (
             <>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                Registre No. documento de tranferencia
+                Registre No. documento de tranferencia para pago Total
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                <b>
+                  Conductor : {info.conductor} vehiculo de placas: {info.placas}
+                </b>
+                <b>
+                  Servicio No. {info.id} Transferir el valor de $
+                  {(info.pago / 1.13) * (0.6).toFixed(2)}
+                </b>
                 Escriba el numero del documento que certifica la transaccion
                 bancaria con la que hizo el pago del saldo.
               </Typography>

@@ -12,6 +12,8 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import toast from "react-hot-toast";
 import Divider from "@mui/material/Divider";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
 
 const style = {
   position: "absolute",
@@ -43,7 +45,8 @@ export default function Anticipos() {
 
   const handlerAnticipo = () => {
     if (info.id) {
-      advance(info.id, value);
+      const valorAnticipoPagado = (info.pago / 1.13) * (0.6).toFixed(2);
+      advance(info.id, value, valorAnticipoPagado);
       toast("Pago de anticipo registrado exitosamente");
     } else {
       toast.error("No se pudo hacer el registro del pago. Vuelva a intentar");
@@ -64,6 +67,7 @@ export default function Anticipos() {
         anticipos.map((anticipo, i) => (
           <>
             <ListItem
+              alignItems="flex-start"
               key={i}
               disableGutters
               secondaryAction={
@@ -78,8 +82,14 @@ export default function Anticipos() {
                 </IconButton>
               }
             >
+              <ListItemAvatar>
+                <Avatar
+                  alt="Foto del Conductor"
+                  src={anticipo.imagenConductor}
+                />
+              </ListItemAvatar>
               <ListItemText
-                primary={`Line item ${anticipo.id}`}
+                primary={`Servicio No. ${anticipo.id}`}
                 secondary={
                   <div>
                     <Typography
@@ -88,10 +98,18 @@ export default function Anticipos() {
                       variant="body2"
                       color="text.primary"
                     >
-                      Ali Connors
+                      <b>
+                        Anticipo pagadero a: Conductor : {anticipo.conductor}
+                        vehiculo de placas:
+                        {anticipo.placas}
+                      </b>
                     </Typography>
-                    {" — I'll be in your neighborhood doing errands this…"}
-                    <Typography>Hola </Typography>
+                    <Typography>
+                      <b>
+                        Transferir el valor de $
+                        {(anticipo.pago / 1.13) * (0.4).toFixed(2)}
+                      </b>
+                    </Typography>
                   </div>
                 }
               />
@@ -115,6 +133,13 @@ export default function Anticipos() {
                 Registrar el No. de Comprobante de Pago del Anticipo
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                <b>
+                  Conductor : {info.conductor} vehiculo de placas: {info.placas}
+                </b>
+                <b>
+                  Servicio No. {info.id} Transferir el valor de ${" "}
+                  {(info.pago / 1.13) * (0.4).toFixed(2)}
+                </b>
                 Escriba el numero del documento que certifica la transaccion
                 bancaria con la que hizo el pago del anticipo.
               </Typography>

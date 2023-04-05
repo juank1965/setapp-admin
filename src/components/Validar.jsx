@@ -12,6 +12,8 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import toast from "react-hot-toast";
 import Divider from "@mui/material/Divider";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
 
 const style = {
   position: "absolute",
@@ -51,91 +53,242 @@ export default function Validar() {
     handleClose();
   };
   return (
-    <List
-      sx={{
-        width: "100%",
-        maxWidth: 360,
-        bgcolor: "background.paper",
-        mt: "50px",
-      }}
-    >
-      <h5 className="titulo">Servicios Por Validar Pago de Reserva</h5>
-      {validar.length > 0 ? (
-        validar.map((valida, i) => (
-          <>
-            <ListItem
-              key={i}
-              disableGutters
-              secondaryAction={
-                <IconButton
-                  aria-label="comment"
-                  onClick={() => {
-                    setInfo(valida);
-                    handleOpen();
-                  }}
-                >
-                  <CommentIcon />
-                </IconButton>
-              }
-            >
-              <ListItemText
-                primary={`Line item ${valida.id}`}
-                secondary={
-                  <div>
-                    <Typography
-                      sx={{ display: "inline" }}
-                      component="span"
-                      variant="body2"
-                      color="text.primary"
-                    >
-                      Ali Connors
-                    </Typography>
-                    {" — I'll be in your neighborhood doing errands this…"}
-                    <Typography>Hola </Typography>
-                  </div>
-                }
-              />
-            </ListItem>
-            <Divider />
-          </>
-        ))
-      ) : (
-        <h6 className="titulo">No hay Pagos para Validar</h6>
-      )}
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+    <>
+      <List
+        sx={{
+          width: "100%",
+          maxWidth: 360,
+          bgcolor: "background.paper",
+          mt: "50px",
+        }}
       >
-        <Box sx={style}>
-          {info && (
+        <h5 className="titulo">
+          Servicios Por Validar Pago de Reserva por EPAYCO
+        </h5>
+        {validar.length > 0 ? (
+          validar.map((valida, i) => (
             <>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Ingrese el numero epayco de transaccion
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Escriba el numero del documento que certifica la transaccion
-                Epayco con la que se recibio el pago del servicio.
-              </Typography>
-              <TextField
-                id="standard-basic"
-                label="# Epayco"
-                variant="standard"
-                value={value}
-                onChange={handleChange}
-              />
-              <Button
-                variant="contained"
-                size="small"
-                onClick={handlerValidacion}
-              >
-                Validar Pago
-              </Button>
+              {valida.metodoPago === "epayco" && (
+                <>
+                  <ListItem
+                    alignItems="flex-start"
+                    key={i}
+                    disableGutters
+                    secondaryAction={
+                      <IconButton
+                        aria-label="comment"
+                        onClick={() => {
+                          setInfo(valida);
+                          handleOpen();
+                        }}
+                      >
+                        <CommentIcon />
+                      </IconButton>
+                    }
+                  >
+                    <ListItemAvatar>
+                      <Avatar
+                        alt="Foto del Conductor"
+                        src={valida.imagenCliente}
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={`Servicio No. ${valida.id}`}
+                      secondary={
+                        <div>
+                          <Typography
+                            sx={{ display: "inline" }}
+                            component="span"
+                            variant="body2"
+                            color="text.primary"
+                          >
+                            Valor a contrastar pagado a Epayco : $
+                            {valida.pago.toFixed(2)}
+                          </Typography>
+                          <Typography>
+                            Clase de Servicio: {valida.clase}
+                          </Typography>
+                          <Typography>
+                            Saliendo desde: {info.ciudadOrigen},
+                            {info.direccionOrigen}
+                          </Typography>
+                          <Typography>
+                            Viajando Hacia : {valida.ciudadDestino},
+                            {valida.direccionDestino}
+                          </Typography>
+                          <Typography>
+                            Tipo de Vehiculo: {valida.tipo}
+                          </Typography>
+                        </div>
+                      }
+                    />
+                  </ListItem>
+                  <Divider />
+                </>
+              )}
             </>
-          )}
-        </Box>
-      </Modal>
-    </List>
+          ))
+        ) : (
+          <h6 className="titulo">No hay Pagos para Validar</h6>
+        )}
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            {info && (
+              <>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Ingrese el numero epayco de transaccion
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  <b>
+                    Para el servicio No. {info.id} se pagaron : ${" "}
+                    {info.pago.toFixed(2)}
+                  </b>
+                  Escriba el numero del documento Equivalente que certifica la
+                  transaccion Epayco con la que se recibio el pago del servicio.
+                </Typography>
+                <TextField
+                  id="standard-basic"
+                  label="Factura o Documento Equivalente #"
+                  variant="standard"
+                  value={value}
+                  onChange={handleChange}
+                />
+                <Button
+                  variant="contained"
+                  size="small"
+                  onClick={handlerValidacion}
+                >
+                  Validar Pago Por EPAYCO
+                </Button>
+              </>
+            )}
+          </Box>
+        </Modal>
+      </List>
+      <Divider />
+      <List
+        sx={{
+          width: "100%",
+          maxWidth: 360,
+          bgcolor: "background.paper",
+          mt: "50px",
+        }}
+      >
+        <h5 className="titulo">
+          Servicios Por Validar Pago de Reserva en oficina
+        </h5>
+        {validar.length > 0 ? (
+          validar.map((valida, i) => (
+            <>
+              {valida.metodoPago === "oficina" && (
+                <>
+                  <ListItem
+                    alignItems="flex-start"
+                    key={i}
+                    disableGutters
+                    secondaryAction={
+                      <IconButton
+                        aria-label="comment"
+                        onClick={() => {
+                          setInfo(valida);
+                          handleOpen();
+                        }}
+                      >
+                        <CommentIcon />
+                      </IconButton>
+                    }
+                  >
+                    <ListItemAvatar>
+                      <Avatar
+                        alt="Foto del Conductor"
+                        src={valida.imagenCliente}
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={`Servicio No. ${valida.id}`}
+                      secondary={
+                        <div>
+                          <Typography
+                            sx={{ display: "inline" }}
+                            component="span"
+                            variant="body2"
+                            color="text.primary"
+                          >
+                            <b>
+                              Valor A PAGAR EN OFICINA : $
+                              {valida.pago.toFixed(2)}
+                            </b>
+                          </Typography>
+                          <Typography>
+                            Clase de Servicio: {valida.clase}
+                          </Typography>
+                          <Typography>
+                            Saliendo desde: {info.ciudadOrigen},
+                            {info.direccionOrigen}
+                          </Typography>
+                          <Typography>
+                            Viajando Hacia : {valida.ciudadDestino},
+                            {valida.direccionDestino}
+                          </Typography>
+                          <Typography>
+                            Tipo de Vehiculo: {valida.tipo}
+                          </Typography>
+                        </div>
+                      }
+                    />
+                  </ListItem>
+                  <Divider />
+                </>
+              )}
+            </>
+          ))
+        ) : (
+          <h6 className="titulo">No hay Pagos para Validar</h6>
+        )}
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            {info && (
+              <>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Ingrese el numero de Factura o Documento Equivalente
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  <b>
+                    Para el servicio No. {info.id} DEBE CANCELAR : $
+                    {info.pago.toFixed(2)}
+                  </b>
+                  Escriba el numero del documento Equivalente que certifica la
+                  transaccion con la que se recibe el pago del servicio.
+                </Typography>
+                <TextField
+                  id="standard-basic"
+                  label="Factura o Documento Equivalente #"
+                  variant="standard"
+                  value={value}
+                  onChange={handleChange}
+                />
+                <Button
+                  variant="contained"
+                  size="small"
+                  onClick={handlerValidacion}
+                >
+                  Validar Pago EN OFICINA
+                </Button>
+              </>
+            )}
+          </Box>
+        </Modal>
+      </List>
+    </>
   );
 }

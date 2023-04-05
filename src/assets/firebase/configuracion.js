@@ -151,11 +151,12 @@ export const getForAdvance = (actualizar) => {
   });
 };
 // PROBAR Metodo advance -- Registra la informacion del numero de transferencia con el que se paga el anticipo
-export const advance = async (id, number) => {
+export const advance = async (id, number, payed) => {
   const advanceRef = doc(db, "services", id);
   await updateDoc(advanceRef, {
     transaccionPagoAnticipoNumero: number,
     anticipoConductorPagado: true,
+    valorAnticipoPagado: payed,
   });
 };
 //Metodo getForTotalPay -- Lista los servicios a los que se les puede pagar el saldo final a conductores
@@ -186,11 +187,12 @@ export const getForTotalPay = (actualizar) => {
   });
 };
 //  PROBAR Metodo totalPay -- Rgistra la informacion del numero de transferencia con el que se cancela la totalidad del servicio al conductor
-export const totalPay = async (id, number) => {
+export const totalPay = async (id, number, payed) => {
   const pagoTotalRef = doc(db, "services", id);
   await updateDoc(pagoTotalRef, {
     transaccionPagoTotalNumero: number,
     saldoConductorPagado: true,
+    valorSaldoPagado: payed,
   });
 };
 

@@ -71,7 +71,7 @@ export default function ListaUsuarios() {
       <CardActions className={styles.cardfooter}>
         <Link to="/panel-control/operadores">
           <IconButton aria-label="price">
-            <StyledBadge badgeContent={2} color="secondary">
+            <StyledBadge badgeContent={0} color="secondary">
               <MonetizationOnIcon />
             </StyledBadge>
           </IconButton>

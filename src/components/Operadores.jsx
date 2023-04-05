@@ -10,6 +10,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Divider from "@mui/material/Divider";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
 
 const style = {
   position: "absolute",
@@ -47,6 +49,7 @@ export default function Operadores() {
         operadores.map((operador, i) => (
           <>
             <ListItem
+              alignItems="flex-start"
               key={i}
               disableGutters
               secondaryAction={
@@ -61,8 +64,11 @@ export default function Operadores() {
                 </IconButton>
               }
             >
+              <ListItemAvatar>
+                <Avatar alt="Foto del Usuario" src={operador.imagen} />
+              </ListItemAvatar>
               <ListItemText
-                primary={`Line item ${operador.nombre}`}
+                primary={`Nombre: ${operador.nombre}`}
                 secondary={
                   <div>
                     <Typography
