@@ -62,9 +62,7 @@ export default function Validar() {
           mt: "50px",
         }}
       >
-        <h5 className="titulo">
-          Servicios Por Validar Pago de Reserva por EPAYCO
-        </h5>
+        <h5 className="titulo">Validar Pagos de Reservas vía EPAYCO</h5>
         {validar.length > 0 ? (
           validar.map((valida, i) => (
             <>
@@ -179,13 +177,11 @@ export default function Validar() {
           mt: "50px",
         }}
       >
-        <h5 className="titulo">
-          Servicios Por Validar Pago de Reserva en oficina
-        </h5>
+        <h5 className="titulo">Validar Pagos de Reserva vía transferencias</h5>
         {validar.length > 0 ? (
           validar.map((valida, i) => (
             <>
-              {valida.metodoPago === "oficina" && (
+              {valida.metodoPago === "transferencia" && (
                 <>
                   <ListItem
                     alignItems="flex-start"
@@ -219,10 +215,7 @@ export default function Validar() {
                             variant="body2"
                             color="text.primary"
                           >
-                            <b>
-                              Valor A PAGAR EN OFICINA : $
-                              {valida.pago.toFixed(2)}
-                            </b>
+                            <b>Valor TRANSFERIDO : ${valida.pago.toFixed(2)}</b>
                           </Typography>
                           <Typography>
                             Clase de Servicio: {valida.clase}
@@ -260,19 +253,20 @@ export default function Validar() {
             {info && (
               <>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Ingrese el numero de Factura o Documento Equivalente
+                  Ingrese el numero de transferencia o consignación
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                   <b>
-                    Para el servicio No. {info.id} DEBE CANCELAR : $
+                    Para el servicio No. {info.id} se tranfiere : $
                     {info.pago.toFixed(2)}
                   </b>
                   Escriba el numero del documento Equivalente que certifica la
-                  transaccion con la que se recibe el pago del servicio.
+                  transaccion con la que se registra la consignación o
+                  transferencia.
                 </Typography>
                 <TextField
                   id="standard-basic"
-                  label="Factura o Documento Equivalente #"
+                  label="Consignación o tranferencia #"
                   variant="standard"
                   value={value}
                   onChange={handleChange}
@@ -282,7 +276,7 @@ export default function Validar() {
                   size="small"
                   onClick={handlerValidacion}
                 >
-                  Validar Pago EN OFICINA
+                  Validar Pago por TRANSFERENCIA
                 </Button>
               </>
             )}
