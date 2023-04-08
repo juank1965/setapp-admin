@@ -20,7 +20,8 @@ import GestionaReservas from "./components/GestionaReservas";
 import GestionaPagos from "./components/GestionaPagos";
 import Operadores from "./components/Operadores";
 import Conductores from "./components/Conductores";
-import Validar from "./components/Validar";
+import ValidarEpayco from "./components/ValidarEpayco";
+import ValidarTransferencia from "./components/ValidarTransferencia";
 import Anticipos from "./components/Anticipos";
 import Saldos from "./components/Saldos";
 import toast, { Toaster } from "react-hot-toast";
@@ -39,7 +40,11 @@ function App() {
           <Route path="pagos" element={<GestionaPagos />} />
           <Route path="operadores" element={<Operadores />} />
           <Route path="conductores" element={<Conductores />} />
-          <Route path="validar" element={<Validar />} />
+          <Route path="validarEpayco" element={<ValidarEpayco />} />
+          <Route
+            path="validarTransferencia"
+            element={<ValidarTransferencia />}
+          />
           <Route path="anticipos" element={<Anticipos />} />
           <Route path="saldos" element={<Saldos />} />
           <Route path="mapa" element={<Mapa />} />

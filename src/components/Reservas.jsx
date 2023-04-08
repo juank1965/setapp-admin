@@ -42,35 +42,71 @@ export default function Reservas() {
   const handleCerrarCondiciones = () => setAbrirCondiciones(false);
 
   return (
-    <Card sx={{ maxWidth: 250 }} className="cardstyle">
-      <CardActionArea component={Link} to="/panel-control/validar">
-        <CardMedia
-          component="img"
-          height="100"
-          image={reservar}
-          alt="Reservaciones"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="subtitle2" component="div">
-            LISTA LOS SERVICIOS POR "VALIDAR" EL PAGO EFECTUADO AL RESERVAR
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Haciendo click aqui podes completar las reservas de los vehiculos
-            que esten pendientes de validar su pago. Este proceso cruza la
-            informacion de el backend de epayco dando vlidez al pago realizado
-            por el cliente.
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions className={styles.cardfooter}>
-        <Link to="/panel-control/validar">
-          <IconButton aria-label="crash">
-            <StyledBadge badgeContent={2} color="secondary">
-              <NoCrashIcon />
-            </StyledBadge>
-          </IconButton>
-        </Link>
-      </CardActions>
-    </Card>
+    <>
+      <Card sx={{ maxWidth: 250 }} className="cardstyle">
+        <CardActionArea component={Link} to="/panel-control/validarEpayco">
+          <CardMedia
+            component="img"
+            height="100"
+            image={reservar}
+            alt="Reservaciones"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="subtitle2" component="div">
+              LISTA LOS SERVICIOS POR "VALIDAR" EL PAGO EFECTUADO POR EPAYCO
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Haciendo click aqui podes completar las reservas de los vehiculos
+              que esten pendientes de validar su pago. Este proceso cruza la
+              informacion de el backend de epayco dando vAlidez al pago
+              realizado por el cliente.
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions className={styles.cardfooter}>
+          <Link to="/panel-control/validarEpayco">
+            <IconButton aria-label="crash">
+              <StyledBadge badgeContent={2} color="secondary">
+                <NoCrashIcon />
+              </StyledBadge>
+            </IconButton>
+          </Link>
+        </CardActions>
+      </Card>
+      <Card sx={{ maxWidth: 250 }} className="cardstyle">
+        <CardActionArea
+          component={Link}
+          to="/panel-control/validarTransferencia"
+        >
+          <CardMedia
+            component="img"
+            height="100"
+            image={reservar}
+            alt="Reservaciones"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="subtitle2" component="div">
+              LISTA LOS SERVICIOS POR "VALIDAR" EL PAGO EFECTUADO POR
+              TRANFERENCIA O CONSIGNACION
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Haciendo click aqui podes completar las reservas de los vehiculos
+              que esten pendientes de validar su pago. Este proceso cruza la
+              informacion de DEL BANCO dando validez al pago realizado por el
+              cliente.
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions className={styles.cardfooter}>
+          <Link to="/panel-control/validarTransferencia">
+            <IconButton aria-label="crash">
+              <StyledBadge badgeContent={2} color="secondary">
+                <NoCrashIcon />
+              </StyledBadge>
+            </IconButton>
+          </Link>
+        </CardActions>
+      </Card>
+    </>
   );
 }
