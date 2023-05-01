@@ -12,6 +12,7 @@ import Modal from "@mui/material/Modal";
 import Divider from "@mui/material/Divider";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
+import Rating from "@mui/material/Rating";
 
 const style = {
   position: "absolute",
@@ -39,36 +40,48 @@ export default function Operadores() {
     <List
       sx={{
         width: "100%",
-        maxWidth: 360,
+        maxWidth: "100%",
         bgcolor: "background.paper",
         mt: "50px",
+        mb: "50px",
       }}
     >
-      <h5 className="titulo">Operadores Turisticos Registrados</h5>
+      <h5 className="titulo">
+        Operadores Turisticos Registrados {operadores.length}
+      </h5>
       {operadores.length > 0 ? (
         operadores.map((operador, i) => (
           <>
             <ListItem
               alignItems="flex-start"
-              key={i}
+              key={operador.id}
               disableGutters
               secondaryAction={
-                <IconButton
-                  aria-label="comment"
-                  onClick={() => {
-                    setInfo(operador);
-                    handleOpen();
-                  }}
-                >
-                  <CommentIcon />
-                </IconButton>
+                <>
+                  <IconButton
+                    aria-label="comment"
+                    onClick={() => {
+                      setInfo(operador);
+                      handleOpen();
+                    }}
+                  >
+                    <CommentIcon />
+                  </IconButton>
+                </>
               }
             >
-              <ListItemAvatar>
-                <Avatar alt="Foto del Usuario" src={operador.imagen} />
-              </ListItemAvatar>
+              <div className="bodypaneluno">
+                <ListItemAvatar>
+                  <Avatar alt="Foto del Usuario" src={operador.imagen} />
+                </ListItemAvatar>
+                <Rating
+                  name="simple-controlled"
+                  size="small"
+                  value={operador.rating}
+                />
+              </div>
               <ListItemText
-                primary={`Nombre: ${operador.nombre}`}
+                primary={`${operador.nombre} `}
                 secondary={
                   <div>
                     <Typography
@@ -77,10 +90,11 @@ export default function Operadores() {
                       variant="body2"
                       color="text.primary"
                     >
-                      Ali Connors
+                      Empresa:{operador.empresa}--
                     </Typography>
-                    {" — I'll be in your neighborhood doing errands this…"}
-                    <Typography>Hola </Typography>
+                    Direccion:{operador.direccion}
+                    <Typography>email : {operador.email} </Typography>
+                    <Typography>telefono : {operador.telefono} </Typography>
                   </div>
                 }
               />
@@ -100,16 +114,38 @@ export default function Operadores() {
         <Box sx={style}>
           {info && (
             <>
+              <div className="bodypaneluno">
+                <ListItemAvatar>
+                  <Avatar alt="Foto del Usuario" src={info.imagen} />
+                </ListItemAvatar>
+                <Rating
+                  name="simple-controlled"
+                  size="small"
+                  value={info.rating}
+                />
+              </div>
               <Typography
                 id="modal-modal-title"
                 variant="inherit"
                 component="h4"
               >
-                Operador : {info.nombre} Calificación: {info.rating}
+                Operador : {info.nombre}
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 Empresa:{info.empresa}
               </Typography>
+              <div className="bodypaneluno">
+                <Typography
+                  sx={{ display: "inline" }}
+                  component="span"
+                  variant="body2"
+                  color="text.primary"
+                >
+                  Direccion:{info.direccion}
+                </Typography>
+                <Typography>email : {info.email} </Typography>
+                <Typography>telefono : {info.telefono} </Typography>
+              </div>
             </>
           )}
         </Box>

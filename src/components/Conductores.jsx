@@ -12,6 +12,7 @@ import Modal from "@mui/material/Modal";
 import Divider from "@mui/material/Divider";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
+import Rating from "@mui/material/Rating";
 
 const style = {
   position: "absolute",
@@ -39,18 +40,19 @@ export default function Conductores() {
     <List
       sx={{
         width: "100%",
-        maxWidth: 360,
+        maxWidth: "100%",
         bgcolor: "background.paper",
         mt: "50px",
+        mb: "50px",
       }}
     >
-      <h5 className="titulo">Conductores Registrados</h5>
+      <h5 className="titulo">Conductores Registrados {conductores.length}</h5>
       {conductores.length > 0 ? (
         conductores.map((conductor, i) => (
           <>
             <ListItem
               alignItems="flex-start"
-              key={i}
+              key={conductor.id}
               disableGutters
               secondaryAction={
                 <IconButton
@@ -64,9 +66,16 @@ export default function Conductores() {
                 </IconButton>
               }
             >
-              <ListItemAvatar>
-                <Avatar alt="Foto del Usuario" src={conductor.imagen} />
-              </ListItemAvatar>
+              <div className="bodypaneluno">
+                <ListItemAvatar>
+                  <Avatar alt="Foto del Usuario" src={conductor.imagen} />
+                </ListItemAvatar>
+                <Rating
+                  name="simple-controlled"
+                  size="small"
+                  value={conductor.rating}
+                />
+              </div>
               <ListItemText
                 primary={`Conductor ${conductor.nombre}`}
                 secondary={
@@ -77,10 +86,17 @@ export default function Conductores() {
                       variant="body2"
                       color="text.primary"
                     >
-                      {conductor.placas}
+                      {conductor.tipo} Placas:{conductor.placas}
                     </Typography>
-                    {" — I'll be in your neighborhood doing errands this…"}
-                    <Typography>Hola </Typography>
+                    --{conductor.marca} modelo:{conductor.modelo} capacidad:
+                    {conductor.capacidad}
+                    <Typography>
+                      Afiliado a: {conductor.empresa} No.
+                      {conductor.numeroInterno}
+                    </Typography>
+                    <Typography>Direccion: {conductor.direccion}</Typography>
+                    <Typography>Email: {conductor.email}</Typography>
+                    <Typography>Telefono: {conductor.telefono}</Typography>
                   </div>
                 }
               />
@@ -100,12 +116,22 @@ export default function Conductores() {
         <Box sx={style}>
           {info && (
             <>
+              <div className="bodypaneluno">
+                <ListItemAvatar>
+                  <Avatar alt="Foto del Usuario" src={info.imagen} />
+                </ListItemAvatar>
+                <Rating
+                  name="simple-controlled"
+                  size="small"
+                  value={info.rating}
+                />
+              </div>
               <Typography
                 id="modal-modal-title"
                 variant="inherit"
                 component="h4"
               >
-                Conductor :{info.nombre} Calificación: {info.rating}
+                {info.nombre}
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 Vehiculo {info.placas} tipo : {info.tipo} capacidad :

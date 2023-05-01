@@ -117,7 +117,7 @@ export default function Saldos() {
           </>
         ))
       ) : (
-        <h6 className="titulo">No hay anticipos Por Pagar</h6>
+        <h6 className="titulo">No hay Saldos Por Pagar</h6>
       )}
       <Modal
         open={open}

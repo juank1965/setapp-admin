@@ -82,6 +82,13 @@
   flex-direction: column;
 }
 
+.bodypaneluno {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .bodypanelcontrol {
   display: flex;
   justify-content: center;
@@ -115,4 +122,5 @@
 
 .titulo {
   color: #4a4242;
+  margin: 5px;
 }
