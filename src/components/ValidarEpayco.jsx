@@ -100,8 +100,11 @@ export default function ValidarEpayco() {
                           color="text.primary"
                         >
                           <b>
-                            Valor a contrastar pagado a Epayco : $
-                            {valida.pago.toFixed(2)}
+                            Valor a contrastar pagado a Epayco :
+                            {new Intl.NumberFormat("es-CO", {
+                              style: "currency",
+                              currency: "COP",
+                            }).format(valida.pago)}
                           </b>
                         </Typography>
                         <Typography>
@@ -142,8 +145,11 @@ export default function ValidarEpayco() {
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 <b>
-                  Para el servicio No. {info.id} se pagaron : $
-                  {info.pago.toFixed(2)}
+                  Para el servicio No. {info.id} se pagaron :{" "}
+                  {new Intl.NumberFormat("es-CO", {
+                    style: "currency",
+                    currency: "COP",
+                  }).format(info.pago)}
                 </b>
                 Escriba el numero del documento Equivalente que certifica la
                 transaccion Epayco con la que se recibio el pago del servicio.

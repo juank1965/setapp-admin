@@ -99,7 +99,13 @@ export default function ValidarTransferencia() {
                           variant="body2"
                           color="text.primary"
                         >
-                          <b>Valor TRANSFERIDO : ${valida.pago.toFixed(2)}</b>
+                          <b>
+                            Valor TRANSFERIDO :
+                            {new Intl.NumberFormat("es-CO", {
+                              style: "currency",
+                              currency: "COP",
+                            }).format(valida.pago)}
+                          </b>
                         </Typography>
                         <Typography>
                           Clase de Servicio: {valida.clase}
@@ -139,8 +145,11 @@ export default function ValidarTransferencia() {
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 <b>
-                  Para el servicio No. {info.id} se tranfiere : $
-                  {info.pago.toFixed(2)}
+                  Para el servicio No. {info.id} se tranfiere :
+                  {new Intl.NumberFormat("es-CO", {
+                    style: "currency",
+                    currency: "COP",
+                  }).format(info.pago)}
                 </b>
                 Escriba el numero del documento Equivalente que certifica la
                 transaccion con la que se registra la consignación o

@@ -48,7 +48,7 @@ export default function Conductores() {
     >
       <h5 className="titulo">Conductores Registrados {conductores.length}</h5>
       {conductores.length > 0 ? (
-        conductores.map((conductor, i) => (
+        conductores.map((conductor) => (
           <>
             <ListItem
               alignItems="flex-start"

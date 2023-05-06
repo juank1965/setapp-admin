@@ -50,7 +50,7 @@ export default function Operadores() {
         Operadores Turisticos Registrados {operadores.length}
       </h5>
       {operadores.length > 0 ? (
-        operadores.map((operador, i) => (
+        operadores.map((operador) => (
           <>
             <ListItem
               alignItems="flex-start"

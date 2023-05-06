@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import Divider from "@mui/material/Divider";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -42,16 +43,17 @@ export default function Anticipos() {
   React.useEffect(() => {
     const listaAnticipos = getForAdvance(setAnticipos);
   }, [getForAdvance]);
-
+  let navigate = useNavigate();
   const handlerAnticipo = () => {
     if (info.id) {
-      const valorAnticipoPagado = (info.pago / 1.13) * (0.6).toFixed(2);
+      const valorAnticipoPagado = (info.pago / 1.13) * (0.4).toFixed(2);
       advance(info.id, value, valorAnticipoPagado);
       toast("Pago de anticipo registrado exitosamente");
     } else {
       toast.error("No se pudo hacer el registro del pago. Vuelva a intentar");
     }
     handleClose();
+    navigate("panel-control/pagos");
   };
   return (
     <List
@@ -106,8 +108,11 @@ export default function Anticipos() {
                     </Typography>
                     <Typography>
                       <b>
-                        Transferir el valor de $
-                        {(anticipo.pago / 1.13) * (0.4).toFixed(2)}
+                        Transferir el valor de:
+                        {new Intl.NumberFormat("es-CO", {
+                          style: "currency",
+                          currency: "COP",
+                        }).format((anticipo.pago / 1.13) * 0.4)}
                       </b>
                     </Typography>
                   </div>
@@ -130,16 +135,21 @@ export default function Anticipos() {
           {info && (
             <>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                Registrar el No. de Comprobante de Pago del Anticipo
+                Registre el No. de Comprobante de Pago del Anticipo
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 <b>
                   Conductor : {info.conductor} vehiculo de placas: {info.placas}
                 </b>
                 <b>
-                  Servicio No. {info.id} Transferir el valor de ${" "}
-                  {(info.pago / 1.13) * (0.4).toFixed(2)}
+                  Servicio No. {info.id} Transferir el valor de:
+                  {new Intl.NumberFormat("es-CO", {
+                    style: "currency",
+                    currency: "COP",
+                  }).format((info.pago / 1.13) * 0.4)}
                 </b>
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 Escriba el numero del documento que certifica la transaccion
                 bancaria con la que hizo el pago del anticipo.
               </Typography>

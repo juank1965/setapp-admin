@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import Divider from "@mui/material/Divider";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -43,6 +44,7 @@ export default function Saldos() {
     const listaSaldos = getForTotalPay(setSaldos);
   }, [getForTotalPay]);
 
+  let navigate = useNavigate();
   const handlerSaldos = () => {
     if (info.id) {
       const valorSaldoPagado = (info.pago / 1.13) * (0.6).toFixed(2);
@@ -52,6 +54,7 @@ export default function Saldos() {
       toast.error("No se pudo hacer el registro del pago. Vuelva a intentar");
     }
     handleClose();
+    navigate("panel-control/pagos");
   };
   return (
     <List
@@ -105,8 +108,11 @@ export default function Saldos() {
                     </Typography>
                     <Typography>
                       <b>
-                        Transferir el valor de $
-                        {(saldo.pago / 1.13) * (0.6).toFixed(2)}
+                        Transferir el valor de:
+                        {new Intl.NumberFormat("es-CO", {
+                          style: "currency",
+                          currency: "COP",
+                        }).format((saldo.pago / 1.13) * 0.6)}
                       </b>
                     </Typography>
                   </div>
@@ -136,8 +142,11 @@ export default function Saldos() {
                   Conductor : {info.conductor} vehiculo de placas: {info.placas}
                 </b>
                 <b>
-                  Servicio No. {info.id} Transferir el valor de $
-                  {(info.pago / 1.13) * (0.6).toFixed(2)}
+                  Servicio No. {info.id} Transferir el valor de
+                  {new Intl.NumberFormat("es-CO", {
+                    style: "currency",
+                    currency: "COP",
+                  }).format((info.pago / 1.13) * 0.6)}
                 </b>
                 Escriba el numero del documento que certifica la transaccion
                 bancaria con la que hizo el pago del saldo.
