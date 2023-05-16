@@ -86,12 +86,10 @@ export default function MenuBar() {
   );
 
   useEffect(() => {
-    if (dataUser && dataUser.datos.image !== null) {
-      setImagen(dataUser.datos.image);
-      console.log(imagen);
+    if (dataUser && dataUser.imagen !== null) {
+      setImagen(dataUser.imagen);      
     }
-  }, []);
-  //console.log(dataUser);
+  }, []);  
 
   const handleDrawerOpen = () => {
     setOpen(true);

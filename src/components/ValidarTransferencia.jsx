@@ -15,6 +15,7 @@ import Divider from "@mui/material/Divider";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Paper from "@mui/material/Paper";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -43,14 +44,16 @@ export default function ValidarTransferencia() {
   React.useEffect(() => {
     const listaPorValidar = getForValidate(setValidar);
   }, [getForValidate]);
+  let navigate = useNavigate();
   const handlerValidacion = async () => {
     if (info.id) {
       validate(info.id, value);
       toast("Pago Registrado exitosamente, Servicio en estado RESERVADO");
     } else {
       toast.error("No se pudo hacer la validacion del pago. Vuelva a intentar");
+      handleClose();
     }
-    handleClose();
+    navigate("/panel-control/reservas");
   };
   return (
     <List
@@ -63,13 +66,13 @@ export default function ValidarTransferencia() {
     >
       <h5 className="titulo">Validar Pagos de Reserva vía transferencias</h5>
       {validar.length > 0 ? (
-        validar.map((valida, i) => (
+        validar.map((valida) => (
           <>
             {valida.metodPago === "transferencia" && (
               <>
                 <ListItem
                   alignItems="flex-start"
-                  key={i}
+                  key={valida.id}
                   disableGutters
                   secondaryAction={
                     <IconButton

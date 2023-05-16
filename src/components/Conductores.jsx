@@ -36,11 +36,12 @@ export default function Conductores() {
   React.useEffect(() => {
     const listaConductores = getConductores(setConductores);
   }, [getConductores]);
+  console.log(conductores)
   return (
     <List
       sx={{
-        width: "100%",
-        maxWidth: "100%",
+        width: "90%",
+        maxWidth: "90%",
         bgcolor: "background.paper",
         mt: "50px",
         mb: "50px",
@@ -79,7 +80,7 @@ export default function Conductores() {
               <ListItemText
                 primary={`Conductor ${conductor.nombre}`}
                 secondary={
-                  <div>
+                  <>
                     <Typography
                       sx={{ display: "inline" }}
                       component="span"
@@ -87,17 +88,26 @@ export default function Conductores() {
                       color="text.primary"
                     >
                       {conductor.tipo} Placas:{conductor.placas}
-                    </Typography>
-                    --{conductor.marca} modelo:{conductor.modelo} capacidad:
+                      --{conductor.marca} modelo:{conductor.modelo} capacidad:
                     {conductor.capacidad}
-                    <Typography>
+                    </Typography>                    
+                    <Typography
+                      sx={{ display: "inline" }}
+                      component="span"
+                      variant="inherit"
+                      color="text.primary"
+                    >
                       Afiliado a: {conductor.empresa} No.
-                      {conductor.numeroInterno}
+                      {conductor.numeroInterno} -                    
+                      Direccion: {conductor.direccion} -
+                      Email: {conductor.email}
+                      Telefono: {conductor.telefono} -
+                      Banco: {conductor.banco}
+                      Tipo Cuenta: {conductor.tipocuenta}
+                      No. Cuenta: {conductor.cuenta}
+                      Titular: {conductor.titular}
                     </Typography>
-                    <Typography>Direccion: {conductor.direccion}</Typography>
-                    <Typography>Email: {conductor.email}</Typography>
-                    <Typography>Telefono: {conductor.telefono}</Typography>
-                  </div>
+                  </>
                 }
               />
             </ListItem>

@@ -2,10 +2,10 @@ import * as React from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import CommentIcon from "@mui/icons-material/Comment";
+import MapIcon from "@mui/icons-material/Map";
 import IconButton from "@mui/material/IconButton";
 import { Typography } from "@mui/material";
-import { getForAdvance, advance } from "../assets/firebase/configuracion";
+import { getForConfirmados } from "../assets/firebase/configuracion";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 import Divider from "@mui/material/Divider";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-import { useNavigate } from "react-router-dom";
+import Paper from "@mui/material/Paper";
 
 const style = {
   position: "absolute",
@@ -28,7 +28,7 @@ const style = {
   p: 4,
 };
 
-export default function Anticipos() {
+export default function ListaViajesConfirmados() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
   const [info, setInfo] = React.useState();
@@ -39,22 +39,12 @@ export default function Anticipos() {
     setValue(event.target.value);
   };
 
-  const [anticipos, setAnticipos] = React.useState([]);
+  const handlerValidacion = (e) => {};
+
+  const [viajesConfirmados, setViajesConfirmados] = React.useState([]);
   React.useEffect(() => {
-    const listaAnticipos = getForAdvance(setAnticipos);
-  }, [getForAdvance]);
-  let navigate = useNavigate();
-  const handlerAnticipo = () => {
-    if (info.id) {
-      const valorAnticipoPagado = (info.valorOferta * 0.9 * 0.4).toFixed(2);
-      advance(info.id, value, valorAnticipoPagado);
-      toast("Pago de anticipo registrado exitosamente");
-    } else {
-      toast.error("No se pudo hacer el registro del pago. Vuelva a intentar");
-      handleClose();
-    }
-    navigate("/panel-control/pagos");
-  };  
+    const listaConfirmados = getForConfirmados(setViajesConfirmados);
+  }, [getForConfirmados]);
   return (
     <List
       sx={{
@@ -64,34 +54,31 @@ export default function Anticipos() {
         mt: "50px",
       }}
     >
-      <h5 className="titulo">Servicios Por Pago de Anticipo</h5>
-      {anticipos.length > 0 ? (
-        anticipos.map((anticipo) => (
+      <h5 className="titulo">viajes Confirmados</h5>
+      {viajesConfirmados.length > 0 ? (
+        viajesConfirmados.map((viaje) => (
           <>
             <ListItem
               alignItems="flex-start"
-              key={anticipo.id}
+              key={viaje.id}
               disableGutters
               secondaryAction={
                 <IconButton
                   aria-label="comment"
                   onClick={() => {
-                    setInfo(anticipo);
+                    setInfo(viaje);
                     handleOpen();
                   }}
                 >
-                  <CommentIcon />
+                  <MapIcon />
                 </IconButton>
               }
             >
               <ListItemAvatar>
-                <Avatar
-                  alt="Foto del Conductor"
-                  src={anticipo.imagenConductor}
-                />
+                <Avatar alt="Foto del Conductor" src={viaje.imagenCliente} />
               </ListItemAvatar>
               <ListItemText
-                primary={`Servicio No. ${anticipo.id}`}
+                primary={`Servicio No. ${viaje.id}`}
                 secondary={
                   <>
                     <Typography
@@ -101,20 +88,23 @@ export default function Anticipos() {
                       color="text.primary"
                     >
                       <b>
-                        Anticipo pagadero a: Conductor : {anticipo.conductor}
-                        vehiculo de placas:
-                        {anticipo.placas}
-                      </b>
-                    </Typography>
-                    <Typography>
-                      <b>
-                        Transferir el valor de:
+                        Valor TRANSFERIDO :
                         {new Intl.NumberFormat("es-CO", {
                           style: "currency",
                           currency: "COP",
-                        }).format(anticipo.valorOferta * 0.9 * 0.4)}
+                        }).format(viaje.pago)}
                       </b>
                     </Typography>
+                    <Typography>Clase de Servicio: {viaje.clase}</Typography>
+                    <Typography>
+                      Saliendo desde: {viaje.ciudadOrigen},
+                      {viaje.direccionOrigen}
+                    </Typography>
+                    <Typography>
+                      Viajando Hacia : {viaje.ciudadDestino},
+                      {viaje.direccionDestino}
+                    </Typography>
+                    <Typography>Tipo de Vehiculo: {viaje.tipo}</Typography>
                   </>
                 }
               />
@@ -123,7 +113,7 @@ export default function Anticipos() {
           </>
         ))
       ) : (
-        <h6 className="titulo">No hay anticipos Por Pagar</h6>
+        <h6 className="titulo">No hay Viajes Confirmados Registradas</h6>
       )}
       <Modal
         open={open}
@@ -132,42 +122,36 @@ export default function Anticipos() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {info && (
+          {info && info.metodPago === "transferencia" && (
             <>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                Registre el No. de Comprobante de Pago del Anticipo
+                Ingrese el numero de transferencia o consignación
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 <b>
-                  Conductor : {info.conductor} vehiculo de placas: {info.placas}
-                </b>
-                <b>
-                  Servicio No. {info.id} Transferir el valor de:
+                  Para el servicio No. {info.id} se tranfiere :
                   {new Intl.NumberFormat("es-CO", {
                     style: "currency",
                     currency: "COP",
-                  }).format(info.valorOferta *0.9 * 0.4)}
+                  }).format(info.pago)}
                 </b>
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Escriba el numero del documento que certifica la transaccion
-                bancaria con la que hizo el pago del anticipo.
+                Escriba el numero del documento Equivalente que certifica la
+                transaccion con la que se registra la consignación o
+                transferencia.
               </Typography>
               <TextField
                 id="standard-basic"
-                label="No. Transacion Bancaria"
+                label="Consignación o tranferencia #"
                 variant="standard"
                 value={value}
-                onChange={(event) => {
-                  setValue(event.target.value);
-                }}
+                onChange={handleChange}
               />
               <Button
                 variant="contained"
                 size="small"
-                onClick={handlerAnticipo}
+                onClick={handlerValidacion}
               >
-                Registrar Anticipo
+                Validar Pago por TRANSFERENCIA
               </Button>
             </>
           )}

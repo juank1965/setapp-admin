@@ -30,8 +30,8 @@ const style = {
 
 export default function Saldos() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
   const [info, setInfo] = React.useState();
+  const [number, setNumber] = React.useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -47,14 +47,14 @@ export default function Saldos() {
   let navigate = useNavigate();
   const handlerSaldos = () => {
     if (info.id) {
-      const valorSaldoPagado = (info.pago / 1.13) * (0.6).toFixed(2);
-      totalPay(info.id, value, valorSaldoPagado);
+      const valorSaldoPagado = (info.valorOferta * 0.90 * 0.6).toFixed(2);
+      totalPay(info.id, number, valorSaldoPagado);
       toast("Pago total del servicio registrado con exito");
     } else {
       toast.error("No se pudo hacer el registro del pago. Vuelva a intentar");
+      handleClose();
     }
-    handleClose();
-    navigate("panel-control/pagos");
+    navigate("/panel-control/pagos");
   };
   return (
     <List
@@ -69,11 +69,11 @@ export default function Saldos() {
         Servicios Por Pago de Saldo Final a CONDUCTORES
       </h5>
       {saldos.length > 0 ? (
-        saldos.map((saldo, i) => (
+        saldos.map((saldo) => (
           <>
             <ListItem
               alignItems="flex-start"
-              key={i}
+              key={saldo.id}
               disableGutters
               secondaryAction={
                 <IconButton
@@ -93,7 +93,7 @@ export default function Saldos() {
               <ListItemText
                 primary={`Servicio No. ${saldo.id}`}
                 secondary={
-                  <div>
+                  <>
                     <Typography
                       sx={{ display: "inline" }}
                       component="span"
@@ -112,10 +112,10 @@ export default function Saldos() {
                         {new Intl.NumberFormat("es-CO", {
                           style: "currency",
                           currency: "COP",
-                        }).format((saldo.pago / 1.13) * 0.6)}
+                        }).format(saldo.valorOferta * 0.9 * 0.6)}
                       </b>
                     </Typography>
-                  </div>
+                  </>
                 }
               />
             </ListItem>
@@ -146,7 +146,7 @@ export default function Saldos() {
                   {new Intl.NumberFormat("es-CO", {
                     style: "currency",
                     currency: "COP",
-                  }).format((info.pago / 1.13) * 0.6)}
+                  }).format(info.valorOferta * 0.9 * 0.6)}
                 </b>
                 Escriba el numero del documento que certifica la transaccion
                 bancaria con la que hizo el pago del saldo.
@@ -155,6 +155,10 @@ export default function Saldos() {
                 id="standard-basic"
                 label="No. Transaccion Bancaria"
                 variant="standard"
+                value={number}
+                onChange={(event) => {
+                  setNumber(event.target.value);
+                }}
               />
               <Button variant="contained" size="small" onClick={handlerSaldos}>
                 Registrar Pago Total

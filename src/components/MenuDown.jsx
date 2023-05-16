@@ -72,7 +72,7 @@ export default function MenuDown() {
             label="Servicios en Curso"
             icon={<CheckIcon />}
             component={Link}
-            to="/panel-control/usuarios"
+            to="/panel-control/servicios-en-curso"
           />
           <BottomNavigationAction
             label="Mapa"

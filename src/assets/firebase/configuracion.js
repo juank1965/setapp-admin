@@ -128,7 +128,8 @@ export const getForAdvance = (actualizar) => {
   const q = query(
     collection(db, "services"),
     where("estado", "==", "confirmado"),
-    where("pagarAnticipoConductor", "==", true)
+    where("pagarAnticipoConductor", "==", true),
+    where("anticipoConductorPagado", "==", false)
   );
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const validar = [];
@@ -151,12 +152,15 @@ export const getForAdvance = (actualizar) => {
   });
 };
 // PROBAR Metodo advance -- Registra la informacion del numero de transferencia con el que se paga el anticipo
-export const advance = async (id, number, payed) => {
+export const advance = async (id, number, valorPagado) => {
+  const valorPagadoFormateado = new Intl.NumberFormat("es-ES", {
+    maximumFractionDigits: 0,
+  }).format(valorPagado);
   const advanceRef = doc(db, "services", id);
   await updateDoc(advanceRef, {
     transaccionPagoAnticipoNumero: number,
     anticipoConductorPagado: true,
-    valorAnticipoPagado: payed,
+    valorAnticipoPagado: valorPagadoFormateado,
   });
 };
 //Metodo getForTotalPay -- Lista los servicios a los que se les puede pagar el saldo final a conductores
@@ -164,7 +168,8 @@ export const getForTotalPay = (actualizar) => {
   const q = query(
     collection(db, "services"),
     where("estado", "==", "confirmado"),
-    where("pagarSaldoConductor", "==", true)
+    where("pagarSaldoConductor", "==", true),
+    where("saldoConductorPagado", "==", false)
   );
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const validar = [];
@@ -186,13 +191,70 @@ export const getForTotalPay = (actualizar) => {
     }
   });
 };
-//  PROBAR Metodo totalPay -- Rgistra la informacion del numero de transferencia con el que se cancela la totalidad del servicio al conductor
-export const totalPay = async (id, number, payed) => {
+//  PROBAR Metodo totalPay -- Registra la informacion del numero de transferencia con el que se cancela la totalidad del servicio al conductor
+export const totalPay = async (id, number, saldoPagado) => {
+  const saldoPagadoFormateado = new Intl.NumberFormat("es-ES", {
+    maximumFractionDigits: 0,
+  }).format(saldoPagado);
   const pagoTotalRef = doc(db, "services", id);
   await updateDoc(pagoTotalRef, {
     transaccionPagoTotalNumero: number,
     saldoConductorPagado: true,
-    valorSaldoPagado: payed,
+    valorSaldoPagado: saldoPagadoFormateado,
+  });
+};
+
+// Metodo para obtener todos los servicios Confirmados
+export const getForConfirmados = (actualizar) => {
+  const q = query(
+    collection(db, "services"),
+    where("estado", "==", "confirmado")
+  );
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const confirmados = [];
+    querySnapshot.forEach((doc) => {
+      confirmados.push(doc.data());
+    });
+    if (confirmados.length > 0) {
+      confirmados.sort(function (a, b) {
+        if (a.fechaSalida == b.fechaSalida) {
+          return 0;
+        }
+        if (a.fechaSalida < b.fechaSalida) {
+          return -1;
+        }
+        return 1;
+      });
+      actualizar(confirmados);
+      localStorage.setItem("confirmados", JSON.stringify(confirmados));
+    }
+  });
+};
+
+// Metodo para obtener todos los servicios Reservados
+export const getForReservas = (actualizar) => {
+  const q = query(
+    collection(db, "services"),
+    where("estado", "==", "reservado")
+  );
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const reservas = [];
+    querySnapshot.forEach((doc) => {
+      reservas.push(doc.data());
+    });
+    if (reservas.length > 0) {
+      reservas.sort(function (a, b) {
+        if (a.fechaSalida == b.fechaSalida) {
+          return 0;
+        }
+        if (a.fechaSalida < b.fechaSalida) {
+          return -1;
+        }
+        return 1;
+      });
+      actualizar(reservas);
+      localStorage.setItem("reservas", JSON.stringify(reservas));
+    }
   });
 };
 

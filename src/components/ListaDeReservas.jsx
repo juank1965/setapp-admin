@@ -40,7 +40,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export default function PagoSaldos() {
+export default function ListaDeReservas() {
   const [abrirCotizacion, setAbrirCotizacion] = React.useState(false);
   const handleAbrirCotizacion = () => setAbrirCotizacion(true);
   const handleCerrarCotizacion = () => setAbrirCotizacion(false);
@@ -51,7 +51,7 @@ export default function PagoSaldos() {
 
   return (
     <Card sx={{ maxWidth: 250 }} className="cardstyle">
-      <CardActionArea component={Link} to="/panel-control/saldos">
+      <CardActionArea component={Link} to="/panel-control/reservaciones">
         <CardMedia
           component="img"
           height="100"
@@ -60,19 +60,18 @@ export default function PagoSaldos() {
         />
         <CardContent>
           <Typography gutterBottom variant="subtitle2" component="div">
-            LISTADO PARA GESTIONAR PAGO DEL SALDO FINAL A CONDUCTORES
+            LISTADO DE RESERVAS REGISTRADAS
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Aca podes listar los usuarios conductores que han finalizado su
-            servicio y a los que se debe transferir el pago del saldo final de u
-            viaje.
+            Aca podes listar las registradas en el sistema. Se puede modificar
+            algunos datos segun requerimientos
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions className={styles.cardfooter}>
-        <Link to="/panel-control/saldos">
+        <Link to="/panel-control/reservaciones">
           <IconButton aria-label="price">
-            <StyledBadge badgeContent={2} color="secondary">
+            <StyledBadge badgeContent={0} color="secondary">
               <MonetizationOnIcon />
             </StyledBadge>
           </IconButton>

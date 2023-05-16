@@ -70,7 +70,7 @@ export default function PagoAnticipos() {
         </CardContent>
       </CardActionArea>
       <CardActions className={styles.cardfooter}>
-        <Link to="/panel-control/cotizaciones">
+        <Link to="/panel-control/anticipos">
           <IconButton aria-label="price">
             <StyledBadge badgeContent={2} color="secondary">
               <MonetizationOnIcon />

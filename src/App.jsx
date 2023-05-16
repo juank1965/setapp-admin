@@ -10,11 +10,9 @@ import Cotizaciones from "./components/Cotizaciones";
 import Seleccion from "./components/Seleccion";
 import Reservaciones from "./components/Reservaciones";
 import Confirmaciones from "./components/Confirmaciones";
-import Mapa from "./components/Mapa";
 import Historial from "./components/Historial";
 import Perfil from "./components/Perfil";
 import Salir from "./components/Salir";
-import MapLeaflet from "./components/MapLeaflet";
 import Usuarios from "./components/Usuarios";
 import GestionaReservas from "./components/GestionaReservas";
 import GestionaPagos from "./components/GestionaPagos";
@@ -25,6 +23,11 @@ import ValidarTransferencia from "./components/ValidarTransferencia";
 import Anticipos from "./components/Anticipos";
 import Saldos from "./components/Saldos";
 import toast, { Toaster } from "react-hot-toast";
+import ListaDeReservas from "./components/ListaDeReservas";
+import ListaServiciosConfirmados from "./components/ListaServiciosConfirmados";
+import ServiciosEnCurso from "./components/ServiciosEnCurso";
+import ListaServiciosReservados from "./components/ListaServiciosReservados";
+import ListaViajesConfirmados from "./components/ListaViajesConfirmados";
 
 function App() {
   return (
@@ -41,13 +44,19 @@ function App() {
           <Route path="operadores" element={<Operadores />} />
           <Route path="conductores" element={<Conductores />} />
           <Route path="validarEpayco" element={<ValidarEpayco />} />
+          <Route path="servicios-en-curso" element={<ServiciosEnCurso />} />
+          <Route path="lista-de-reservas" element={<ListaDeReservas />} />
+          <Route path="reservaciones" element={<ListaServiciosReservados />} />
+          <Route
+            path="viajes-confirmados"
+            element={<ListaViajesConfirmados />}
+          />
           <Route
             path="validarTransferencia"
             element={<ValidarTransferencia />}
           />
           <Route path="anticipos" element={<Anticipos />} />
           <Route path="saldos" element={<Saldos />} />
-          <Route path="mapa" element={<Mapa />} />
           <Route path="historial" element={<Historial />} />
           <Route path="perfil" element={<Perfil />} />
           <Route path="salir" element={<Salir />} />
