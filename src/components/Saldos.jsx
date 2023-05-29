@@ -47,7 +47,7 @@ export default function Saldos() {
   let navigate = useNavigate();
   const handlerSaldos = () => {
     if (info.id) {
-      const valorSaldoPagado = (info.valorOferta * 0.90 * 0.6).toFixed(2);
+      const valorSaldoPagado = (info.valorOferta * 0.9 * 0.6).toFixed(2);
       totalPay(info.id, number, valorSaldoPagado);
       toast("Pago total del servicio registrado con exito");
     } else {
@@ -115,6 +115,19 @@ export default function Saldos() {
                         }).format(saldo.valorOferta * 0.9 * 0.6)}
                       </b>
                     </Typography>
+                    <Typography
+                      sx={{ display: "inline" }}
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      <b>
+                        Anticipo a la cuenta: No. {saldo.cuenta}
+                        Banco:
+                        {anticipo.banco} {saldo.tipocuenta}
+                        Titular: {saldo.titular}
+                      </b>
+                    </Typography>
                   </>
                 }
               />
@@ -148,6 +161,21 @@ export default function Saldos() {
                     currency: "COP",
                   }).format(info.valorOferta * 0.9 * 0.6)}
                 </b>
+              </Typography>
+              <Typography
+                sx={{ display: "inline" }}
+                component="span"
+                variant="body2"
+                color="text.primary"
+              >
+                <b>
+                  Anticipo a la cuenta: No. {info.cuenta}
+                  Banco:
+                  {info.banco} {info.tipocuenta}
+                  Titular: {info.titular}
+                </b>
+              </Typography>
+              <Typography>
                 Escriba el numero del documento que certifica la transaccion
                 bancaria con la que hizo el pago del saldo.
               </Typography>

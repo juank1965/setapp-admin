@@ -54,7 +54,8 @@ export default function Anticipos() {
       handleClose();
     }
     navigate("/panel-control/pagos");
-  };  
+  }; 
+  console.log(anticipos) 
   return (
     <List
       sx={{
@@ -68,58 +69,73 @@ export default function Anticipos() {
       {anticipos.length > 0 ? (
         anticipos.map((anticipo) => (
           <>
-            <ListItem
-              alignItems="flex-start"
-              key={anticipo.id}
-              disableGutters
-              secondaryAction={
-                <IconButton
-                  aria-label="comment"
-                  onClick={() => {
-                    setInfo(anticipo);
-                    handleOpen();
-                  }}
-                >
-                  <CommentIcon />
-                </IconButton>
-              }
-            >
-              <ListItemAvatar>
-                <Avatar
-                  alt="Foto del Conductor"
-                  src={anticipo.imagenConductor}
-                />
-              </ListItemAvatar>
-              <ListItemText
-                primary={`Servicio No. ${anticipo.id}`}
-                secondary={
-                  <>
-                    <Typography
-                      sx={{ display: "inline" }}
-                      component="span"
-                      variant="body2"
-                      color="text.primary"
-                    >
-                      <b>
-                        Anticipo pagadero a: Conductor : {anticipo.conductor}
-                        vehiculo de placas:
-                        {anticipo.placas}
-                      </b>
-                    </Typography>
-                    <Typography>
-                      <b>
-                        Transferir el valor de:
-                        {new Intl.NumberFormat("es-CO", {
-                          style: "currency",
-                          currency: "COP",
-                        }).format(anticipo.valorOferta * 0.9 * 0.4)}
-                      </b>
-                    </Typography>
-                  </>
+            <>
+              <ListItem
+                alignItems="flex-start"
+                key={anticipo.id}
+                disableGutters
+                secondaryAction={
+                  <IconButton
+                    aria-label="comment"
+                    onClick={() => {
+                      setInfo({ anticipo });
+                      handleOpen();
+                    }}
+                  >
+                    <CommentIcon />
+                  </IconButton>
                 }
-              />
-            </ListItem>
-            <Divider />
+              >
+                <ListItemAvatar>
+                  <Avatar
+                    alt="Foto del Conductor"
+                    src={anticipo.imagenConductor}
+                  />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={`Servicio No. ${anticipo.id}`}
+                  secondary={
+                    <>
+                      <Typography
+                        sx={{ display: "inline" }}
+                        component="span"
+                        variant="body2"
+                        color="text.primary"
+                      >
+                        <b>
+                          Anticipo pagadero a: Conductor : {anticipo.conductor}
+                          vehiculo de placas:
+                          {anticipo.placas}
+                        </b>
+                      </Typography>
+                      <Typography>
+                        <b>
+                          Transferir el valor de:
+                          {new Intl.NumberFormat("es-CO", {
+                            style: "currency",
+                            currency: "COP",
+                          }).format(anticipo.valorOferta * 0.9 * 0.4)}
+                        </b>
+                      </Typography>
+                      <Typography
+                        sx={{ display: "inline" }}
+                        component="span"
+                        variant="body2"
+                        color="text.primary"
+                      >
+                        <b>
+                          Anticipo a la cuenta: No. {anticipo.cuenta}
+                          Banco:
+                          {anticipo.banco} {anticipo.tipocuenta}
+                          Titular: {anticipo.titular}
+                        </b>
+                      </Typography>
+                    </>
+                  }
+                />
+              </ListItem>
+              <Divider />
+            </>
           </>
         ))
       ) : (
@@ -146,9 +162,24 @@ export default function Anticipos() {
                   {new Intl.NumberFormat("es-CO", {
                     style: "currency",
                     currency: "COP",
-                  }).format(info.valorOferta *0.9 * 0.4)}
+                  }).format(info.valorOferta * 0.9 * 0.4)}
                 </b>
               </Typography>
+
+              <Typography
+                sx={{ display: "inline" }}
+                component="span"
+                variant="body2"
+                color="text.primary"
+              >
+                <b>
+                  Anticipo a la cuenta: No. {info.cuenta}
+                  Banco:
+                  {info.banco} {info.tipocuenta}
+                  Titular: {info.titular}
+                </b>
+              </Typography>
+
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 Escriba el numero del documento que certifica la transaccion
                 bancaria con la que hizo el pago del anticipo.
