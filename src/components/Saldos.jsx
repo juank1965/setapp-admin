@@ -122,9 +122,9 @@ export default function Saldos() {
                       color="text.primary"
                     >
                       <b>
-                        Anticipo a la cuenta: No. {saldo.cuenta}
+                        Saldo a la cuenta: No. {saldo.cuenta}
                         Banco:
-                        {anticipo.banco} {saldo.tipocuenta}
+                        {saldo.banco} | {saldo.tipocuenta} |
                         Titular: {saldo.titular}
                       </b>
                     </Typography>
@@ -171,7 +171,7 @@ export default function Saldos() {
                 <b>
                   Anticipo a la cuenta: No. {info.cuenta}
                   Banco:
-                  {info.banco} {info.tipocuenta}
+                  {info.banco} | {info.tipocuenta} |
                   Titular: {info.titular}
                 </b>
               </Typography>

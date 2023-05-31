@@ -78,7 +78,7 @@ export default function Anticipos() {
                   <IconButton
                     aria-label="comment"
                     onClick={() => {
-                      setInfo({ anticipo });
+                      setInfo(anticipo);
                       handleOpen();
                     }}
                   >
@@ -124,9 +124,9 @@ export default function Anticipos() {
                         color="text.primary"
                       >
                         <b>
-                          Anticipo a la cuenta: No. {anticipo.cuenta}
+                          Anticipo a la cuenta: No. {anticipo.cuenta} |
                           Banco:
-                          {anticipo.banco} {anticipo.tipocuenta}
+                          {anticipo.banco} | {anticipo.tipocuenta} |
                           Titular: {anticipo.titular}
                         </b>
                       </Typography>
@@ -159,7 +159,9 @@ export default function Anticipos() {
                 </b>
                 <b>
                   Servicio No. {info.id} Transferir el valor de:
-                  {new Intl.NumberFormat("es-CO", {
+                  {
+                    
+                  new Intl.NumberFormat("es-CO", {
                     style: "currency",
                     currency: "COP",
                   }).format(info.valorOferta * 0.9 * 0.4)}
@@ -173,9 +175,9 @@ export default function Anticipos() {
                 color="text.primary"
               >
                 <b>
-                  Anticipo a la cuenta: No. {info.cuenta}
+                  Anticipo a la cuenta: No. {info.cuenta} |
                   Banco:
-                  {info.banco} {info.tipocuenta}
+                  {info.banco} | {info.tipocuenta} |
                   Titular: {info.titular}
                 </b>
               </Typography>

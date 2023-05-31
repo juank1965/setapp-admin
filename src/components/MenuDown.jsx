@@ -61,9 +61,9 @@ export default function MenuDown() {
           <BottomNavigationAction
             label="Gestionar Pagos"
             icon={
-              <StyledBadge badgeContent={4} color="secondary">
+              <Badge badgeContent={0} color="secondary">
                 <MonetizationOnIcon />
-              </StyledBadge>
+              </Badge>
             }
             component={Link}
             to="/panel-control/pagos"

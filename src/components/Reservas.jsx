@@ -66,9 +66,9 @@ export default function Reservas() {
         <CardActions className={styles.cardfooter}>
           <Link to="/panel-control/validarEpayco">
             <IconButton aria-label="crash">
-              <StyledBadge badgeContent={2} color="secondary">
+              <Badge badgeContent={0} color="secondary">
                 <NoCrashIcon />
-              </StyledBadge>
+              </Badge>
             </IconButton>
           </Link>
         </CardActions>
@@ -100,9 +100,9 @@ export default function Reservas() {
         <CardActions className={styles.cardfooter}>
           <Link to="/panel-control/validarTransferencia">
             <IconButton aria-label="crash">
-              <StyledBadge badgeContent={2} color="secondary">
+              <Badge badgeContent={0} color="secondary">
                 <NoCrashIcon />
-              </StyledBadge>
+              </Badge>
             </IconButton>
           </Link>
         </CardActions>

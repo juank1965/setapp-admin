@@ -71,9 +71,9 @@ export default function ListaDeReservas() {
       <CardActions className={styles.cardfooter}>
         <Link to="/panel-control/reservaciones">
           <IconButton aria-label="price">
-            <StyledBadge badgeContent={0} color="secondary">
+            <Badge badgeContent={0} color="secondary">
               <MonetizationOnIcon />
-            </StyledBadge>
+            </Badge>
           </IconButton>
         </Link>
       </CardActions>

@@ -72,9 +72,9 @@ export default function PagoAnticipos() {
       <CardActions className={styles.cardfooter}>
         <Link to="/panel-control/anticipos">
           <IconButton aria-label="price">
-            <StyledBadge badgeContent={2} color="secondary">
+            <Badge badgeContent={0} color="secondary">
               <MonetizationOnIcon />
-            </StyledBadge>
+            </Badge>
           </IconButton>
         </Link>
       </CardActions>

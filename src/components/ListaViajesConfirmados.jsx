@@ -45,6 +45,7 @@ export default function ListaViajesConfirmados() {
   React.useEffect(() => {
     const listaConfirmados = getForConfirmados(setViajesConfirmados);
   }, [getForConfirmados]);
+  console.log(viajesConfirmados)
   return (
     <List
       sx={{
@@ -54,7 +55,7 @@ export default function ListaViajesConfirmados() {
         mt: "50px",
       }}
     >
-      <h5 className="titulo">viajes Confirmados</h5>
+      <h5 className="titulo">Seguimiento a servicios</h5>
       {viajesConfirmados.length > 0 ? (
         viajesConfirmados.map((viaje) => (
           <>
@@ -97,12 +98,10 @@ export default function ListaViajesConfirmados() {
                     </Typography>
                     <Typography>Clase de Servicio: {viaje.clase}</Typography>
                     <Typography>
-                      Saliendo desde: {viaje.ciudadOrigen},
-                      {viaje.direccionOrigen}
+                      Saliendo desde: {viaje.origen}
                     </Typography>
                     <Typography>
-                      Viajando Hacia : {viaje.ciudadDestino},
-                      {viaje.direccionDestino}
+                      Viajando Hacia : {viaje.destino}
                     </Typography>
                     <Typography>Tipo de Vehiculo: {viaje.tipo}</Typography>
                   </>
@@ -125,33 +124,20 @@ export default function ListaViajesConfirmados() {
           {info && info.metodPago === "transferencia" && (
             <>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                Ingrese el numero de transferencia o consignación
+                MAPA DE TRAYECTORIA DEL SERVICIO CONTRATADO
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 <b>
-                  Para el servicio No. {info.id} se tranfiere :
-                  {new Intl.NumberFormat("es-CO", {
-                    style: "currency",
-                    currency: "COP",
-                  }).format(info.pago)}
+                  El servicio No. {info.id} se encuentra :                 
                 </b>
-                Escriba el numero del documento Equivalente que certifica la
-                transaccion con la que se registra la consignación o
-                transferencia.
-              </Typography>
-              <TextField
-                id="standard-basic"
-                label="Consignación o tranferencia #"
-                variant="standard"
-                value={value}
-                onChange={handleChange}
-              />
+                Mapa de trayectoria.
+              </Typography>              
               <Button
                 variant="contained"
                 size="small"
-                onClick={handlerValidacion}
+                onClick={handleClose}
               >
-                Validar Pago por TRANSFERENCIA
+                Cerrar Mapa
               </Button>
             </>
           )}

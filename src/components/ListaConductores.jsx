@@ -71,9 +71,9 @@ export default function ListaConductores() {
       <CardActions className={styles.cardfooter}>
         <Link to="/panel-control/conductores">
           <IconButton aria-label="price">
-            <StyledBadge badgeContent={2} color="secondary">
+            <Badge badgeContent={0} color="secondary">
               <MonetizationOnIcon />
-            </StyledBadge>
+            </Badge>
           </IconButton>
         </Link>
       </CardActions>
