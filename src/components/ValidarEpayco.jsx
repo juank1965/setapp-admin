@@ -115,12 +115,10 @@ export default function ValidarEpayco() {
                           Clase de Servicio: {valida.clase}
                         </Typography>
                         <Typography>
-                          Saliendo desde: {valida.ciudadOrigen},
-                          {valida.direccionOrigen}
+                          Saliendo desde: {valida.origen}
                         </Typography>
                         <Typography>
-                          Viajando Hacia : {valida.ciudadDestino},
-                          {valida.direccionDestino}
+                          Viajando Hacia : {valida.destino}
                         </Typography>
                         <Typography>Tipo de Vehiculo: {valida.tipo}</Typography>
                       </>

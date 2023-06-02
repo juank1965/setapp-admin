@@ -112,7 +112,7 @@ export default function Saldos() {
                         {new Intl.NumberFormat("es-CO", {
                           style: "currency",
                           currency: "COP",
-                        }).format(saldo.valorOferta * 0.9 * 0.6)}
+                        }).format((saldo.valorOferta * 0.9 * 0.6).toFixed(0))}
                       </b>
                     </Typography>
                     <Typography
@@ -159,7 +159,7 @@ export default function Saldos() {
                   {new Intl.NumberFormat("es-CO", {
                     style: "currency",
                     currency: "COP",
-                  }).format(info.valorOferta * 0.9 * 0.6)}
+                  }).format((info.valorOferta * 0.9 * 0.6).toFixed(0))}
                 </b>
               </Typography>
               <Typography
