@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import ListaUsuarios from "./ListaUsuarios";
+import ListaUsuariosNuevos from "./ListaUsuariosNuevos";
 import ListaConductores from "./ListaConductores";
+import ListaConductoresPorValidar from "./ListaConductoresPorValidar";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,8 +50,10 @@ function Usuarios() {
   return (
     <div className="bodypanel bodycontent">
       <div className="cardcontainerstyle">
+        <ListaConductoresPorValidar />
+        <ListaUsuariosNuevos />
         <ListaUsuarios />
-        <ListaConductores />
+        <ListaConductores />        
       </div>
     </div>
   );

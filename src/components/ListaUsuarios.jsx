@@ -14,7 +14,7 @@ import PolicyIcon from "@mui/icons-material/Policy";
 import FormCotizar from "./FormCotizar";
 import styles from "./Cotizar.module.css";
 import presupuesto from "../assets/solicitar-presupuesto.png";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import BallotIcon from '@mui/icons-material/Ballot';
 
 const style = {
   position: "absolute",
@@ -72,7 +72,7 @@ export default function ListaUsuarios() {
         <Link to="/panel-control/operadores">
           <IconButton aria-label="price">
             <Badge badgeContent={0} color="secondary">
-              <MonetizationOnIcon />
+              <BallotIcon />
             </Badge>
           </IconButton>
         </Link>

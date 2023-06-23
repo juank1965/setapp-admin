@@ -48,9 +48,40 @@ export const getUsuario = async (id) => {
   const data = docSnap.data();
   return data;
 };
+// Metodo para obtener listado de Nuevos Operadores Registrados
+export const getUsuariosNuevos = (actualizar) => {
+  const q = query(
+    collection(db, "usuarios"),
+    where("perfil", "==", true),
+    where("nuevo", "==", true)
+  );
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const usuarios = [];
+    querySnapshot.forEach((doc) => {
+      usuarios.push(doc.data());
+    });
+    if (usuarios.length > 0) {
+      usuarios.sort(function (a, b) {
+        if (a.nombre == b.nombre) {
+          return 0;
+        }
+        if (a.nombre < b.nombre) {
+          return -1;
+        }
+        return 1;
+      });
+      actualizar(usuarios);
+      localStorage.setItem("reservas", JSON.stringify(usuarios));
+    }
+  });
+};
 // Metodo para obtener listado de Operadores Registrados
 export const getUsuarios = (actualizar) => {
-  const q = query(collection(db, "usuarios"));
+  const q = query(
+    collection(db, "usuarios"),
+    where("perfil", "==", true),
+    where("nuevo", "==", false)
+  );
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const usuarios = [];
     querySnapshot.forEach((doc) => {
@@ -73,7 +104,40 @@ export const getUsuarios = (actualizar) => {
 };
 // Metodo para obtener listado de Conductores Registrados
 export const getConductores = (actualizar) => {
-  const q = query(collection(db, "conductores"));
+  const q = query(
+    collection(db, "conductores"),
+    where("validado", "==", true),
+    where("documentosVehiculo", "==", true),
+    where("fotosVehiculo", "==", true)
+  );
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const conductores = [];
+    querySnapshot.forEach((doc) => {
+      conductores.push(doc.data());
+    });
+    if (conductores.length > 0) {
+      conductores.sort(function (a, b) {
+        if (a.nombre == b.nombre) {
+          return 0;
+        }
+        if (a.nombre < b.nombre) {
+          return -1;
+        }
+        return 1;
+      });
+      actualizar(conductores);
+      localStorage.setItem("conductores", JSON.stringify(conductores));
+    }
+  });
+};
+// Metodo para obtener listado de Conductores Registrados Din Validar
+export const getConductoresPorValidar = (actualizar) => {
+  const q = query(
+    collection(db, "conductores"),
+    where("validado", "==", false),
+    where("documentosVehiculo", "==", true),
+    where("fotosVehiculo", "==", true)
+  );
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const conductores = [];
     querySnapshot.forEach((doc) => {

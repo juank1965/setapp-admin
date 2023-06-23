@@ -17,7 +17,9 @@ import Usuarios from "./components/Usuarios";
 import GestionaReservas from "./components/GestionaReservas";
 import GestionaPagos from "./components/GestionaPagos";
 import Operadores from "./components/Operadores";
+import OperadoresNuevos from "./components/OperadoresNuevos";
 import Conductores from "./components/Conductores";
+import ConductoresPorValidar from "./components/ConductoresPorValidar";
 import ValidarEpayco from "./components/ValidarEpayco";
 import ValidarTransferencia from "./components/ValidarTransferencia";
 import Anticipos from "./components/Anticipos";
@@ -42,7 +44,9 @@ function App() {
           <Route path="reservas" element={<GestionaReservas />} />
           <Route path="pagos" element={<GestionaPagos />} />
           <Route path="operadores" element={<Operadores />} />
+          <Route path="operadores-nuevos" element={<OperadoresNuevos />} />
           <Route path="conductores" element={<Conductores />} />
+          <Route path="conductores-por-validar" element={<ConductoresPorValidar />} />
           <Route path="validarEpayco" element={<ValidarEpayco />} />
           <Route path="servicios-en-curso" element={<ServiciosEnCurso />} />
           <Route path="lista-de-reservas" element={<ListaDeReservas />} />

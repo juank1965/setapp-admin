@@ -40,7 +40,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export default function ListaConductores() {
+export default function ListaUsuariosNuevos() {
   const [abrirCotizacion, setAbrirCotizacion] = React.useState(false);
   const handleAbrirCotizacion = () => setAbrirCotizacion(true);
   const handleCerrarCotizacion = () => setAbrirCotizacion(false);
@@ -51,7 +51,7 @@ export default function ListaConductores() {
 
   return (
     <Card sx={{ maxWidth: 250 }} className="cardstyle">
-      <CardActionArea component={Link} to="/panel-control/conductores">
+      <CardActionArea component={Link} to="/panel-control/Operadores-nuevos">
         <CardMedia
           component="img"
           height="100"
@@ -60,16 +60,16 @@ export default function ListaConductores() {
         />
         <CardContent>
           <Typography gutterBottom variant="subtitle2" component="div">
-            LISTADO DE CONDUCTORES REGISTRADOS EN EL SISTEMA
+            LISTADO DE NUEVOS OPERADORES TURISTICOS REGISTRADOS
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Aca podes listar los usuarios conductores registrados en el sistema.
-            Se puede modificar algunos datos segun requerimientos
+            Aca podes listar los usuarios operadores turisticos nuevos registrados en
+            el sistema. Se puede modificar algunos datos segun requerimientos
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions className={styles.cardfooter}>
-        <Link to="/panel-control/conductores">
+        <Link to="/panel-control/operadores-nuevos">
           <IconButton aria-label="price">
             <Badge badgeContent={0} color="secondary">
               <BallotIcon />
