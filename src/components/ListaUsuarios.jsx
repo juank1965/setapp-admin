@@ -60,7 +60,7 @@ export default function ListaUsuarios() {
         />
         <CardContent>
           <Typography gutterBottom variant="subtitle2" component="div">
-            LISTADO DE OPERADORES TURISTICOS REGISTRADOS
+            OPERADORES TURISTICOS REGISTRADOS
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Aca podes listar los usuarios operadores turisticos registrados en

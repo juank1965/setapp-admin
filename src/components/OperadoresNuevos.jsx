@@ -5,7 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import CommentIcon from "@mui/icons-material/Comment";
 import IconButton from "@mui/material/IconButton";
 import { Typography } from "@mui/material";
-import { getUsuariosNuevos } from "../assets/firebase/configuracion";
+import { getUsuariosNuevos, validarUsuario } from "../assets/firebase/configuracion";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
@@ -39,7 +39,8 @@ export default function OperadoresNuevos() {
     const listaOperadores = getUsuariosNuevos(setOperadores);
   }, [getUsuariosNuevos]);
 
-  const handlerBienvenida = () => {
+  const handlerBienvenida = (id) => {
+    validarUsuario(id);
     navigate("/panel-control/usuarios");
   }
   
@@ -153,7 +154,9 @@ export default function OperadoresNuevos() {
                 <Typography>email : {info.email} </Typography>
                 <Typography>telefono : {info.telefono} </Typography>
               </div>
-              <Button onClick={handlerBienvenida}>Enviar Email de Bienvenida</Button>
+              <Button onClick={() => {
+              validarUsuario(info.id);
+              navigate("/panel-control/usuarios");}}>Antes de validar, enviar Email de Bienvenida</Button>
             </>
           )}
         </Box>

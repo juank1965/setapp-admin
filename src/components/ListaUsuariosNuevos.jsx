@@ -60,7 +60,7 @@ export default function ListaUsuariosNuevos() {
         />
         <CardContent>
           <Typography gutterBottom variant="subtitle2" component="div">
-            LISTADO DE NUEVOS OPERADORES TURISTICOS REGISTRADOS
+            OPERADORES TURISTICOS NUEVOS
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Aca podes listar los usuarios operadores turisticos nuevos registrados en

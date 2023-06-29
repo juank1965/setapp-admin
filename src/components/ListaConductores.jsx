@@ -60,7 +60,7 @@ export default function ListaConductores() {
         />
         <CardContent>
           <Typography gutterBottom variant="subtitle2" component="div">
-            LISTADO DE CONDUCTORES REGISTRADOS EN EL SISTEMA
+            CONDUCTORES REGISTRADOS
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Aca podes listar los usuarios conductores registrados en el sistema.

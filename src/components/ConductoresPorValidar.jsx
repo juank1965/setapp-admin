@@ -5,7 +5,10 @@ import ListItemText from "@mui/material/ListItemText";
 import CommentIcon from "@mui/icons-material/Comment";
 import IconButton from "@mui/material/IconButton";
 import { Typography } from "@mui/material";
-import { getConductores, getConductoresPorValidar } from "../assets/firebase/configuracion";
+import {
+  getConductoresPorValidar,
+  validarConductor,
+} from "../assets/firebase/configuracion";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
@@ -37,13 +40,8 @@ export default function ConductoresPorValidar() {
   const [conductores, setConductores] = React.useState([]);
   React.useEffect(() => {
     const listaConductores = getConductoresPorValidar(setConductores);
-  }, [getConductoresPorValidar]);
-
-  const validaConductor = ()=> {
-    navigate("/panel-control/usuarios");
-  }
+  }, [getConductoresPorValidar]); 
   
-  console.log(conductores)
   return (
     <List
       sx={{
@@ -54,7 +52,9 @@ export default function ConductoresPorValidar() {
         mb: "50px",
       }}
     >
-      <h5 className="titulo">Conductores Registrados Por Validar: {conductores.length}</h5>
+      <h5 className="titulo">
+        Conductores Registrados Por Validar: {conductores.length}
+      </h5>
       {conductores.length > 0 ? (
         conductores.map((conductor) => (
           <>
@@ -96,8 +96,8 @@ export default function ConductoresPorValidar() {
                     >
                       {conductor.tipo} Placas:{conductor.placas}
                       --{conductor.marca} modelo:{conductor.modelo} capacidad:
-                    {conductor.capacidad}
-                    </Typography>                    
+                      {conductor.capacidad}
+                    </Typography>
                     <Typography
                       sx={{ display: "inline" }}
                       component="span"
@@ -105,11 +105,9 @@ export default function ConductoresPorValidar() {
                       color="text.primary"
                     >
                       Afiliado a: {conductor.empresa} No.
-                      {conductor.numeroInterno} -                    
-                      Direccion: {conductor.direccion} -
-                      Email: {conductor.email}
-                      Telefono: {conductor.telefono} -
-                      Banco: {conductor.banco}
+                      {conductor.numeroInterno} - Direccion:{" "}
+                      {conductor.direccion} - Email: {conductor.email}
+                      Telefono: {conductor.telefono} - Banco: {conductor.banco}
                       Tipo Cuenta: {conductor.tipocuenta}
                       No. Cuenta: {conductor.cuenta}
                       Titular: {conductor.titular}
@@ -153,10 +151,17 @@ export default function ConductoresPorValidar() {
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 Vehiculo {info.placas} tipo : {info.tipo} capacidad :
                 {info.capacidad} Pasajeros
-              </Typography>              
+              </Typography>
             </>
           )}
-          <Button onClick={validaConductor}>Validar Conductor</Button>
+          <Button
+            onClick={() => {
+              validarConductor(info.id);
+              navigate("/panel-control/usuarios");
+            }}
+          >
+            Validar Conductor
+          </Button>
         </Box>
       </Modal>
     </List>

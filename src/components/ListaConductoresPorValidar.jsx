@@ -60,7 +60,7 @@ export default function ListaConductoresPorValidar() {
         />
         <CardContent>
           <Typography gutterBottom variant="subtitle2" component="div">
-            LISTADO DE CONDUCTORES POR VALIDAR
+            CONDUCTORES POR VALIDAR
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Aca podes listar los usuarios conductores registrados que pueden ser

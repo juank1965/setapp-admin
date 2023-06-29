@@ -158,6 +158,16 @@ export const getConductoresPorValidar = (actualizar) => {
     }
   });
 };
+// Validar el conductor al revisar sus documentos y fotos
+export const validarConductor = async(id) =>{
+  const validarConductorRef = doc(db, "conductores", id);
+  await updateDoc(validarConductorRef, { validado: true });
+}
+// Validar al usuario Operador despues de enviar correo de bienvenida solicitando RUT
+export const validarUsuario = async(id) =>{
+  const validarUsuarioRef = doc(db, "usuarios", id);
+  await updateDoc(validarUsuarioRef, { nuevo: false });
+}
 // Metodo para obtener todos los servicios por validar
 export const getForValidate = (actualizar) => {
   const q = query(collection(db, "services"), where("estado", "==", "validar"));
