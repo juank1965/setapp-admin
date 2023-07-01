@@ -134,8 +134,7 @@ export const getConductores = (actualizar) => {
 export const getConductoresPorValidar = (actualizar) => {
   const q = query(
     collection(db, "conductores"),
-    where("validado", "==", false),
-    where("documentosVehiculo", "==", true),
+    where("validado", "==", false),    
     where("fotosVehiculo", "==", true)
   );
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -161,7 +160,7 @@ export const getConductoresPorValidar = (actualizar) => {
 // Validar el conductor al revisar sus documentos y fotos
 export const validarConductor = async(id) =>{
   const validarConductorRef = doc(db, "conductores", id);
-  await updateDoc(validarConductorRef, { validado: true });
+  await updateDoc(validarConductorRef, { validado: true, documentosVehiculo: true });
 }
 // Validar al usuario Operador despues de enviar correo de bienvenida solicitando RUT
 export const validarUsuario = async(id) =>{
