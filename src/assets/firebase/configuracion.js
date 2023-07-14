@@ -135,7 +135,8 @@ export const getConductoresPorValidar = (actualizar) => {
   const q = query(
     collection(db, "conductores"),
     where("validado", "==", false),    
-    where("fotosVehiculo", "==", true)
+    where("fotosVehiculo", "==", true),
+    where("perfil", "==", true),
   );
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const conductores = [];
