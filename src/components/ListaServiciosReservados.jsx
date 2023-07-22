@@ -43,6 +43,9 @@ export default function ListaServiciosReservados() {
   React.useEffect(() => {
     const listaReservados = getForReservas(setReservas);
   }, [getForReservas]);
+
+  const handlerValidacion = (e) => {};
+
   return (
     <List
       sx={{
@@ -95,12 +98,10 @@ export default function ListaServiciosReservados() {
                     </Typography>
                     <Typography>Clase de Servicio: {reserva.clase}</Typography>
                     <Typography>
-                      Saliendo desde: {reserva.ciudadOrigen},
-                      {reserva.direccionOrigen}
+                      Saliendo desde: {reserva.origen}                      
                     </Typography>
                     <Typography>
-                      Viajando Hacia : {reserva.ciudadDestino},
-                      {reserva.direccionDestino}
+                      Viajando Hacia : {reserva.destino}                      
                     </Typography>
                     <Typography>Tipo de Vehiculo: {reserva.tipo}</Typography>
                   </>
@@ -123,33 +124,20 @@ export default function ListaServiciosReservados() {
           {info && info.metodPago === "transferencia" && (
             <>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                Ingrese el numero de transferencia o consignación
+                MAPA DE TRAYECTORIA DEL SERVICIO CONTRATADO
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 <b>
-                  Para el servicio No. {info.id} se tranfiere :
-                  {new Intl.NumberFormat("es-CO", {
-                    style: "currency",
-                    currency: "COP",
-                  }).format(info.pago)}
+                  El servicio No. {info.id} se encuentra :                 
                 </b>
-                Escriba el numero del documento Equivalente que certifica la
-                transaccion con la que se registra la consignación o
-                transferencia.
-              </Typography>
-              <TextField
-                id="standard-basic"
-                label="Consignación o tranferencia #"
-                variant="standard"
-                value={value}
-                onChange={handleChange}
-              />
+                Componente de Mapa de trayectoria.
+              </Typography>              
               <Button
                 variant="contained"
                 size="small"
-                onClick={handlerValidacion}
+                onClick={handleClose}
               >
-                Validar Pago por TRANSFERENCIA
+                Cerrar Mapa
               </Button>
             </>
           )}

@@ -44,8 +44,7 @@ export default function ListaViajesConfirmados() {
   const [viajesConfirmados, setViajesConfirmados] = React.useState([]);
   React.useEffect(() => {
     const listaConfirmados = getForConfirmados(setViajesConfirmados);
-  }, [getForConfirmados]);
-  console.log(viajesConfirmados)
+  }, [getForConfirmados]);  
   return (
     <List
       sx={{
@@ -130,7 +129,7 @@ export default function ListaViajesConfirmados() {
                 <b>
                   El servicio No. {info.id} se encuentra :                 
                 </b>
-                Mapa de trayectoria.
+                Componente de Mapa de trayectoria.
               </Typography>              
               <Button
                 variant="contained"

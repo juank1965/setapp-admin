@@ -201,7 +201,7 @@ export const validate = async (id, number) => {
 export const getForAdvance = (actualizar) => {
   const q = query(
     collection(db, "services"),
-    where("estado", "==", "confirmado"),
+    //where("estado", "==", "confirmado"),
     where("pagarAnticipoConductor", "==", true),
     where("anticipoConductorPagado", "==", false)
   );
@@ -241,7 +241,7 @@ export const advance = async (id, number, valorPagado) => {
 export const getForTotalPay = (actualizar) => {
   const q = query(
     collection(db, "services"),
-    where("estado", "==", "confirmado"),
+    //where("estado", "==", "confirmado"),
     where("pagarSaldoConductor", "==", true),
     where("saldoConductorPagado", "==", false)
   );
