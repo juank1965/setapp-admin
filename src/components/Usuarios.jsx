@@ -6,6 +6,7 @@ import ListaUsuarios from "./ListaUsuarios";
 import ListaUsuariosNuevos from "./ListaUsuariosNuevos";
 import ListaConductores from "./ListaConductores";
 import ListaConductoresPorValidar from "./ListaConductoresPorValidar";
+import ListaConductoresNuevos from "./ListaConductoresNuevos";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -50,6 +51,7 @@ function Usuarios() {
   return (
     <div className="bodypanel bodycontent">
       <div className="cardcontainerstyle">
+        <ListaConductoresNuevos />
         <ListaConductoresPorValidar />
         <ListaUsuariosNuevos />
         <ListaUsuarios />

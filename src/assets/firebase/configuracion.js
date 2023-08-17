@@ -130,7 +130,35 @@ export const getConductores = (actualizar) => {
     }
   });
 };
-// Metodo para obtener listado de Conductores Registrados Din Validar
+// Metodo para obtener listado de Conductores Nuevos Registrados para envío de correo
+export const getConductoresNuevos = (actualizar) => {
+  const q = query(
+    collection(db, "conductores"),
+    where("validado", "==", false),    
+    where("fotosVehiculo", "==", false),
+    where("documentosVehiculo", "==", false),
+    where("perfil", "==", true)
+  );
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const conductores = [];
+    querySnapshot.forEach((doc) => {
+      conductores.push(doc.data());
+    });
+    if (conductores.length > 0) {
+      conductores.sort(function (a, b) {
+        if (a.nombre == b.nombre) {
+          return 0;
+        }
+        if (a.nombre < b.nombre) {
+          return -1;
+        }
+        return 1;
+      });
+      actualizar(conductores);      
+    }
+  });
+};
+// Metodo para obtener listado de Conductores Registrados Sin Validar
 export const getConductoresPorValidar = (actualizar) => {
   const q = query(
     collection(db, "conductores"),

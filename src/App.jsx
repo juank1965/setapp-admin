@@ -30,6 +30,7 @@ import ListaServiciosConfirmados from "./components/ListaServiciosConfirmados";
 import ServiciosEnCurso from "./components/ServiciosEnCurso";
 import ListaServiciosReservados from "./components/ListaServiciosReservados";
 import ListaViajesConfirmados from "./components/ListaViajesConfirmados";
+import ConductoresNuevos from "./components/ConductoresNuevos";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path="operadores-nuevos" element={<OperadoresNuevos />} />
           <Route path="conductores" element={<Conductores />} />
           <Route path="conductores-por-validar" element={<ConductoresPorValidar />} />
+          <Route path="conductores-nuevos" element={<ConductoresNuevos />} />
           <Route path="validarEpayco" element={<ValidarEpayco />} />
           <Route path="servicios-en-curso" element={<ServiciosEnCurso />} />
           <Route path="lista-de-reservas" element={<ListaDeReservas />} />

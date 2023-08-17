@@ -6,8 +6,7 @@ import CommentIcon from "@mui/icons-material/Comment";
 import IconButton from "@mui/material/IconButton";
 import { Typography } from "@mui/material";
 import {
-  getConductoresPorValidar,
-  validarConductor,
+  getConductoresNuevos,  
 } from "../assets/firebase/configuracion";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -30,17 +29,17 @@ const style = {
   p: 4,
 };
 
-export default function ConductoresPorValidar() {
+export default function ConductoresNuevos() {
   let navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const [info, setInfo] = React.useState();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [conductores, setConductores] = React.useState([]);
+  const [conductoresNuevos, setConductoresNuevos] = React.useState([]);
   React.useEffect(() => {
-    const listaConductores = getConductoresPorValidar(setConductores);
-  }, [getConductoresPorValidar]); 
+    const listaConductoresNuevos = getConductoresNuevos(setConductoresNuevos);
+  }, [getConductoresNuevos]); 
   
   return (
     <List
@@ -53,20 +52,20 @@ export default function ConductoresPorValidar() {
       }}
     >
       <h5 className="titulo">
-        Conductores Registrados Por Validar: {conductores.length}
+        Conductores Registrados Nuevos: {conductoresNuevos.length}
       </h5>
-      {conductores.length > 0 ? (
-        conductores.map((conductor) => (
+      {conductoresNuevos.length > 0 ? (
+        conductoresNuevos.map((conductorNuevo) => (
           <>
             <ListItem
               alignItems="flex-start"
-              key={conductor.id}
+              key={conductorNuevo.id}
               disableGutters
               secondaryAction={
                 <IconButton
                   aria-label="comment"
                   onClick={() => {
-                    setInfo(conductor);
+                    setInfo(conductorNuevo);
                     handleOpen();
                   }}
                 >
@@ -76,16 +75,16 @@ export default function ConductoresPorValidar() {
             >
               <div className="bodypaneluno">
                 <ListItemAvatar>
-                  <Avatar alt="Foto del Usuario" src={conductor.imagen} />
+                  <Avatar alt="Foto del Usuario" src={conductorNuevo.imagen} />
                 </ListItemAvatar>
                 <Rating
                   name="simple-controlled"
                   size="small"
-                  value={conductor.rating}
+                  value={conductorNuevo.rating}
                 />
               </div>
               <ListItemText
-                primary={`Conductor ${conductor.nombre}`}
+                primary={`Conductor ${conductorNuevo.nombre}`}
                 secondary={
                   <>
                     <Typography
@@ -94,9 +93,9 @@ export default function ConductoresPorValidar() {
                       variant="body2"
                       color="text.primary"
                     >
-                      {conductor.tipo} Placas:{conductor.placas}
-                      --{conductor.marca} modelo:{conductor.modelo} capacidad:
-                      {conductor.capacidad}
+                      {conductorNuevo.tipo} Placas:{conductorNuevo.placas}
+                      --{conductorNuevo.marca} modelo:{conductorNuevo.modelo} capacidad:
+                      {conductorNuevo.capacidad}
                     </Typography>
                     <Typography
                       sx={{ display: "inline" }}
@@ -104,13 +103,13 @@ export default function ConductoresPorValidar() {
                       variant="inherit"
                       color="text.primary"
                     >
-                      Afiliado a: {conductor.empresa} No.
-                      {conductor.numeroInterno} - Direccion:{" "}
-                      {conductor.direccion} - Email: {conductor.email}
-                      Telefono: {conductor.telefono} - Banco: {conductor.banco}
-                      Tipo Cuenta: {conductor.tipocuenta}
-                      No. Cuenta: {conductor.cuenta}
-                      Titular: {conductor.titular}
+                      Afiliado a: {conductorNuevo.empresa} No.
+                      {conductorNuevo.numeroInterno} - Direccion:{" "}
+                      {conductorNuevo.direccion} - Email: {conductorNuevo.email}
+                      Telefono: {conductorNuevo.telefono} - Banco: {conductorNuevo.banco}
+                      Tipo Cuenta: {conductorNuevo.tipocuenta}
+                      No. Cuenta: {conductorNuevo.cuenta}
+                      Titular: {conductorNuevo.titular}
                     </Typography>
                   </>
                 }
@@ -120,7 +119,7 @@ export default function ConductoresPorValidar() {
           </>
         ))
       ) : (
-        <h6 className="titulo">No hay Conductores Registrados</h6>
+        <h6 className="titulo">No hay Conductores Nuevos Registrados</h6>
       )}
       <Modal
         open={open}
@@ -155,12 +154,11 @@ export default function ConductoresPorValidar() {
             </>
           )}
           <Button
-            onClick={() => {
-              validarConductor(info.id);
+            onClick={() => {              
               navigate("/panel-control/usuarios");
             }}
           >
-            Validar Conductor
+            Enviar email de Bienvenida para q suba fotos y docs
           </Button>
         </Box>
       </Modal>
