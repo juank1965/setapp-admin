@@ -17,6 +17,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import PagoAnticipos from "./PagoAnticipos";
 import PagoSaldos from "./PagoSaldos";
+import PagoRecompensas from "./PagoRecompensas";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -63,6 +64,7 @@ function GestionaPagos() {
       <div className="cardcontainerstyle">
         <PagoAnticipos />
         <PagoSaldos />
+        <PagoRecompensas />
       </div>
     </div>
   );

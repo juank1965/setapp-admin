@@ -40,7 +40,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export default function PagoSaldos() {
+export default function PagoRecompensas() {
   const [abrirCotizacion, setAbrirCotizacion] = React.useState(false);
   const handleAbrirCotizacion = () => setAbrirCotizacion(true);
   const handleCerrarCotizacion = () => setAbrirCotizacion(false);
@@ -51,7 +51,7 @@ export default function PagoSaldos() {
 
   return (
     <Card sx={{ maxWidth: 250 }} className="cardstyle">
-      <CardActionArea component={Link} to="/panel-control/saldos">
+      <CardActionArea component={Link} to="/panel-control/recompensas">
         <CardMedia
           component="img"
           height="100"
@@ -60,17 +60,16 @@ export default function PagoSaldos() {
         />
         <CardContent>
           <Typography gutterBottom variant="subtitle2" component="div">
-            PAGOS SALDO FINAL A CONDUCTORES
+            PAGO RECOMPENSAS A CONDUCTORES POR REFERIDOS
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Aca podes listar los usuarios conductores que han finalizado su
-            servicio y a los que se debe transferir el pago del saldo final de u
-            viaje.
+            Aca podes listar los usuarios conductores que han logrado el número de viajes establecido
+            en el programa de REFERIDOS a los que se debe transferir el pago por concepto de recompensas.
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions className={styles.cardfooter}>
-        <Link to="/panel-control/saldos">
+        <Link to="/panel-control/recompensas">
           <IconButton aria-label="price">
             <Badge badgeContent={0} color="secondary">
               <MonetizationOnIcon />

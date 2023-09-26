@@ -66,7 +66,7 @@ export default function Validar() {
         {validar.length > 0 ? (
           validar.map((valida, i) => (
             <>
-              {valida.metodoPago === "epayco" && (
+              {valida.metodPago === "epayco" && (
                 <>
                   <ListItem
                     alignItems="flex-start"
@@ -86,7 +86,7 @@ export default function Validar() {
                   >
                     <ListItemAvatar>
                       <Avatar
-                        alt="Foto del Conductor"
+                        alt="Foto del Cliente"
                         src={valida.imagenCliente}
                       />
                     </ListItemAvatar>
@@ -107,12 +107,10 @@ export default function Validar() {
                             Clase de Servicio: {valida.clase}
                           </Typography>
                           <Typography>
-                            Saliendo desde: {info.ciudadOrigen},
-                            {info.direccionOrigen}
+                            Saliendo desde: {info.origen}                            
                           </Typography>
                           <Typography>
-                            Viajando Hacia : {valida.ciudadDestino},
-                            {valida.direccionDestino}
+                            Viajando Hacia : {valida.destino}                            
                           </Typography>
                           <Typography>
                             Tipo de Vehiculo: {valida.tipo}
@@ -181,7 +179,7 @@ export default function Validar() {
         {validar.length > 0 ? (
           validar.map((valida, i) => (
             <>
-              {valida.metodoPago === "transferencia" && (
+              {valida.metodPago === "transferencia" && (
                 <>
                   <ListItem
                     alignItems="flex-start"

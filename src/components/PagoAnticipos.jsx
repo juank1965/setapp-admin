@@ -60,7 +60,7 @@ export default function PagoAnticipos() {
         />
         <CardContent>
           <Typography gutterBottom variant="subtitle2" component="div">
-            LISTADO PARA GESTIONAR PAGO DE ANTICIPOS A CONDUCTORES
+            PAGO ANTICIPOS A CONDUCTORES
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Aca podes listar los usuarios conductores que han subido el FUEC a

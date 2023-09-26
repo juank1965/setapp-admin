@@ -40,6 +40,9 @@ export const db = getFirestore(app);
 export const auth = getAuth(app);
 // TODO: Falta inicializar el Storage si es requerido
 // Creamos las instancias de los proveedores de autenticacion
+// CONSTANTES PARA EL PROGRAMA DE REFERIDOS
+const VIAJES = [import.meta.env.VITE_REFERIDOS_VIAJES];
+const VALOR = [import.meta.env.VITE_REFERIDOS_VALOR];
 
 // Metodo para obtener usuario de la BD
 export const getUsuario = async (id) => {
@@ -70,9 +73,9 @@ export const getUsuariosNuevos = (actualizar) => {
         }
         return 1;
       });
-      actualizar(usuarios);
-      localStorage.setItem("reservas", JSON.stringify(usuarios));
     }
+    actualizar(usuarios);
+    localStorage.setItem("reservas", JSON.stringify(usuarios));
   });
 };
 // Metodo para obtener listado de Operadores Registrados
@@ -97,9 +100,9 @@ export const getUsuarios = (actualizar) => {
         }
         return 1;
       });
-      actualizar(usuarios);
-      localStorage.setItem("reservas", JSON.stringify(usuarios));
     }
+    actualizar(usuarios);
+    localStorage.setItem("reservas", JSON.stringify(usuarios));
   });
 };
 // Metodo para obtener listado de Conductores Registrados
@@ -125,16 +128,16 @@ export const getConductores = (actualizar) => {
         }
         return 1;
       });
-      actualizar(conductores);
-      localStorage.setItem("conductores", JSON.stringify(conductores));
     }
+    actualizar(conductores);
+    localStorage.setItem("conductores", JSON.stringify(conductores));
   });
 };
 // Metodo para obtener listado de Conductores Nuevos Registrados para envío de correo
 export const getConductoresNuevos = (actualizar) => {
   const q = query(
     collection(db, "conductores"),
-    where("validado", "==", false),    
+    where("validado", "==", false),
     where("fotosVehiculo", "==", false),
     where("documentosVehiculo", "==", false),
     where("perfil", "==", true)
@@ -154,17 +157,17 @@ export const getConductoresNuevos = (actualizar) => {
         }
         return 1;
       });
-      actualizar(conductores);      
     }
+    actualizar(conductores);
   });
 };
 // Metodo para obtener listado de Conductores Registrados Sin Validar
 export const getConductoresPorValidar = (actualizar) => {
   const q = query(
     collection(db, "conductores"),
-    where("validado", "==", false),    
+    where("validado", "==", false),
     where("fotosVehiculo", "==", true),
-    where("perfil", "==", true),
+    where("perfil", "==", true)
   );
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const conductores = [];
@@ -181,21 +184,56 @@ export const getConductoresPorValidar = (actualizar) => {
         }
         return 1;
       });
-      actualizar(conductores);
-      localStorage.setItem("conductores", JSON.stringify(conductores));
     }
+    actualizar(conductores);
+    localStorage.setItem("conductores", JSON.stringify(conductores));
+  });
+};
+// Método para obtener listado de conductores con 100 viajes o más a los que no se les haya pagado la recompensa
+export const getConductoresPorRecompensar = (actualizar) => {
+  const q = query(
+    collection(db, "conductores"),
+    where("viajesRealizados", ">=", VIAJES),
+    where("comisionPagadaAReferente", "==", false)
+  );
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const conductores = [];
+    querySnapshot.forEach((doc) => {
+      if (doc.data().referidoPor !== "setapp") {
+        conductores.push(doc.data());
+      }
+    });
+    if (conductores.length > 0) {
+      conductores.sort(function (a, b) {
+        if (a.referidoPor == b.referidoPor) {
+          return 0;
+        }
+        if (a.referidoPor < b.referidoPor) {
+          return -1;
+        }
+        return 1;
+      });
+    }
+    actualizar(conductores);
+    localStorage.setItem(
+      "conductoresPorRecompensar",
+      JSON.stringify(conductores)
+    );
   });
 };
 // Validar el conductor al revisar sus documentos y fotos
-export const validarConductor = async(id) =>{
+export const validarConductor = async (id) => {
   const validarConductorRef = doc(db, "conductores", id);
-  await updateDoc(validarConductorRef, { validado: true, documentosVehiculo: true });
-}
+  await updateDoc(validarConductorRef, {
+    validado: true,
+    documentosVehiculo: true,
+  });
+};
 // Validar al usuario Operador despues de enviar correo de bienvenida solicitando RUT
-export const validarUsuario = async(id) =>{
+export const validarUsuario = async (id) => {
   const validarUsuarioRef = doc(db, "usuarios", id);
   await updateDoc(validarUsuarioRef, { nuevo: false });
-}
+};
 // Metodo para obtener todos los servicios por validar
 export const getForValidate = (actualizar) => {
   const q = query(collection(db, "services"), where("estado", "==", "validar"));
@@ -214,9 +252,9 @@ export const getForValidate = (actualizar) => {
         }
         return 1;
       });
-      actualizar(validar);
-      localStorage.setItem("validar", JSON.stringify(validar));
     }
+    actualizar(validar);
+    localStorage.setItem("validar", JSON.stringify(validar));
   });
 };
 
@@ -248,9 +286,9 @@ export const getForAdvance = (actualizar) => {
         }
         return 1;
       });
-      actualizar(validar);
-      localStorage.setItem("validar", JSON.stringify(validar));
     }
+    actualizar(validar);
+    localStorage.setItem("validar", JSON.stringify(validar));
   });
 };
 // PROBAR Metodo advance -- Registra la informacion del numero de transferencia con el que se paga el anticipo
@@ -288,9 +326,9 @@ export const getForTotalPay = (actualizar) => {
         }
         return 1;
       });
-      actualizar(validar);
-      localStorage.setItem("validar", JSON.stringify(validar));
     }
+    actualizar(validar);
+    localStorage.setItem("validar", JSON.stringify(validar));
   });
 };
 //  PROBAR Metodo totalPay -- Registra la informacion del numero de transferencia con el que se cancela la totalidad del servicio al conductor
@@ -304,6 +342,41 @@ export const totalPay = async (id, number, saldoPagado) => {
     saldoConductorPagado: true,
     valorSaldoPagado: saldoPagadoFormateado,
   });
+};
+// Registrar pago de recompensa -- OJO REVISAR
+export const totalPayReward = async (id, number, referente) => {
+  //TODO - Con id busco el conductor actual y actualizo el campo comisionPagadaAReferente a true
+  // actualizo el campo transaccionPagoRecompensaNumero con number
+  const comisionPagadaRef = doc(db, "conductores", id);
+  await updateDoc(comisionPagadaRef, {
+    comisionesPagadasAReferente: true,
+    transaccionPagoRecompensaNumero: number,
+  });
+  // con referente.id busco el conductor que refirió y actualizo campo comisionesTotalesPagadas
+  const actualizarSaldoRef = doc(db, "conductores", referente.id);
+  await updateDoc(actualizarSaldoRef, {
+    comisionesTotalesPagadas: referente.comisionesTotalesPagadas + VALOR,
+  });
+};
+// Obtener conductor a recompensar
+export const conductorARecompensar = (codigo, referente) => {
+  const q = query(collection(db, "conductores"), where("codigo", "==", codigo));
+  const conductor = [];
+  querySnapshot.forEach((doc) => {
+    conductor.push(doc.data());
+  });
+  if (conductor.length > 0) {
+    conductor.sort(function (a, b) {
+      if (a.id == b.id) {
+        return 0;
+      }
+      if (a.id < b.id) {
+        return -1;
+      }
+      return 1;
+    });
+  }
+  referente(conductor);
 };
 
 // Metodo para obtener todos los servicios Confirmados
@@ -327,9 +400,9 @@ export const getForConfirmados = (actualizar) => {
         }
         return 1;
       });
-      actualizar(confirmados);
-      localStorage.setItem("confirmados", JSON.stringify(confirmados));
     }
+    actualizar(confirmados);
+    localStorage.setItem("confirmados", JSON.stringify(confirmados));
   });
 };
 
@@ -354,9 +427,9 @@ export const getForReservas = (actualizar) => {
         }
         return 1;
       });
-      actualizar(reservas);
-      localStorage.setItem("reservas", JSON.stringify(reservas));
     }
+    actualizar(reservas);
+    localStorage.setItem("reservas", JSON.stringify(reservas));
   });
 };
 

@@ -31,6 +31,7 @@ import ServiciosEnCurso from "./components/ServiciosEnCurso";
 import ListaServiciosReservados from "./components/ListaServiciosReservados";
 import ListaViajesConfirmados from "./components/ListaViajesConfirmados";
 import ConductoresNuevos from "./components/ConductoresNuevos";
+import Recompensas from "./components/Recompensas";
 
 function App() {
   return (
@@ -63,6 +64,7 @@ function App() {
           />
           <Route path="anticipos" element={<Anticipos />} />
           <Route path="saldos" element={<Saldos />} />
+          <Route path="recompensas" element={<Recompensas />} />
           <Route path="historial" element={<Historial />} />
           <Route path="perfil" element={<Perfil />} />
           <Route path="salir" element={<Salir />} />
