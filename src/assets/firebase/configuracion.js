@@ -227,6 +227,7 @@ export const validarConductor = async (id) => {
   await updateDoc(validarConductorRef, {
     validado: true,
     documentosVehiculo: true,
+    suspendido: false,
   });
 };
 // Validar al usuario Operador despues de enviar correo de bienvenida solicitando RUT
