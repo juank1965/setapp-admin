@@ -46,7 +46,7 @@ export default function Anticipos() {
   let navigate = useNavigate();
   const handlerAnticipo = () => {
     if (info.id) {
-      const valorAnticipoPagado = (info.valorOferta * 0.9 * 0.4).toFixed(0);
+      const valorAnticipoPagado = (info.valorOferta * 0.9 * 0.5).toFixed(0);
       advance(info.id, value, valorAnticipoPagado);
       toast("Pago de anticipo registrado exitosamente");
     } else {
@@ -65,7 +65,7 @@ export default function Anticipos() {
         mt: "50px",
       }}
     >
-      <h5 className="titulo">Servicios Por Pago de Anticipo</h5>
+      <h5 className="titulo">Servicios Por Pago del 50% de Anticipo</h5>
       {anticipos.length > 0 ? (
         anticipos.map((anticipo) => (
           <>
@@ -114,7 +114,7 @@ export default function Anticipos() {
                           {new Intl.NumberFormat("es-CO", {
                             style: "currency",
                             currency: "COP",
-                          }).format((anticipo.valorOferta * 0.9 * 0.4).toFixed(0))}
+                          }).format((anticipo.valorOferta * 0.9 * 0.5).toFixed(0))}
                         </b>
                       </Typography>
                       <Typography
@@ -164,7 +164,7 @@ export default function Anticipos() {
                   new Intl.NumberFormat("es-CO", {
                     style: "currency",
                     currency: "COP",
-                  }).format((info.valorOferta * 0.9 * 0.4).toFixed(0))}
+                  }).format((info.valorOferta * 0.9 * 0.5).toFixed(0))}
                 </b>
               </Typography>
 

@@ -47,7 +47,7 @@ export default function Saldos() {
   let navigate = useNavigate();
   const handlerSaldos = () => {
     if (info.id) {
-      const valorSaldoPagado = (info.valorOferta * 0.9 * 0.6).toFixed(2);
+      const valorSaldoPagado = (info.valorOferta * 0.9 * 0.5).toFixed(2);
       totalPay(info.id, number, valorSaldoPagado);
       toast("Pago total del servicio registrado con exito");
     } else {
@@ -66,7 +66,7 @@ export default function Saldos() {
       }}
     >
       <h5 className="titulo">
-        Servicios Por Pago de Saldo Final a CONDUCTORES
+        Servicios Por Pago de Saldo Final del 50% a CONDUCTORES
       </h5>
       {saldos.length > 0 ? (
         saldos.map((saldo) => (
@@ -112,7 +112,7 @@ export default function Saldos() {
                         {new Intl.NumberFormat("es-CO", {
                           style: "currency",
                           currency: "COP",
-                        }).format((saldo.valorOferta * 0.9 * 0.6).toFixed(0))}
+                        }).format((saldo.valorOferta * 0.9 * 0.5).toFixed(0))}
                       </b>
                     </Typography>
                     <Typography
@@ -159,7 +159,7 @@ export default function Saldos() {
                   {new Intl.NumberFormat("es-CO", {
                     style: "currency",
                     currency: "COP",
-                  }).format((info.valorOferta * 0.9 * 0.6).toFixed(0))}
+                  }).format((info.valorOferta * 0.9 * 0.5).toFixed(0))}
                 </b>
               </Typography>
               <Typography
