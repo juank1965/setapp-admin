@@ -2,10 +2,10 @@ import * as React from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import MapIcon from "@mui/icons-material/Map";
+import CommentIcon from "@mui/icons-material/Comment";
 import IconButton from "@mui/material/IconButton";
 import { Typography } from "@mui/material";
-import { getForConfirmados } from "../assets/firebase/configuracion";
+import { getForPedidosPendientes } from "../assets/firebase/configuracion";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
@@ -28,7 +28,7 @@ const style = {
   p: 4,
 };
 
-export default function ListaViajesConfirmados() {
+export default function ListaServiciosPedidos() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
   const [info, setInfo] = React.useState();
@@ -39,12 +39,13 @@ export default function ListaViajesConfirmados() {
     setValue(event.target.value);
   };
 
+  const [pedidos, setPedidos] = React.useState([]);
+  React.useEffect(() => {
+    const listaPedidos = getForPedidosPendientes(setPedidos);
+  }, [getForPedidosPendientes]);
+
   const handlerValidacion = (e) => {};
 
-  const [viajesConfirmados, setViajesConfirmados] = React.useState([]);
-  React.useEffect(() => {
-    const listaConfirmados = getForConfirmados(setViajesConfirmados);
-  }, [getForConfirmados]);  
   return (
     <List
       sx={{
@@ -54,31 +55,31 @@ export default function ListaViajesConfirmados() {
         mt: "50px",
       }}
     >
-      <h5 className="titulo">Seguimiento a servicios</h5>
-      {viajesConfirmados.length > 0 ? (
-        viajesConfirmados.map((viaje) => (
+      <h5 className="titulo">Lista de pedidos</h5>
+      {pedidos.length > 0 ? (
+        pedidos.map((pedido) => (
           <>
             <ListItem
               alignItems="flex-start"
-              key={viaje.id}
+              key={pedido.id}
               disableGutters
               secondaryAction={
                 <IconButton
                   aria-label="comment"
                   onClick={() => {
-                    setInfo(viaje);
+                    setInfo(pedido);
                     handleOpen();
                   }}
                 >
-                  <MapIcon />
+                  <CommentIcon />
                 </IconButton>
               }
             >
               <ListItemAvatar>
-                <Avatar alt="Foto del Conductor" src={viaje.imagenCliente} />
+                <Avatar alt="Foto del Conductor" src={pedido.imagenCliente} />
               </ListItemAvatar>
               <ListItemText
-                primary={`Servicio No. ${viaje.id}`}
+                primary={`Servicio No. ${pedido.id}`}
                 secondary={
                   <>
                     <Typography
@@ -92,17 +93,17 @@ export default function ListaViajesConfirmados() {
                         {new Intl.NumberFormat("es-CO", {
                           style: "currency",
                           currency: "COP",
-                        }).format(viaje.pago)}
+                        }).format(pedido.pago)}
                       </b>
                     </Typography>
-                    <Typography>Clase de Servicio: {viaje.clase}</Typography>
+                    <Typography>Clase de Servicio: {pedido.clase}</Typography>
                     <Typography>
-                      Saliendo desde: {viaje.origen}
+                      Saliendo desde: {pedido.origen}                      
                     </Typography>
                     <Typography>
-                      Viajando Hacia : {viaje.destino}
+                      Viajando Hacia : {pedido.destino}                      
                     </Typography>
-                    <Typography>Tipo de Vehiculo: {viaje.tipo}</Typography>
+                    <Typography>Tipo de Vehiculo: {pedido.tipo}</Typography>
                   </>
                 }
               />
@@ -111,7 +112,7 @@ export default function ListaViajesConfirmados() {
           </>
         ))
       ) : (
-        <h6 className="titulo">No hay Viajes Confirmados Registrados</h6>
+        <h6 className="titulo">No hay pedidos Activos</h6>
       )}
       <Modal
         open={open}

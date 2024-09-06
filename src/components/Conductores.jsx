@@ -35,8 +35,7 @@ export default function Conductores() {
   const [conductores, setConductores] = React.useState([]);
   React.useEffect(() => {
     const listaConductores = getConductores(setConductores);
-  }, [getConductores]);
-  console.log(conductores)
+  }, [getConductores]);  
   return (
     <List
       sx={{

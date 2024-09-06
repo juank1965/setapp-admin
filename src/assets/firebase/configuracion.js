@@ -434,6 +434,69 @@ export const getForReservas = (actualizar) => {
   });
 };
 
+// Metodo para obtener todos los servicios Pendientes 
+export const getForPedidosPendientes = (actualizar) => {
+  const pedidos = []
+  const qp = query(
+    collection(db, "services"),
+    where("estado", "==", "pendiente")
+  );
+  const qv = query(
+    collection(db, "services"),
+    where("estado", "==", "validar")
+  );
+  const unsubscribep = onSnapshot(qp, (querySnapshot) => {    
+    querySnapshot.forEach((doc) => {
+      pedidos.push(doc.data());
+    });    
+  });
+  const unsubscribev = onSnapshot(qv, (querySnapshot) => {    
+    querySnapshot.forEach((doc) => {
+      pedidos.push(doc.data());
+    });    
+  });
+  if (pedidos.length > 0) {
+    pedidos.sort(function (a, b) {
+      if (a.fechaSalida == b.fechaSalida) {
+        return 0;
+      }
+      if (a.fechaSalida < b.fechaSalida) {
+        return -1;
+      }
+      return 1;
+    });
+  }
+  actualizar(pedidos);
+  localStorage.setItem("pedidos", JSON.stringify(pedidos));
+};
+
+// Metodo para obtener todos los servicios Finalizados
+export const getForFinalizados = (actualizar) => {
+  const q = query(
+    collection(db, "services"),
+    where("estado", "==", "finalizado")
+  );
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const finalizados = [];
+    querySnapshot.forEach((doc) => {
+      finalizados.push(doc.data());
+    });
+    if (finalizados.length > 0) {
+      finalizados.sort(function (a, b) {
+        if (a.fechaSalida == b.fechaSalida) {
+          return 0;
+        }
+        if (a.fechaSalida < b.fechaSalida) {
+          return -1;
+        }
+        return 1;
+      });
+    }
+    actualizar(finalizados);
+    localStorage.setItem("finalizados", JSON.stringify(finalizados));
+  });
+};
+
 // Metodo para salir de la aplicacion
 export const salir = async () => {
   await signOut(auth)

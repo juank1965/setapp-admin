@@ -73,13 +73,7 @@ export default function MenuDown() {
             icon={<CheckIcon />}
             component={Link}
             to="/panel-control/servicios-en-curso"
-          />
-          <BottomNavigationAction
-            label="Mapa"
-            icon={<MapIcon />}
-            component={Link}
-            to="/panel-control/usuarios"
-          />
+          />          
         </BottomNavigation>
       </Paper>
     </Box>

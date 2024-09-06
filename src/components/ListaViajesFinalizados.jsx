@@ -5,7 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MapIcon from "@mui/icons-material/Map";
 import IconButton from "@mui/material/IconButton";
 import { Typography } from "@mui/material";
-import { getForConfirmados } from "../assets/firebase/configuracion";
+import { getForFinalizados } from "../assets/firebase/configuracion";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
@@ -28,7 +28,7 @@ const style = {
   p: 4,
 };
 
-export default function ListaViajesConfirmados() {
+export default function ListaViajesFinalizados() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
   const [info, setInfo] = React.useState();
@@ -41,10 +41,10 @@ export default function ListaViajesConfirmados() {
 
   const handlerValidacion = (e) => {};
 
-  const [viajesConfirmados, setViajesConfirmados] = React.useState([]);
+  const [viajesFinalizados, setViajesFinalizados] = React.useState([]);
   React.useEffect(() => {
-    const listaConfirmados = getForConfirmados(setViajesConfirmados);
-  }, [getForConfirmados]);  
+    const listaFinalizados = getForFinalizados(setViajesFinalizados);
+  }, [getForFinalizados]);  
   return (
     <List
       sx={{
@@ -55,8 +55,8 @@ export default function ListaViajesConfirmados() {
       }}
     >
       <h5 className="titulo">Seguimiento a servicios</h5>
-      {viajesConfirmados.length > 0 ? (
-        viajesConfirmados.map((viaje) => (
+      {viajesFinalizados.length > 0 ? (
+        viajesFinalizados.map((viaje) => (
           <>
             <ListItem
               alignItems="flex-start"
@@ -111,7 +111,7 @@ export default function ListaViajesConfirmados() {
           </>
         ))
       ) : (
-        <h6 className="titulo">No hay Viajes Confirmados Registrados</h6>
+        <h6 className="titulo">No hay Viajes Finalizados Registrados</h6>
       )}
       <Modal
         open={open}

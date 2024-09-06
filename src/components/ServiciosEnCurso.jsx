@@ -4,6 +4,13 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import ListaDeReservas from "./ListaDeReservas";
 import ListaServiciosConfirmados from "./ListaServiciosConfirmados";
+import ListaServiciosFinalizados from "./ListaServiciosFinalizados";
+import { Divider } from "@mui/material";
+import ListaDePedidos from "./ListaDePedidos";
+import ListaServiciosReservados from "./ListaServiciosReservados";
+import ListaViajesConfirmados from "./ListaViajesConfirmados";
+import ListaViajesFinalizados from "./ListaViajesFinalizados";
+import ListaServiciosPedidos from "./ListaServiciosPedidos";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -39,18 +46,27 @@ function a11yProps(index) {
 }
 
 function ServiciosEnCurso() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(1);
 
-  const handleChange = (event, newValue) => {
+  const handleValue = (newValue) => {
     setValue(newValue);
   };
 
   return (
     <div className="bodypanel bodycontent">
-      <div className="cardcontainerstyle">
-        <ListaDeReservas />
-        <ListaServiciosConfirmados />
-      </div>
+      <Box sx={{ display: 'flex', flexDirection: "row", margin: 1 }}>
+        <ListaDePedidos change ={handleValue} />
+        <ListaDeReservas change ={handleValue} />
+        <ListaServiciosConfirmados change ={handleValue} />
+        <ListaServiciosFinalizados change ={handleValue} />
+      </Box>
+      <Divider component="li" />
+      <Box sx={{ display: 'flex', justifyContent: "center" }}>
+      {value ===1 && (<ListaServiciosPedidos />)}      
+      {value ===2 && (<ListaServiciosReservados />)}
+      {value ===3 && (<ListaViajesConfirmados />)}
+      {value ===4 && (<ListaViajesFinalizados />)}
+      </Box>
     </div>
   );
 }

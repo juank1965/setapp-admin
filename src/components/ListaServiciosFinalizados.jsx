@@ -40,21 +40,27 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export default function PagoAnticipos({change}) {  
+export default function ListaServiciosFinalizados({ change }) {
+  const [abrirCotizacion, setAbrirCotizacion] = React.useState(false);
+  const handleAbrirCotizacion = () => setAbrirCotizacion(true);
+  const handleCerrarCotizacion = () => setAbrirCotizacion(false);
+
+  const [abrirCondiciones, setAbrirCondiciones] = React.useState(false);
+  const handleAbrirCondiciones = () => setAbrirCondiciones(true);
+  const handleCerrarCondiciones = () => setAbrirCondiciones(false);
 
   function handleChange() {
-    let value = 1;
-    
+    let value = 4;
+
     change(value);
-    
- }
+  }
 
   return (
     <Card sx={{ display: "flex", margin: 2 }}>
       <CardActionArea onClick={handleChange}>        
         <Box sx={{ display: "flex",justifyContent:"center", alignItems: "center", padding: 1, m:1 }}>
           <Typography gutterBottom variant="subtitle2" component="div">
-            PAGO ANTICIPO A CONDUCTORES
+            SERVICIOS FINALIZADOS
           </Typography>          
         </Box>
       </CardActionArea>

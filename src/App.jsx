@@ -30,6 +30,7 @@ import ListaServiciosConfirmados from "./components/ListaServiciosConfirmados";
 import ServiciosEnCurso from "./components/ServiciosEnCurso";
 import ListaServiciosReservados from "./components/ListaServiciosReservados";
 import ListaViajesConfirmados from "./components/ListaViajesConfirmados";
+import ListaViajesFinalizados from "./components/ListaViajesFinalizados";
 import ConductoresNuevos from "./components/ConductoresNuevos";
 import Recompensas from "./components/Recompensas";
 
@@ -57,6 +58,10 @@ function App() {
           <Route
             path="viajes-confirmados"
             element={<ListaViajesConfirmados />}
+          />
+          <Route
+            path="viajes-finalizados"
+            element={<ListaViajesFinalizados />}
           />
           <Route
             path="validarTransferencia"

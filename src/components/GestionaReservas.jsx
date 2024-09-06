@@ -1,6 +1,6 @@
 import React from "react";
 import Cotizar from "./Cotizar";
-import Reservas from "./Reservas";
+import Reservas from "./ReservasTransferencia";
 import Itinerario from "./Itinerario";
 import Seguimiento from "./Seguimiento";
 import FormCotizar from "./FormCotizar";
@@ -15,6 +15,11 @@ import Tab from "@mui/material/Tab";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import ReservasEpayco from "./ReservasEpayco";
+import ReservasTranferencia from "./ReservasTransferencia";
+import ValidarEpayco from "./ValidarEpayco";
+import ValidarTransferencia from "./ValidarTransferencia";
+import { Divider } from "@mui/material";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -52,15 +57,21 @@ function a11yProps(index) {
 function GestionaReservas() {
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleValue = (newValue) => {
     setValue(newValue);
   };
 
   return (
     <div className="bodypanel bodycontent">
-      <div className="cardcontainerstyle">
-        <Reservas />
-      </div>
+      <Box sx={{ display: "flex", flexDirection: "row", margin: 1 }}>
+        <ReservasEpayco change={handleValue} />
+        <ReservasTranferencia change={handleValue} />
+      </Box>
+      <Divider component="li" />
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        {value === 1 && <ValidarEpayco />}
+        {value === 2 && <ValidarTransferencia />}
+      </Box>
     </div>
   );
 }

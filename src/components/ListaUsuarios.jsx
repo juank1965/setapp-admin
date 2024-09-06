@@ -40,43 +40,30 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export default function ListaUsuarios() {
-  const [abrirCotizacion, setAbrirCotizacion] = React.useState(false);
-  const handleAbrirCotizacion = () => setAbrirCotizacion(true);
-  const handleCerrarCotizacion = () => setAbrirCotizacion(false);
+export default function ListaUsuarios({ change }) {
+  function handleChange() {
+    let value = 5;
+    change(value);
+  }
 
-  const [abrirCondiciones, setAbrirCondiciones] = React.useState(false);
-  const handleAbrirCondiciones = () => setAbrirCondiciones(true);
-  const handleCerrarCondiciones = () => setAbrirCondiciones(false);
 
   return (
-    <Card sx={{ maxWidth: 250 }} className="cardstyle">
-      <CardActionArea component={Link} to="/panel-control/Operadores">
-        <CardMedia
-          component="img"
-          height="100"
-          image={presupuesto}
-          alt="Presupuesto"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="subtitle2" component="div">
+    <Card sx={{ display:"flex", margin:2 }} >
+      <CardActionArea onClick={handleChange}>      
+      <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 1,
+            m: 1,
+          }}
+        >
+      <Typography gutterBottom variant="subtitle2" component="div">
             OPERADORES TURISTICOS REGISTRADOS
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Aca podes listar los usuarios operadores turisticos registrados en
-            el sistema. Se puede modificar algunos datos segun requerimientos
-          </Typography>
-        </CardContent>
+          </Typography>      
+      </Box>
       </CardActionArea>
-      <CardActions className={styles.cardfooter}>
-        <Link to="/panel-control/operadores">
-          <IconButton aria-label="price">
-            <Badge badgeContent={0} color="secondary">
-              <BallotIcon />
-            </Badge>
-          </IconButton>
-        </Link>
-      </CardActions>
     </Card>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import Cotizar from "./Cotizar";
-import Reservas from "./Reservas";
+import Reservas from "./ReservasTransferencia";
 import Itinerario from "./Itinerario";
 import Seguimiento from "./Seguimiento";
 import FormCotizar from "./FormCotizar";
@@ -18,6 +18,10 @@ import Box from "@mui/material/Box";
 import PagoAnticipos from "./PagoAnticipos";
 import PagoSaldos from "./PagoSaldos";
 import PagoRecompensas from "./PagoRecompensas";
+import { Divider } from "@mui/material";
+import Anticipos from "./Anticipos";
+import Saldos from "./Saldos";
+import Recompensas from "./Recompensas";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,19 +57,26 @@ function a11yProps(index) {
 }
 
 function GestionaPagos() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(1);
 
-  const handleChange = (event, newValue) => {
+  const handleValue = (newValue) => {
     setValue(newValue);
   };
 
   return (
     <div className="bodypanel bodycontent">
-      <div className="cardcontainerstyle">
-        <PagoAnticipos />
-        <PagoSaldos />
-        <PagoRecompensas />
-      </div>
+      <Box sx={{ display: 'flex', flexDirection: "row", margin: 1 }}>
+        <PagoAnticipos change ={handleValue} />
+        <PagoSaldos change ={handleValue} />
+        <PagoRecompensas change ={handleValue} />
+      </Box>
+      <Divider component="li" />
+      <Box sx={{ display: 'flex', justifyContent: "center" }}>
+      {value ===1 && (<Anticipos />)}      
+      {value ===2 && (<Saldos />)}
+      {value ===3 && (<Recompensas />)}
+      
+      </Box>
     </div>
   );
 }

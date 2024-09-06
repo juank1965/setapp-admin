@@ -55,7 +55,7 @@ export default function ValidarEpayco() {
     }
    
     navigate("/panel-control/reservas");
-  };
+  };  
   return (
     <List
       sx={{

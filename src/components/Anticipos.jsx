@@ -21,7 +21,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  minWidth: 400,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -54,18 +54,17 @@ export default function Anticipos() {
       handleClose();
     }
     navigate("/panel-control/pagos");
-  }; 
-  console.log(anticipos) 
+  };   
   return (
     <List
       sx={{
         width: "100%",
-        maxWidth: 360,
+        minWidth: 360,
         bgcolor: "background.paper",
         mt: "50px",
       }}
     >
-      <h5 className="titulo">Servicios Por Pago del 50% de Anticipo</h5>
+      <h5 className="titulo">Servicios Por Pago deAnticipo 50%</h5>
       {anticipos.length > 0 ? (
         anticipos.map((anticipo) => (
           <>

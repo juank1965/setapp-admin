@@ -40,7 +40,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export default function ListaDeReservas() {
+export default function ListaDeReservas({change}) {
   const [abrirCotizacion, setAbrirCotizacion] = React.useState(false);
   const handleAbrirCotizacion = () => setAbrirCotizacion(true);
   const handleCerrarCotizacion = () => setAbrirCotizacion(false);
@@ -49,34 +49,21 @@ export default function ListaDeReservas() {
   const handleAbrirCondiciones = () => setAbrirCondiciones(true);
   const handleCerrarCondiciones = () => setAbrirCondiciones(false);
 
+  function handleChange() {
+    let value = 2;
+    
+    change(value);
+ }
+
   return (
-    <Card sx={{ maxWidth: 250 }} className="cardstyle">
-      <CardActionArea component={Link} to="/panel-control/reservaciones">
-        <CardMedia
-          component="img"
-          height="100"
-          image={presupuesto}
-          alt="Presupuesto"
-        />
-        <CardContent>
+    <Card sx={{ display: "flex", margin: 2 }}>
+      <CardActionArea onClick={handleChange}>        
+        <Box sx={{ display: "flex",justifyContent:"center", alignItems: "center", padding: 1, m:1 }}>
           <Typography gutterBottom variant="subtitle2" component="div">
-            LISTADO DE RESERVAS REGISTRADAS
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Aca podes listar las registradas en el sistema. Se puede modificar
-            algunos datos segun requerimientos
-          </Typography>
-        </CardContent>
+            RESERVAS REGISTRADAS
+          </Typography>          
+        </Box>
       </CardActionArea>
-      <CardActions className={styles.cardfooter}>
-        <Link to="/panel-control/reservaciones">
-          <IconButton aria-label="price">
-            <Badge badgeContent={0} color="secondary">
-              <MonetizationOnIcon />
-            </Badge>
-          </IconButton>
-        </Link>
-      </CardActions>
     </Card>
   );
 }

@@ -40,44 +40,24 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export default function PagoSaldos() {
-  const [abrirCotizacion, setAbrirCotizacion] = React.useState(false);
-  const handleAbrirCotizacion = () => setAbrirCotizacion(true);
-  const handleCerrarCotizacion = () => setAbrirCotizacion(false);
-
-  const [abrirCondiciones, setAbrirCondiciones] = React.useState(false);
-  const handleAbrirCondiciones = () => setAbrirCondiciones(true);
-  const handleCerrarCondiciones = () => setAbrirCondiciones(false);
+export default function PagoSaldos({change}) {
+  
+  function handleChange() {
+    let value = 2;
+    
+    change(value);
+    
+ }
 
   return (
-    <Card sx={{ maxWidth: 250 }} className="cardstyle">
-      <CardActionArea component={Link} to="/panel-control/saldos">
-        <CardMedia
-          component="img"
-          height="100"
-          image={presupuesto}
-          alt="Presupuesto"
-        />
-        <CardContent>
+    <Card sx={{ display: "flex", margin: 2 }}>
+      <CardActionArea onClick={handleChange}>        
+        <Box sx={{ display: "flex",justifyContent:"center", alignItems: "center", padding: 1, m:1 }}>
           <Typography gutterBottom variant="subtitle2" component="div">
-            PAGOS SALDO FINAL A CONDUCTORES
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Aca podes listar los usuarios conductores que han finalizado su
-            servicio y a los que se debe transferir el pago del saldo final de u
-            viaje.
-          </Typography>
-        </CardContent>
+            PAGO SALDO A CONDUCTORES
+          </Typography>          
+        </Box>
       </CardActionArea>
-      <CardActions className={styles.cardfooter}>
-        <Link to="/panel-control/saldos">
-          <IconButton aria-label="price">
-            <Badge badgeContent={0} color="secondary">
-              <MonetizationOnIcon />
-            </Badge>
-          </IconButton>
-        </Link>
-      </CardActions>
     </Card>
   );
 }

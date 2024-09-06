@@ -40,43 +40,23 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export default function PagoRecompensas() {
-  const [abrirCotizacion, setAbrirCotizacion] = React.useState(false);
-  const handleAbrirCotizacion = () => setAbrirCotizacion(true);
-  const handleCerrarCotizacion = () => setAbrirCotizacion(false);
-
-  const [abrirCondiciones, setAbrirCondiciones] = React.useState(false);
-  const handleAbrirCondiciones = () => setAbrirCondiciones(true);
-  const handleCerrarCondiciones = () => setAbrirCondiciones(false);
+export default function PagoRecompensas({change}) {
+  function handleChange() {
+    let value = 3;
+    
+    change(value);
+    
+ }
 
   return (
-    <Card sx={{ maxWidth: 250 }} className="cardstyle">
-      <CardActionArea component={Link} to="/panel-control/recompensas">
-        <CardMedia
-          component="img"
-          height="100"
-          image={presupuesto}
-          alt="Presupuesto"
-        />
-        <CardContent>
+    <Card sx={{ display: "flex", margin: 2 }}>
+      <CardActionArea onClick={handleChange}>        
+      <Box sx={{ display: "flex",justifyContent:"center", alignItems: "center", padding: 1, m:1 }}>
           <Typography gutterBottom variant="subtitle2" component="div">
-            PAGO RECOMPENSAS A CONDUCTORES POR REFERIDOS
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Aca podes listar los usuarios conductores que han logrado el número de viajes establecido
-            en el programa de REFERIDOS a los que se debe transferir el pago por concepto de recompensas.
-          </Typography>
-        </CardContent>
+            PAGO POR REFERIDOS
+          </Typography>          
+        </Box>
       </CardActionArea>
-      <CardActions className={styles.cardfooter}>
-        <Link to="/panel-control/recompensas">
-          <IconButton aria-label="price">
-            <Badge badgeContent={0} color="secondary">
-              <MonetizationOnIcon />
-            </Badge>
-          </IconButton>
-        </Link>
-      </CardActions>
     </Card>
   );
 }

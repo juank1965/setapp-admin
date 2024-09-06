@@ -40,23 +40,21 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export default function PagoAnticipos({change}) {  
+export default function ListaDePedidos({change}) { 
 
   function handleChange() {
-    let value = 1;
-    
-    change(value);
-    
+    let value = 1;    
+    change(value);    
  }
 
-  return (
-    <Card sx={{ display: "flex", margin: 2 }}>
-      <CardActionArea onClick={handleChange}>        
+  return (    
+    <Card sx={{ display: "flex", margin: 2 }} >
+      <CardActionArea onClick={handleChange} >        
         <Box sx={{ display: "flex",justifyContent:"center", alignItems: "center", padding: 1, m:1 }}>
           <Typography gutterBottom variant="subtitle2" component="div">
-            PAGO ANTICIPO A CONDUCTORES
+            PEDIDOS ACTIVOS
           </Typography>          
-        </Box>
+        </Box>        
       </CardActionArea>
     </Card>
   );

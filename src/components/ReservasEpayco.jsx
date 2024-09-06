@@ -4,17 +4,16 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, CardActions, IconButton } from "@mui/material";
+import { Button, CardActionArea, CardActions, IconButton } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Badge from "@mui/material/Badge";
-import PriceCheckIcon from "@mui/icons-material/PriceCheck";
+import NoCrashIcon from "@mui/icons-material/NoCrash";
 import { styled } from "@mui/material/styles";
 import PolicyIcon from "@mui/icons-material/Policy";
-import FormCotizar from "./FormCotizar";
 import styles from "./Cotizar.module.css";
-import presupuesto from "../assets/solicitar-presupuesto.png";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import reservar from "../assets/reservar.jpeg";
+import Divider from "@mui/material/Divider";
 
 const style = {
   position: "absolute",
@@ -27,8 +26,6 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
-  height: "75%",
-  overflow: "auto",
 };
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -40,22 +37,19 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export default function PagoAnticipos({change}) {  
-
+export default function ReservasEpayco({ change }) {
   function handleChange() {
     let value = 1;
-    
     change(value);
-    
- }
+  }
 
   return (
     <Card sx={{ display: "flex", margin: 2 }}>
-      <CardActionArea onClick={handleChange}>        
-        <Box sx={{ display: "flex",justifyContent:"center", alignItems: "center", padding: 1, m:1 }}>
+      <CardActionArea onClick={handleChange}>
+        <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
           <Typography gutterBottom variant="subtitle2" component="div">
-            PAGO ANTICIPO A CONDUCTORES
-          </Typography>          
+            "VALIDAR" PAGOS POR EPAYCO
+          </Typography>
         </Box>
       </CardActionArea>
     </Card>

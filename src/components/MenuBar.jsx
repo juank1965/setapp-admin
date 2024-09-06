@@ -13,7 +13,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
-//import ListItemButton from "@mui/material/ListItemButton";
+import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
@@ -87,9 +87,9 @@ export default function MenuBar() {
 
   useEffect(() => {
     if (dataUser && dataUser.imagen !== null) {
-      setImagen(dataUser.imagen);      
+      setImagen(dataUser.imagen);
     }
-  }, []);  
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -133,6 +133,7 @@ export default function MenuBar() {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
+            fontSize: "10px"
           },
         }}
         variant="persistent"
@@ -150,8 +151,7 @@ export default function MenuBar() {
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItem
-            button
+          <ListItemButton
             component={Link}
             to="/panel-control/perfil"
             onClick={handleDrawerClose}
@@ -160,13 +160,173 @@ export default function MenuBar() {
               <AccountCircleIcon />
             </ListItemIcon>
             <ListItemText primary="Perfil de Usuario" />
+          </ListItemButton>
+          <ListItem>
+            <Box>
+              <ListItemText primary="Gestionar Usuarios" />
+              <Box>
+                <ListItemText primary="Operadores turísticos" />
+                <ListItemButton
+                  component={Link}
+                  to="/panel-control/perfil"
+                  onClick={handleDrawerClose}
+                >
+                  <ListItemIcon>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Nuevos" />
+                </ListItemButton>
+                <ListItemButton
+                  component={Link}
+                  to="/panel-control/perfil"
+                  onClick={handleDrawerClose}
+                >
+                  <ListItemIcon>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Registrados" />
+                </ListItemButton>
+              </Box>
+              <Box>
+                <ListItemText primary="Conductores" />
+                <ListItemButton
+                  component={Link}
+                  to="/panel-control/perfil"
+                  onClick={handleDrawerClose}
+                >
+                  <ListItemIcon>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Nuevos" />
+                </ListItemButton>
+                <ListItemButton
+                  component={Link}
+                  to="/panel-control/perfil"
+                  onClick={handleDrawerClose}
+                >
+                  <ListItemIcon>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Sin Validar" />
+                </ListItemButton>
+                <ListItemButton
+                  component={Link}
+                  to="/panel-control/perfil"
+                  onClick={handleDrawerClose}
+                >
+                  <ListItemIcon>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Validados" />
+                </ListItemButton>
+              </Box>
+            </Box>
           </ListItem>
-          <ListItem button onClick={handleSalir}>
+          <ListItem>
+            <Box>
+              <ListItemText primary="Gestionar Pagos" />
+              <Box>
+                <ListItemText primary="Pago de Reservas" />
+                <ListItemButton
+                  component={Link}
+                  to="/panel-control/perfil"
+                  onClick={handleDrawerClose}
+                >
+                  <ListItemIcon>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Por Epayco" />
+                </ListItemButton>
+                <ListItemButton
+                  component={Link}
+                  to="/panel-control/perfil"
+                  onClick={handleDrawerClose}
+                >
+                  <ListItemIcon>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Transferencia" />
+                </ListItemButton>
+              </Box>
+              <Box>
+                <ListItemText primary="Pago a Conductores" />
+                <ListItemButton
+                  component={Link}
+                  to="/panel-control/perfil"
+                  onClick={handleDrawerClose}
+                >
+                  <ListItemIcon>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Anticipos" />
+                </ListItemButton>
+                <ListItemButton
+                  component={Link}
+                  to="/panel-control/perfil"
+                  onClick={handleDrawerClose}
+                >
+                  <ListItemIcon>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Saldo Final" />
+                </ListItemButton>
+                <ListItemButton
+                  component={Link}
+                  to="/panel-control/perfil"
+                  onClick={handleDrawerClose}
+                >
+                  <ListItemIcon>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Recompensas" />
+                </ListItemButton>
+              </Box>
+            </Box>
+          </ListItem>
+          <ListItem>
+            <Box>
+              <ListItemText primary="Monitoreo de Servicios" />
+              <Box>
+                <ListItemText primary="Lista de Reservas" />
+                <ListItemButton
+                  component={Link}
+                  to="/panel-control/perfil"
+                  onClick={handleDrawerClose}
+                >
+                  <ListItemIcon>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Lista de Salidas" />
+                </ListItemButton>
+                <ListItemButton
+                  component={Link}
+                  to="/panel-control/perfil"
+                  onClick={handleDrawerClose}
+                >
+                  <ListItemIcon>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Finalizados" />
+                </ListItemButton>
+                <ListItemButton
+                  component={Link}
+                  to="/panel-control/perfil"
+                  onClick={handleDrawerClose}
+                >
+                  <ListItemIcon>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Mapa en Tiempo Real" />
+                </ListItemButton> 
+              </Box>              
+            </Box>
+          </ListItem>
+          <ListItemButton onClick={handleSalir}>
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>
             <ListItemText primary="Salir" />
-          </ListItem>
+          </ListItemButton>
         </List>
       </Drawer>
       <Main open={open}>

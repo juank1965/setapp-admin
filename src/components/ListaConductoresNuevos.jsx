@@ -14,7 +14,7 @@ import PolicyIcon from "@mui/icons-material/Policy";
 import FormCotizar from "./FormCotizar";
 import styles from "./Cotizar.module.css";
 import presupuesto from "../assets/solicitar-presupuesto.png";
-import BallotIcon from '@mui/icons-material/Ballot';
+import BallotIcon from "@mui/icons-material/Ballot";
 
 const style = {
   position: "absolute",
@@ -40,43 +40,29 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export default function ListaConductoresNuevos() {
-  const [abrirCotizacion, setAbrirCotizacion] = React.useState(false);
-  const handleAbrirCotizacion = () => setAbrirCotizacion(true);
-  const handleCerrarCotizacion = () => setAbrirCotizacion(false);
-
-  const [abrirCondiciones, setAbrirCondiciones] = React.useState(false);
-  const handleAbrirCondiciones = () => setAbrirCondiciones(true);
-  const handleCerrarCondiciones = () => setAbrirCondiciones(false);
+export default function ListaConductoresNuevos({ change }) {
+  function handleChange() {
+    let value = 1;
+    change(value);
+  }
 
   return (
-    <Card sx={{ maxWidth: 250 }} className="cardstyle">
-      <CardActionArea component={Link} to="/panel-control/conductores-nuevos">
-        <CardMedia
-          component="img"
-          height="100"
-          image={presupuesto}
-          alt="Presupuesto"
-        />
-        <CardContent>
+    <Card sx={{ display: "flex", margin: 2 }}>
+      <CardActionArea onClick={handleChange}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 1,
+            m: 1,
+          }}
+        >
           <Typography gutterBottom variant="subtitle2" component="div">
-            CONDUCTORES NUEVOS
+            CONDUCTORES RECIEN REGISTRADOS
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Aca podes listar los usuarios conductores registrados nuevos que aún no han subido documentos
-            y fotos del vehículo.
-          </Typography>
-        </CardContent>
+        </Box>
       </CardActionArea>
-      <CardActions className={styles.cardfooter}>
-        <Link to="/panel-control/conductores-nuevos">
-          <IconButton aria-label="price">
-            <Badge badgeContent={0} color="secondary">
-              <BallotIcon />
-            </Badge>
-          </IconButton>
-        </Link>
-      </CardActions>
     </Card>
   );
 }

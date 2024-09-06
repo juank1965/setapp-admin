@@ -7,6 +7,12 @@ import ListaUsuariosNuevos from "./ListaUsuariosNuevos";
 import ListaConductores from "./ListaConductores";
 import ListaConductoresPorValidar from "./ListaConductoresPorValidar";
 import ListaConductoresNuevos from "./ListaConductoresNuevos";
+import Divider from '@mui/material/Divider';
+import ConductoresNuevos from "./ConductoresNuevos";
+import ConductoresPorValidar from "./ConductoresPorValidar";
+import Conductores from "./Conductores";
+import OperadoresNuevos from "./OperadoresNuevos";
+import Operadores from "./Operadores";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -44,19 +50,27 @@ function a11yProps(index) {
 function Usuarios() {
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleValue = (newValue) => {
+    setValue(newValue);    
   };
 
   return (
     <div className="bodypanel bodycontent">
-      <div className="cardcontainerstyle">
-        <ListaConductoresNuevos />
-        <ListaConductoresPorValidar />
-        <ListaUsuariosNuevos />
-        <ListaUsuarios />
-        <ListaConductores />        
-      </div>
+      <Box sx={{ display: 'flex', flexDirection: "row", margin: 1 }}>
+        <ListaConductoresNuevos change={handleValue} />
+        <ListaConductoresPorValidar change={handleValue} />
+        <ListaConductores change={handleValue} />  
+        <ListaUsuariosNuevos change={handleValue} />
+        <ListaUsuarios change={handleValue} />          
+      </Box>
+      <Divider component="li" />
+      <Box sx={{ display: 'flex', justifyContent: "center" }}>
+      {value ===1 && (<ConductoresNuevos />)}      
+      {value ===2 && (<ConductoresPorValidar />)}
+      {value ===3 && (<Conductores />)}
+      {value ===4 && (<OperadoresNuevos />)}
+      {value ===5 && (<Operadores />)}
+      </Box>
     </div>
   );
 }
