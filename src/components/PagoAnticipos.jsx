@@ -54,7 +54,7 @@ export default function PagoAnticipos({change}) {
       <CardActionArea onClick={handleChange}>        
         <Box sx={{ display: "flex",justifyContent:"center", alignItems: "center", padding: 1, m:1 }}>
           <Typography gutterBottom variant="subtitle2" component="div">
-            PAGO ANTICIPO A CONDUCTORES
+            PAGO ANTICIPO A CONDUCTORES Y GUIAS
           </Typography>          
         </Box>
       </CardActionArea>

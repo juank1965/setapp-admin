@@ -4,7 +4,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import CommentIcon from "@mui/icons-material/Comment";
 import IconButton from "@mui/material/IconButton";
-import { Typography } from "@mui/material";
+import { Chip, Typography } from "@mui/material";
 import { getUsuarios } from "../assets/firebase/configuracion";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -90,11 +90,31 @@ export default function Operadores() {
                       variant="body2"
                       color="text.primary"
                     >
-                      Empresa:{operador.empresa}--
+                      Empresa:
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={operador.empresa}
+                      />
+                      Direccion:
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={operador.direccion}
+                      />
+                      email :{" "}
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={operador.email}
+                      />{" "}
+                      telefono :{" "}
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={operador.telefono}
+                      />{" "}
                     </Typography>
-                    Direccion:{operador.direccion}
-                    <Typography>email : {operador.email} </Typography>
-                    <Typography>telefono : {operador.telefono} </Typography>
                   </div>
                 }
               />

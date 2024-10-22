@@ -65,17 +65,24 @@ function GestionaPagos() {
 
   return (
     <div className="bodypanel bodycontent">
-      <Box sx={{ display: 'flex', flexDirection: "row", margin: 1 }}>
-        <PagoAnticipos change ={handleValue} />
-        <PagoSaldos change ={handleValue} />
-        <PagoRecompensas change ={handleValue} />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          margin: 1,
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+      >
+        <PagoAnticipos change={handleValue} />
+        <PagoSaldos change={handleValue} />
+        <PagoRecompensas change={handleValue} />
       </Box>
       <Divider component="li" />
-      <Box sx={{ display: 'flex', justifyContent: "center" }}>
-      {value ===1 && (<Anticipos />)}      
-      {value ===2 && (<Saldos />)}
-      {value ===3 && (<Recompensas />)}
-      
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        {value === 1 && <Anticipos />}
+        {value === 2 && <Saldos />}
+        {value === 3 && <Recompensas />}
       </Box>
     </div>
   );

@@ -33,6 +33,9 @@ import ListaViajesConfirmados from "./components/ListaViajesConfirmados";
 import ListaViajesFinalizados from "./components/ListaViajesFinalizados";
 import ConductoresNuevos from "./components/ConductoresNuevos";
 import Recompensas from "./components/Recompensas";
+import Guias from "./components/Guias";
+import GuiasNuevos from "./components/GuiasNuevos";
+import ListaGuiasPorValidar from "./components/ListaGuiasPorValidar";
 
 function App() {
   return (
@@ -51,6 +54,9 @@ function App() {
           <Route path="conductores" element={<Conductores />} />
           <Route path="conductores-por-validar" element={<ConductoresPorValidar />} />
           <Route path="conductores-nuevos" element={<ConductoresNuevos />} />
+          <Route path="guias" element={<Guias />} />
+          <Route path="guias-por-validar" element={<ListaGuiasPorValidar />} />
+          <Route path="guias-nuevos" element={<GuiasNuevos />} />
           <Route path="validarEpayco" element={<ValidarEpayco />} />
           <Route path="servicios-en-curso" element={<ServiciosEnCurso />} />
           <Route path="lista-de-reservas" element={<ListaDeReservas />} />

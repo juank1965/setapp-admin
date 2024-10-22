@@ -54,18 +54,26 @@ function ServiciosEnCurso() {
 
   return (
     <div className="bodypanel bodycontent">
-      <Box sx={{ display: 'flex', flexDirection: "row", margin: 1 }}>
-        <ListaDePedidos change ={handleValue} />
-        <ListaDeReservas change ={handleValue} />
-        <ListaServiciosConfirmados change ={handleValue} />
-        <ListaServiciosFinalizados change ={handleValue} />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          margin: 1,
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+      >
+        <ListaDePedidos change={handleValue} />
+        <ListaDeReservas change={handleValue} />
+        <ListaServiciosConfirmados change={handleValue} />
+        <ListaServiciosFinalizados change={handleValue} />
       </Box>
       <Divider component="li" />
-      <Box sx={{ display: 'flex', justifyContent: "center" }}>
-      {value ===1 && (<ListaServiciosPedidos />)}      
-      {value ===2 && (<ListaServiciosReservados />)}
-      {value ===3 && (<ListaViajesConfirmados />)}
-      {value ===4 && (<ListaViajesFinalizados />)}
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        {value === 1 && <ListaServiciosPedidos />}
+        {value === 2 && <ListaServiciosReservados />}
+        {value === 3 && <ListaViajesConfirmados />}
+        {value === 4 && <ListaViajesFinalizados />}
       </Box>
     </div>
   );

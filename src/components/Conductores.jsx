@@ -13,6 +13,7 @@ import Divider from "@mui/material/Divider";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Rating from "@mui/material/Rating";
+import Chip from "@mui/material/Chip";
 
 const style = {
   position: "absolute",
@@ -35,7 +36,7 @@ export default function Conductores() {
   const [conductores, setConductores] = React.useState([]);
   React.useEffect(() => {
     const listaConductores = getConductores(setConductores);
-  }, [getConductores]);  
+  }, [getConductores]);
   return (
     <List
       sx={{
@@ -86,25 +87,105 @@ export default function Conductores() {
                       variant="body2"
                       color="text.primary"
                     >
-                      {conductor.tipo} Placas:{conductor.placas}
-                      --{conductor.marca} modelo:{conductor.modelo} capacidad:
-                    {conductor.capacidad}
-                    </Typography>                    
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.tipo}
+                      />{" "}
+                      Placas:
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.placas}
+                      />
+                      Marca:{" "}
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.marca}
+                      />
+                      Modelo:
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.modelo}
+                      />{" "}
+                      Pasajeros:
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.capacidad}
+                      />
+                      Afiliado a:
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.empresa}
+                      />{" "}
+                      No Interno:
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.numeroInterno}
+                      />
+                    </Typography>
+                    <br />
                     <Typography
                       sx={{ display: "inline" }}
                       component="span"
                       variant="inherit"
                       color="text.primary"
                     >
-                      Afiliado a: {conductor.empresa} No.
-                      {conductor.numeroInterno} -                    
-                      Direccion: {conductor.direccion} -
-                      Email: {conductor.email}
-                      Telefono: {conductor.telefono} -
-                      Banco: {conductor.banco}
-                      Tipo Cuenta: {conductor.tipocuenta}
-                      No. Cuenta: {conductor.cuenta}
-                      Titular: {conductor.titular}
+                      Direccion:
+                      <Chip
+                        color="secondary"
+                        size="small"
+                        label={conductor.direccion}
+                      />
+                      Email:{" "}
+                      <Chip
+                        color="secondary"
+                        size="small"
+                        label={conductor.email}
+                      />
+                      Telefono:{" "}
+                      <Chip
+                        color="secondary"
+                        size="small"
+                        label={conductor.telefono}
+                      />
+                    </Typography>
+                    <br />
+                    <Typography
+                      sx={{ display: "inline" }}
+                      component="span"
+                      variant="inherit"
+                      color="text.primary"
+                    >
+                      Banco:{" "}
+                      <Chip
+                        color="success"
+                        size="small"
+                        label={conductor.banco}
+                      />
+                      Tipo Cuenta:
+                      <Chip
+                        color="success"
+                        size="small"
+                        label={conductor.tipocuenta}
+                      />
+                      No. Cuenta:{" "}
+                      <Chip
+                        color="success"
+                        size="small"
+                        label={conductor.cuenta}
+                      />
+                      Titular:{" "}
+                      <Chip
+                        color="success"
+                        size="small"
+                        label={conductor.titular}
+                      />
                     </Typography>
                   </>
                 }

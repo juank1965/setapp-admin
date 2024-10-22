@@ -14,7 +14,7 @@ import PolicyIcon from "@mui/icons-material/Policy";
 import FormCotizar from "./FormCotizar";
 import styles from "./Cotizar.module.css";
 import presupuesto from "../assets/solicitar-presupuesto.png";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import BallotIcon from "@mui/icons-material/Ballot";
 
 const style = {
   position: "absolute",
@@ -40,22 +40,27 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export default function PagoSaldos({change}) {
-  
+export default function ListaGuiasNuevos({ change }) {
   function handleChange() {
-    let value = 2;
-    
+    let value = 6;
     change(value);
-    
- }
+  }
 
   return (
     <Card sx={{ display: "flex", margin: 2 }}>
-      <CardActionArea onClick={handleChange}>        
-        <Box sx={{ display: "flex",justifyContent:"center", alignItems: "center", padding: 1, m:1 }}>
+      <CardActionArea onClick={handleChange}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 1,
+            m: 1,
+          }}
+        >
           <Typography gutterBottom variant="subtitle2" component="div">
-            PAGO SALDO A CONDUCTORES Y GUIAS
-          </Typography>          
+            GUÍAS RECIEN REGISTRADOS
+          </Typography>
         </Box>
       </CardActionArea>
     </Card>

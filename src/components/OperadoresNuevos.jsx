@@ -4,8 +4,11 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import CommentIcon from "@mui/icons-material/Comment";
 import IconButton from "@mui/material/IconButton";
-import { Typography } from "@mui/material";
-import { getUsuariosNuevos, validarUsuario } from "../assets/firebase/configuracion";
+import { Chip, Typography } from "@mui/material";
+import {
+  getUsuariosNuevos,
+  validarUsuario,
+} from "../assets/firebase/configuracion";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
@@ -42,8 +45,8 @@ export default function OperadoresNuevos() {
   const handlerBienvenida = (id) => {
     validarUsuario(id);
     navigate("/panel-control/usuarios");
-  }
-  
+  };
+
   return (
     <List
       sx={{
@@ -98,11 +101,31 @@ export default function OperadoresNuevos() {
                       variant="body2"
                       color="text.primary"
                     >
-                      Empresa:{operador.empresa}--
+                      Empresa:
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={operador.empresa}
+                      />
+                      Direccion:
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={operador.direccion}
+                      />
+                      email :{" "}
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={operador.email}
+                      />{" "}
+                      telefono :{" "}
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={operador.telefono}
+                      />{" "}
                     </Typography>
-                    Direccion:{operador.direccion}
-                    <Typography>email : {operador.email} </Typography>
-                    <Typography>telefono : {operador.telefono} </Typography>
                   </div>
                 }
               />
@@ -154,9 +177,14 @@ export default function OperadoresNuevos() {
                 <Typography>email : {info.email} </Typography>
                 <Typography>telefono : {info.telefono} </Typography>
               </div>
-              <Button onClick={() => {
-              validarUsuario(info.id);
-              navigate("/panel-control/usuarios");}}>Antes de validar, enviar Email de Bienvenida</Button>
+              <Button
+                onClick={() => {
+                  validarUsuario(info.id);
+                  navigate("/panel-control/usuarios");
+                }}
+              >
+                Antes de validar, enviar Email de Bienvenida
+              </Button>
             </>
           )}
         </Box>

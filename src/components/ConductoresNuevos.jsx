@@ -4,7 +4,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import CommentIcon from "@mui/icons-material/Comment";
 import IconButton from "@mui/material/IconButton";
-import { Typography } from "@mui/material";
+import { Chip, Typography } from "@mui/material";
 import {
   getConductoresNuevos,  
 } from "../assets/firebase/configuracion";
@@ -93,23 +93,45 @@ export default function ConductoresNuevos() {
                       variant="body2"
                       color="text.primary"
                     >
-                      {conductorNuevo.tipo} Placas:{conductorNuevo.placas}
-                      --{conductorNuevo.marca} modelo:{conductorNuevo.modelo} capacidad:
-                      {conductorNuevo.capacidad}
+                      <Chip color="primary" size="small" label={conductor.tipo} /> Placas:
+                      <Chip color="primary" size="small" label={conductor.placas} />
+                      Marca: <Chip color="primary" size="small" label={conductor.marca} />
+                      Modelo:
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.modelo}
+                      /> Pasajeros:
+                      <Chip color="primary" size="small" label={conductor.capacidad} />
+                      Afiliado a:
+                      <Chip color="primary" size="small" label={conductor.empresa} /> No
+                      Interno:
+                      <Chip color="primary" size="small" label={conductor.numeroInterno} />
                     </Typography>
+                    <br />
                     <Typography
                       sx={{ display: "inline" }}
                       component="span"
                       variant="inherit"
                       color="text.primary"
                     >
-                      Afiliado a: {conductorNuevo.empresa} No.
-                      {conductorNuevo.numeroInterno} - Direccion:{" "}
-                      {conductorNuevo.direccion} - Email: {conductorNuevo.email}
-                      Telefono: {conductorNuevo.telefono} - Banco: {conductorNuevo.banco}
-                      Tipo Cuenta: {conductorNuevo.tipocuenta}
-                      No. Cuenta: {conductorNuevo.cuenta}
-                      Titular: {conductorNuevo.titular}
+                      Direccion:
+                      <Chip color="secondary" size="small" label={conductor.direccion} />
+                      Email: <Chip color="secondary" size="small" label={conductor.email} />
+                      Telefono: <Chip color="secondary" size="small" label={conductor.telefono} />
+                    </Typography>
+                    <br />
+                    <Typography
+                      sx={{ display: "inline" }}
+                      component="span"
+                      variant="inherit"
+                      color="text.primary"
+                    >
+                      Banco: <Chip color="success" size="small" label={conductor.banco} />
+                      Tipo Cuenta:
+                      <Chip color="success" size="small" label={conductor.tipocuenta} />
+                      No. Cuenta: <Chip color="success" size="small" label={conductor.cuenta} />
+                      Titular: <Chip color="success" size="small" label={conductor.titular} />
                     </Typography>
                   </>
                 }

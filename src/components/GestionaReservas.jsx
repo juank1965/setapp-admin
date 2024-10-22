@@ -63,7 +63,8 @@ function GestionaReservas() {
 
   return (
     <div className="bodypanel bodycontent">
-      <Box sx={{ display: "flex", flexDirection: "row", margin: 1 }}>
+      <Box sx={{ display: 'flex', flexDirection: "row", margin: 1, flexWrap: "wrap",
+    justifyContent: "center" }}>
         <ReservasEpayco change={handleValue} />
         <ReservasTranferencia change={handleValue} />
       </Box>

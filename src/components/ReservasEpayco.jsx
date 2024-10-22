@@ -46,9 +46,15 @@ export default function ReservasEpayco({ change }) {
   return (
     <Card sx={{ display: "flex", margin: 2 }}>
       <CardActionArea onClick={handleChange}>
-        <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
+        <Box sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 1,
+            m: 1,
+          }}>
           <Typography gutterBottom variant="subtitle2" component="div">
-            "VALIDAR" PAGOS POR EPAYCO
+            VALIDAR PAGOS EPAYCO
           </Typography>
         </Box>
       </CardActionArea>

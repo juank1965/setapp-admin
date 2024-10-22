@@ -264,6 +264,37 @@ export const validate = async (id, number) => {
   const validarRef = doc(db, "services", id);
   await updateDoc(validarRef, { epaycoNumber: number, estado: "reservado" });
 };
+
+// Metodo para obtener todos los servicios pagados por validar para guías
+export const getForValidateGuias = (actualizar) => {
+  const q = query(collection(db, "services"), where("estadoOfertaGuia", "==", "validar"));
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const validar = [];
+    querySnapshot.forEach((doc) => {
+      validar.push(doc.data());
+    });
+    if (validar.length > 0) {
+      validar.sort(function (a, b) {
+        if (a.fechaSalida == b.fechaSalida) {
+          return 0;
+        }
+        if (a.fechaSalida < b.fechaSalida) {
+          return -1;
+        }
+        return 1;
+      });
+    }
+    actualizar(validar);
+    localStorage.setItem("validarPagoGuia", JSON.stringify(validar));
+  });
+};
+
+// PROBAR Metodo Validate --- valida el pago por epayco para Guías
+export const validateGuias = async (id, number) => {
+  const validarRef = doc(db, "services", id);
+  await updateDoc(validarRef, { epaycoNumberGuia: number, estadoOfertaGuia: "reservado" });
+};
+
 // Metodo getForAdvance -- Lista los servicios a los que se les puede pagar el anticipo a conductores
 export const getForAdvance = (actualizar) => {
   const q = query(
@@ -289,7 +320,7 @@ export const getForAdvance = (actualizar) => {
       });
     }
     actualizar(validar);
-    localStorage.setItem("validar", JSON.stringify(validar));
+    localStorage.setItem("validarAnticipoConductor", JSON.stringify(validar));
   });
 };
 // PROBAR Metodo advance -- Registra la informacion del numero de transferencia con el que se paga el anticipo
@@ -304,6 +335,47 @@ export const advance = async (id, number, valorPagado) => {
     valorAnticipoPagado: valorPagadoFormateado,
   });
 };
+// Metodo getForAdvanceGuias -- Lista los servicios a los que se les puede pagar el anticipo a guías
+export const getForAdvanceGuias = (actualizar) => {
+  const q = query(
+    collection(db, "services"),
+    //where("estado", "==", "confirmado"),
+    where("pagarAnticipoGuia", "==", true),
+    where("anticipoGuiaPagado", "==", false)
+  );
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const validar = [];
+    querySnapshot.forEach((doc) => {
+      validar.push(doc.data());
+    });
+    if (validar.length > 0) {
+      validar.sort(function (a, b) {
+        if (a.fechaSalida == b.fechaSalida) {
+          return 0;
+        }
+        if (a.fechaSalida < b.fechaSalida) {
+          return -1;
+        }
+        return 1;
+      });
+    }
+    actualizar(validar);
+    localStorage.setItem("validarAnticipoGuia", JSON.stringify(validar));
+  });
+};
+// PROBAR Metodo advanceGuia -- Registra la informacion del numero de transferencia con el que se paga el anticipo al guía
+export const advanceGuia = async (id, number, valorPagado) => {
+  const valorPagadoFormateado = new Intl.NumberFormat("es-ES", {
+    maximumFractionDigits: 0,
+  }).format(valorPagado);
+  const advanceRef = doc(db, "services", id);
+  await updateDoc(advanceRef, {
+    transaccionPagoAnticipoGuiaNumero: number,
+    anticipoGuiaPagado: true,
+    valorAnticipoGuiaPagado: valorPagadoFormateado,
+  });
+};
+
 //Metodo getForTotalPay -- Lista los servicios a los que se les puede pagar el saldo final a conductores
 export const getForTotalPay = (actualizar) => {
   const q = query(
@@ -434,7 +506,7 @@ export const getForReservas = (actualizar) => {
   });
 };
 
-// Metodo para obtener todos los servicios Pendientes 
+// Metodo para obtener todos los servicios de transporte Pendientes 
 export const getForPedidosPendientes = (actualizar) => {
   const pedidos = []
   const qp = query(
@@ -506,4 +578,97 @@ export const salir = async () => {
     .catch((error) => {
       console.log(error);
     });
+};
+
+// Métodos para gestionar los Guías Turísticos
+
+// Obtener la lista de gúias registrados
+export const getGuias = (actualizar) => {
+  const q = query(
+    collection(db, "guias"),
+    where("validado", "==", true),
+    where("documentosGuia", "==", true),    
+  );
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const guias = [];
+    querySnapshot.forEach((doc) => {
+      guias.push(doc.data());
+    });
+    if (guias.length > 0) {
+      guias.sort(function (a, b) {
+        if (a.nombre == b.nombre) {
+          return 0;
+        }
+        if (a.nombre < b.nombre) {
+          return -1;
+        }
+        return 1;
+      });
+    }
+    actualizar(guias);
+    localStorage.setItem("guiasRegistrados", JSON.stringify(guias));
+  });
+};
+// Metodo para obtener listado de Guías Nuevos Registrados para envío de correo
+export const getGuiasNuevos = (actualizar) => {
+  const q = query(
+    collection(db, "guias"),
+    where("validado", "==", false),    
+    where("documentosGuia", "==", false),
+    where("perfil", "==", true)
+  );
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const guias = [];
+    querySnapshot.forEach((doc) => {
+      guias.push(doc.data());
+    });
+    if (guias.length > 0) {
+      guias.sort(function (a, b) {
+        if (a.nombre == b.nombre) {
+          return 0;
+        }
+        if (a.nombre < b.nombre) {
+          return -1;
+        }
+        return 1;
+      });
+    }
+    actualizar(guias);
+  });
+};
+// Metodo para obtener listado de Guias Registrados Sin Validar
+export const getGuiasPorValidar = (actualizar) => {
+  const q = query(
+    collection(db, "guias"),
+    where("validado", "==", false),    
+    where("perfil", "==", true)
+  );
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const guias = [];
+    querySnapshot.forEach((doc) => {
+      guias.push(doc.data());
+    });
+    if (guias.length > 0) {
+      guias.sort(function (a, b) {
+        if (a.nombre == b.nombre) {
+          return 0;
+        }
+        if (a.nombre < b.nombre) {
+          return -1;
+        }
+        return 1;
+      });
+    }
+    actualizar(guias);
+    localStorage.setItem("guiasPorValidar", JSON.stringify(guias));
+  });
+};
+// Validar al Guía al revisar sus documentos y fotos
+export const validarGuia = async (id) => {
+  const validarGuiaRef = doc(db, "guias", id);
+  await updateDoc(validarGuiaRef, {
+    validado: true,
+    documentosGuia: true,
+    suspendido: false,
+  });
 };

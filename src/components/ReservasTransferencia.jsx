@@ -47,10 +47,16 @@ export default function ReservasTranferencia({change}) {
            
         <Card sx={{ display: "flex", margin: 2 }}>
           <CardActionArea onClick={handleChange} >            
-            <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
+            <Box sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 1,
+            m: 1,
+          }}>
               <CardContent>
                 <Typography gutterBottom variant="subtitle2" component="div">
-                  "VALIDAR" PAGOS POR TRANFERENCIA
+                  VALIDAR PAGOS TRANFERENCIA
                 </Typography>
               </CardContent>              
             </Box>
