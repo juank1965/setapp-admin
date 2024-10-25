@@ -76,8 +76,8 @@ export default function ValidarEpayco() {
     navigate("/panel-control/reservas");
   };
   const handlerValidacionGuia = async () => {
-    if (info.id) {
-      validateGuias(info.id, value);
+    if (infoGuia.id) {
+      validateGuias(infoGuia.id, value);
       toast("Pago Registrado exitosamente, Servicio en estado RESERVADO");
     } else {
       toast.error("No se pudo hacer la validacion del pago. Vuelva a intentar");
@@ -285,7 +285,7 @@ export default function ValidarEpayco() {
             </>
           ))
         ) : (
-          <h6 className="titulo">No hay Pagos Epayco para Validar</h6>
+          <h6 className="titulo">No hay Pagos Epayco a Guías para Validar</h6>
         )}
         <Modal
           open={openGuia}
@@ -294,18 +294,18 @@ export default function ValidarEpayco() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            {info && info.metodoPagoGuia === "epayco" && (
+            {infoGuia && infoGuia.metodoPagoGuia === "epayco" && (
               <>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                   Ingrese el numero epayco de transaccion
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                   <b>
-                    Para el servicio No. {info.id} se pagaron :{" "}
+                    Para el servicio No. {infoGuia.id} se pagaron :{" "}
                     {new Intl.NumberFormat("es-CO", {
                       style: "currency",
                       currency: "COP",
-                    }).format(info.pagoGuia)}
+                    }).format(infoGuia.pagoGuia)}
                   </b>
                   Escriba el numero del documento Equivalente que certifica la
                   transaccion Epayco con la que se recibio el pago del servicio.

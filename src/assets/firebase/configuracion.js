@@ -401,7 +401,35 @@ export const getForTotalPay = (actualizar) => {
       });
     }
     actualizar(validar);
-    localStorage.setItem("validar", JSON.stringify(validar));
+    localStorage.setItem("validarPagoFinalConductores", JSON.stringify(validar));
+  });
+};
+//Metodo getForTotalPayGuia -- Lista los servicios a los que se les puede pagar el saldo final a Guías
+export const getForTotalPayGuias = (actualizar) => {
+  const q = query(
+    collection(db, "services"),
+    //where("estado", "==", "confirmado"),
+    where("pagarSaldoGuia", "==", true),
+    where("saldoGuiaPagado", "==", false)
+  );
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const validar = [];
+    querySnapshot.forEach((doc) => {
+      validar.push(doc.data());
+    });
+    if (validar.length > 0) {
+      validar.sort(function (a, b) {
+        if (a.fechaSalida == b.fechaSalida) {
+          return 0;
+        }
+        if (a.fechaSalida < b.fechaSalida) {
+          return -1;
+        }
+        return 1;
+      });
+    }
+    actualizar(validar);
+    localStorage.setItem("validarPagoFinalGuia", JSON.stringify(validar));
   });
 };
 //  PROBAR Metodo totalPay -- Registra la informacion del numero de transferencia con el que se cancela la totalidad del servicio al conductor
@@ -414,6 +442,18 @@ export const totalPay = async (id, number, saldoPagado) => {
     transaccionPagoTotalNumero: number,
     saldoConductorPagado: true,
     valorSaldoPagado: saldoPagadoFormateado,
+  });
+};
+//  PROBAR Metodo totalPayGuias -- Registra la informacion del numero de transferencia con el que se cancela la totalidad del servicio al Guía
+export const totalPayGuia = async (id, number, saldoPagado) => {
+  const saldoPagadoFormateado = new Intl.NumberFormat("es-ES", {
+    maximumFractionDigits: 0,
+  }).format(saldoPagado);
+  const pagoTotalRef = doc(db, "services", id);
+  await updateDoc(pagoTotalRef, {
+    transaccionPagoTotalGuiaNumero: number,
+    saldoGuiaPagado: true,
+    valorSaldoPagadoGuia: saldoPagadoFormateado,
   });
 };
 // Registrar pago de recompensa -- OJO REVISAR

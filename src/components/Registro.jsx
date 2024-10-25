@@ -27,8 +27,7 @@ function Registro() {
           // ...
         });
         // Signed in
-        const user = userCredential.user;
-        console.log(user);
+        const user = userCredential.user;        
         // Crea usuario en la base de datos
         const { uid, displayName, email, photoURL } = user;
         setDoc(

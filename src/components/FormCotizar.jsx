@@ -31,8 +31,7 @@ export default function FormCotizar() {
       adultos: 1,
     },
   });
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (data) => {    
     navigate("/panel-control/home");
   };
 

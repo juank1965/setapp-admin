@@ -15,8 +15,7 @@ function Registro() {
     handleSubmit,
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (data) => {    
     sendPasswordResetEmail(auth, data.email)
       .then(() => {
         alert(

@@ -21,8 +21,7 @@ const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
+  transform: "translate(-50%, -50%)",  
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -38,8 +37,8 @@ export default function ValidarTransferencia() {
   const [infoGuia, setInfoGuia] = React.useState();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleOpenGuia = () => setOpen(true);
-  const handleCloseGuia = () => setOpen(false);
+  const handleOpenGuia = () => setOpenGuia(true);
+  const handleCloseGuia = () => setOpenGuia(false);
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -63,6 +62,7 @@ export default function ValidarTransferencia() {
     if (info.id) {
       validate(info.id, value);
       toast("Pago Registrado exitosamente, Servicio en estado RESERVADO");
+      handleClose();
     } else {
       toast.error("No se pudo hacer la validacion del pago. Vuelva a intentar");
       handleClose();
@@ -71,24 +71,26 @@ export default function ValidarTransferencia() {
   };
 
   const handlerValidacionGuia = async () => {
-    if (info.id) {
-      validateGuias(info.id, value);
+    if (infoGuia.id) {
+      validateGuias(infoGuia.id, value);
       toast("Pago Registrado exitosamente, Servicio en estado RESERVADO");
+      handleCloseGuia();
     } else {
       toast.error("No se pudo hacer la validacion del pago. Vuelva a intentar");
       handleCloseGuia();
     }
     navigate("/panel-control/reservas");
   };
-
+  
   return (
     <Box>
     <List
       sx={{
-        width: "100%",
-        maxWidth: 360,
+        width: "90%",
+        minWidth: 320,
         bgcolor: "background.paper",
         mt: "50px",
+        padding: "10px"
       }}
     >
       <h5 className="titulo">Validar Pagos de Reserva Vehículos vía transferencias</h5>
@@ -204,10 +206,11 @@ export default function ValidarTransferencia() {
     </List>
     <List
       sx={{
-        width: "100%",
-        maxWidth: 360,
+        width: "90%",
+        minWidth: 320,
         bgcolor: "background.paper",
         mt: "50px",
+        padding: "10px",        
       }}
     >
       <h5 className="titulo">Validar Pagos de Reserva Servicio de Guias vía transferencias</h5>
@@ -276,27 +279,27 @@ export default function ValidarTransferencia() {
           </>
         ))
       ) : (
-        <h6 className="titulo">No hay Pagos para Validar</h6>
+        <h6 className="titulo">No hay Pagos a guías para Validar</h6>
       )}
-      <Modal
+      <Modal                
         open={openGuia}
         onClose={handleCloseGuia}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {info && info.metodoPagoGuia === "transferencia" && (
+          {infoGuia && infoGuia.metodoPagoGuia === "transferencia" && (
             <>
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Ingrese el numero de transferencia o consignación
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 <b>
-                  Para el servicio No. {info.id} se tranfiere :
+                  Para el servicio No. {infoGuia.id} se tranfiere :
                   {new Intl.NumberFormat("es-CO", {
                     style: "currency",
                     currency: "COP",
-                  }).format(info.pagoGuia)}
+                  }).format(infoGuia.pagoGuia)}
                 </b>
                 Escriba el numero del documento Equivalente que certifica la
                 transaccion con la que se registra la consignación o
@@ -304,7 +307,7 @@ export default function ValidarTransferencia() {
               </Typography>
               <TextField
                 id="standard-basic"
-                label="Consignación o tranferencia #"
+                label="Consignación o transferencia #"
                 variant="standard"
                 value={valueGuia}
                 onChange={handleChangeGuia}
