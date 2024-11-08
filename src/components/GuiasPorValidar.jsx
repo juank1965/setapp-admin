@@ -53,9 +53,9 @@ export default function GuiasPorValidar() {
         mb: "50px",
       }}
     >
-      <h5 className="titulo">
+      <Typography variant="h6" gutterBottom>
         Guias Registrados Por Validar: {guias.length}
-      </h5>
+      </Typography>
       {guias.length > 0 ? (
         guias.map((guia) => (
           <>

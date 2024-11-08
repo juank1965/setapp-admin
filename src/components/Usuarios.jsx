@@ -7,7 +7,7 @@ import ListaUsuariosNuevos from "./ListaUsuariosNuevos";
 import ListaConductores from "./ListaConductores";
 import ListaConductoresPorValidar from "./ListaConductoresPorValidar";
 import ListaConductoresNuevos from "./ListaConductoresNuevos";
-import Divider from '@mui/material/Divider';
+import Divider from "@mui/material/Divider";
 import ConductoresNuevos from "./ConductoresNuevos";
 import ConductoresPorValidar from "./ConductoresPorValidar";
 import Conductores from "./Conductores";
@@ -57,33 +57,67 @@ function Usuarios() {
   const [value, setValue] = React.useState(0);
 
   const handleValue = (newValue) => {
-    setValue(newValue);    
+    setValue(newValue);
   };
 
   return (
     <div className="bodypanel bodycontent">
-      <Box sx={{ display: 'flex', flexDirection: "row", margin: 1, flexWrap: "wrap",
-    justifyContent: "center" }}>
-        <ListaConductoresNuevos change={handleValue} />
-        <ListaConductoresPorValidar change={handleValue} />
-        <ListaConductores change={handleValue} />  
-        <ListaUsuariosNuevos change={handleValue} />
-        <ListaUsuarios change={handleValue} />
-        <ListaGuiasNuevos change={handleValue} />
-        <ListaGuiasPorValidar change={handleValue} />
-        <ListaGuias change={handleValue} />           
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          margin: 1,
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+          }}
+        >
+          <ListaConductoresNuevos change={handleValue} />
+          <ListaConductoresPorValidar change={handleValue} />
+          <ListaConductores change={handleValue} />
+        </Box>
+        <Divider />
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+          }}
+        >
+          <ListaUsuariosNuevos change={handleValue} />
+          <ListaUsuarios change={handleValue} />
+        </Box>
+        <Divider />
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+          }}
+        >
+          <ListaGuiasNuevos change={handleValue} />
+          <ListaGuiasPorValidar change={handleValue} />
+          <ListaGuias change={handleValue} />
+        </Box>
+        
       </Box>
-      <Divider component="li" />
-      <Box sx={{ display: 'flex', justifyContent: "center" }}>
-      {value ===1 && (<ConductoresNuevos />)}      
-      {value ===2 && (<ConductoresPorValidar />)}
-      {value ===3 && (<Conductores />)}
-      {value ===4 && (<OperadoresNuevos />)}
-      {value ===5 && (<Operadores />)}
-      {value ===6 && (<GuiasNuevos />)}      
-      {value ===7 && (<GuiasPorValidar />)}
-      {value ===8 && (<Guias />)}
-      </Box>
+      <Divider />
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          {value === 1 && <ConductoresNuevos />}
+          {value === 2 && <ConductoresPorValidar />}
+          {value === 3 && <Conductores />}
+          {value === 4 && <OperadoresNuevos />}
+          {value === 5 && <Operadores />}
+          {value === 6 && <GuiasNuevos />}
+          {value === 7 && <GuiasPorValidar />}
+          {value === 8 && <Guias />}
+        </Box>
     </div>
   );
 }

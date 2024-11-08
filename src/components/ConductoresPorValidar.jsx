@@ -53,9 +53,9 @@ export default function ConductoresPorValidar() {
         mb: "50px",
       }}
     >
-      <h5 className="titulo">
+      <Typography variant="h6" gutterBottom>
         Conductores Registrados Por Validar: {conductores.length}
-      </h5>
+      </Typography>
       {conductores.length > 0 ? (
         conductores.map((conductor) => (
           <>
@@ -95,20 +95,47 @@ export default function ConductoresPorValidar() {
                       variant="body2"
                       color="text.primary"
                     >
-                      <Chip color="primary" size="small" label={conductor.tipo} /> Placas:
-                      <Chip color="primary" size="small" label={conductor.placas} />
-                      Marca: <Chip color="primary" size="small" label={conductor.marca} />
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.tipo}
+                      />{" "}
+                      Placas:
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.placas}
+                      />
+                      Marca:{" "}
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.marca}
+                      />
                       Modelo:
                       <Chip
                         color="primary"
                         size="small"
                         label={conductor.modelo}
-                      /> Pasajeros:
-                      <Chip color="primary" size="small" label={conductor.capacidad} />
+                      />{" "}
+                      Pasajeros:
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.capacidad}
+                      />
                       Afiliado a:
-                      <Chip color="primary" size="small" label={conductor.empresa} /> No
-                      Interno:
-                      <Chip color="primary" size="small" label={conductor.numeroInterno} />
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.empresa}
+                      />{" "}
+                      No Interno:
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.numeroInterno}
+                      />
                     </Typography>
                     <br />
                     <Typography
@@ -118,9 +145,23 @@ export default function ConductoresPorValidar() {
                       color="text.primary"
                     >
                       Direccion:
-                      <Chip color="secondary" size="small" label={conductor.direccion} />
-                      Email: <Chip color="secondary" size="small" label={conductor.email} />
-                      Telefono: <Chip color="secondary" size="small" label={conductor.telefono} />
+                      <Chip
+                        color="secondary"
+                        size="small"
+                        label={conductor.direccion}
+                      />
+                      Email:{" "}
+                      <Chip
+                        color="secondary"
+                        size="small"
+                        label={conductor.email}
+                      />
+                      Telefono:{" "}
+                      <Chip
+                        color="secondary"
+                        size="small"
+                        label={conductor.telefono}
+                      />
                     </Typography>
                     <br />
                     <Typography
@@ -129,11 +170,30 @@ export default function ConductoresPorValidar() {
                       variant="inherit"
                       color="text.primary"
                     >
-                      Banco: <Chip color="success" size="small" label={conductor.banco} />
+                      Banco:{" "}
+                      <Chip
+                        color="success"
+                        size="small"
+                        label={conductor.banco}
+                      />
                       Tipo Cuenta:
-                      <Chip color="success" size="small" label={conductor.tipocuenta} />
-                      No. Cuenta: <Chip color="success" size="small" label={conductor.cuenta} />
-                      Titular: <Chip color="success" size="small" label={conductor.titular} />
+                      <Chip
+                        color="success"
+                        size="small"
+                        label={conductor.tipocuenta}
+                      />
+                      No. Cuenta:{" "}
+                      <Chip
+                        color="success"
+                        size="small"
+                        label={conductor.cuenta}
+                      />
+                      Titular:{" "}
+                      <Chip
+                        color="success"
+                        size="small"
+                        label={conductor.titular}
+                      />
                     </Typography>
                   </>
                 }

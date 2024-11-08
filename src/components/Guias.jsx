@@ -47,7 +47,7 @@ export default function Guias() {
         mb: "50px",
       }}
     >
-      <h5 className="titulo">Guias Registrados {guias.length}</h5>
+      <Typography variant="h6" gutterBottom>Guias Registrados {guias.length}</Typography>
       {guias.length > 0 ? (
         guias.map((guia) => (
           <>

@@ -57,9 +57,9 @@ export default function OperadoresNuevos() {
         mb: "50px",
       }}
     >
-      <h5 className="titulo">
+      <Typography variant="h6" gutterBottom>
         Operadores Turisticos Registrados {operadores.length}
-      </h5>
+      </Typography>
       {operadores.length > 0 ? (
         operadores.map((operador) => (
           <>

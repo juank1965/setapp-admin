@@ -51,9 +51,9 @@ export default function GuiasNuevos() {
         mb: "50px",
       }}
     >
-      <h5 className="titulo">
+      <Typography variant="h6" gutterBottom>
         Guias Registrados Nuevos: {guiasNuevos.length}
-      </h5>
+      </Typography>
       {guiasNuevos.length > 0 ? (
         guiasNuevos.map((guiaNuevo) => (
           <>

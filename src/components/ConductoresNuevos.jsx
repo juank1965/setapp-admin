@@ -5,9 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import CommentIcon from "@mui/icons-material/Comment";
 import IconButton from "@mui/material/IconButton";
 import { Chip, Typography } from "@mui/material";
-import {
-  getConductoresNuevos,  
-} from "../assets/firebase/configuracion";
+import { getConductoresNuevos } from "../assets/firebase/configuracion";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
@@ -39,8 +37,8 @@ export default function ConductoresNuevos() {
   const [conductoresNuevos, setConductoresNuevos] = React.useState([]);
   React.useEffect(() => {
     const listaConductoresNuevos = getConductoresNuevos(setConductoresNuevos);
-  }, [getConductoresNuevos]); 
-  
+  }, [getConductoresNuevos]);
+
   return (
     <List
       sx={{
@@ -51,9 +49,9 @@ export default function ConductoresNuevos() {
         mb: "50px",
       }}
     >
-      <h5 className="titulo">
+      <Typography variant="h6" gutterBottom>
         Conductores Registrados Nuevos: {conductoresNuevos.length}
-      </h5>
+      </Typography>      
       {conductoresNuevos.length > 0 ? (
         conductoresNuevos.map((conductorNuevo) => (
           <>
@@ -93,20 +91,47 @@ export default function ConductoresNuevos() {
                       variant="body2"
                       color="text.primary"
                     >
-                      <Chip color="primary" size="small" label={conductor.tipo} /> Placas:
-                      <Chip color="primary" size="small" label={conductor.placas} />
-                      Marca: <Chip color="primary" size="small" label={conductor.marca} />
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.tipo}
+                      />{" "}
+                      Placas:
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.placas}
+                      />
+                      Marca:{" "}
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.marca}
+                      />
                       Modelo:
                       <Chip
                         color="primary"
                         size="small"
                         label={conductor.modelo}
-                      /> Pasajeros:
-                      <Chip color="primary" size="small" label={conductor.capacidad} />
+                      />{" "}
+                      Pasajeros:
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.capacidad}
+                      />
                       Afiliado a:
-                      <Chip color="primary" size="small" label={conductor.empresa} /> No
-                      Interno:
-                      <Chip color="primary" size="small" label={conductor.numeroInterno} />
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.empresa}
+                      />{" "}
+                      No Interno:
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.numeroInterno}
+                      />
                     </Typography>
                     <br />
                     <Typography
@@ -116,9 +141,23 @@ export default function ConductoresNuevos() {
                       color="text.primary"
                     >
                       Direccion:
-                      <Chip color="secondary" size="small" label={conductor.direccion} />
-                      Email: <Chip color="secondary" size="small" label={conductor.email} />
-                      Telefono: <Chip color="secondary" size="small" label={conductor.telefono} />
+                      <Chip
+                        color="secondary"
+                        size="small"
+                        label={conductor.direccion}
+                      />
+                      Email:{" "}
+                      <Chip
+                        color="secondary"
+                        size="small"
+                        label={conductor.email}
+                      />
+                      Telefono:{" "}
+                      <Chip
+                        color="secondary"
+                        size="small"
+                        label={conductor.telefono}
+                      />
                     </Typography>
                     <br />
                     <Typography
@@ -127,11 +166,30 @@ export default function ConductoresNuevos() {
                       variant="inherit"
                       color="text.primary"
                     >
-                      Banco: <Chip color="success" size="small" label={conductor.banco} />
+                      Banco:{" "}
+                      <Chip
+                        color="success"
+                        size="small"
+                        label={conductor.banco}
+                      />
                       Tipo Cuenta:
-                      <Chip color="success" size="small" label={conductor.tipocuenta} />
-                      No. Cuenta: <Chip color="success" size="small" label={conductor.cuenta} />
-                      Titular: <Chip color="success" size="small" label={conductor.titular} />
+                      <Chip
+                        color="success"
+                        size="small"
+                        label={conductor.tipocuenta}
+                      />
+                      No. Cuenta:{" "}
+                      <Chip
+                        color="success"
+                        size="small"
+                        label={conductor.cuenta}
+                      />
+                      Titular:{" "}
+                      <Chip
+                        color="success"
+                        size="small"
+                        label={conductor.titular}
+                      />
                     </Typography>
                   </>
                 }
@@ -176,7 +234,7 @@ export default function ConductoresNuevos() {
             </>
           )}
           <Button
-            onClick={() => {              
+            onClick={() => {
               navigate("/panel-control/usuarios");
             }}
           >

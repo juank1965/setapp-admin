@@ -47,7 +47,7 @@ export default function Conductores() {
         mb: "50px",
       }}
     >
-      <h5 className="titulo">Conductores Registrados {conductores.length}</h5>
+      <Typography variant="h6" gutterBottom>Conductores Registrados {conductores.length}</Typography>
       {conductores.length > 0 ? (
         conductores.map((conductor) => (
           <>
