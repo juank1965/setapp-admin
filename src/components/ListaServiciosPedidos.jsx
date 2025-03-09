@@ -55,7 +55,7 @@ export default function ListaServiciosPedidos() {
         mt: "50px",
       }}
     >
-      <h5 className="titulo">Lista de pedidos</h5>
+      <Typography variant="h6" gutterBottom>Lista de pedidos</Typography>
       {pedidos.length > 0 ? (
         pedidos.map((pedido) => (
           <>

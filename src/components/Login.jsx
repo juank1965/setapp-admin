@@ -4,6 +4,7 @@ import styles from "./Login.module.css";
 import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, getUsuario } from "../assets/firebase/configuracion";
+import toast from "react-hot-toast";
 
 function Login() {
   let navigate = useNavigate();
@@ -23,21 +24,21 @@ function Login() {
           userData.then((usuario) => {
             // Ingresa al panel que corresponde
             if (usuario.perfil) {
-              alert("Bievenido !!");
+              toast("Bievenido !!");
               navigate("/panel-control/usuarios");
             } else {
-              alert("Completa tu perfil");
+              toast("Completa tu perfil");
               navigate("/panel-control/perfil");
             }
           });
         } else {
-          alert("Por favor verifica tu correo");
+          toast("Por favor verifica tu correo");
         }
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(`${errorMessage}`);
+        toast(`${errorMessage}`);
       });
   };
 

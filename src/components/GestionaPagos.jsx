@@ -18,7 +18,7 @@ import Box from "@mui/material/Box";
 import PagoAnticipos from "./PagoAnticipos";
 import PagoSaldos from "./PagoSaldos";
 import PagoRecompensas from "./PagoRecompensas";
-import { Divider } from "@mui/material";
+import { Card, Divider } from "@mui/material";
 import Anticipos from "./Anticipos";
 import Saldos from "./Saldos";
 import Recompensas from "./Recompensas";
@@ -68,21 +68,46 @@ function GestionaPagos() {
       <Box
         sx={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
           margin: 1,
           flexWrap: "wrap",
           justifyContent: "center",
+          backgroundColor: "#999999",
         }}
       >
-        <PagoAnticipos change={handleValue} />
-        <PagoSaldos change={handleValue} />
-        <PagoRecompensas change={handleValue} />
-      </Box>
-      <Divider component="li" />
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        {value === 1 && <Anticipos />}
-        {value === 2 && <Saldos />}
-        {value === 3 && <Recompensas />}
+        <Card
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+            margin: "1px",
+            backgroundColor: "#1565c0",
+          }}
+        >
+          <Box sx={{ display: "flex" }}>
+            <Typography
+              color={"white"}
+              gutterBottom
+              variant="h6"
+              component="div"
+            >
+              Pago a Proveedores
+            </Typography>
+          </Box>
+          <Box sx={{ display: "flex" }}>
+            <PagoAnticipos change={handleValue} />
+            <PagoSaldos change={handleValue} />
+            <PagoRecompensas change={handleValue} />
+          </Box>
+        </Card>
+        <Divider />
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          {value === 1 && <Anticipos />}
+          {value === 2 && <Saldos />}
+          {value === 3 && <Recompensas />}
+        </Box>
       </Box>
     </div>
   );

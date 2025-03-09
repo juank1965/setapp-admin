@@ -98,11 +98,12 @@ export default function Anticipos() {
           minWidth: 360,
           bgcolor: "background.paper",
           mt: "50px",
+          mb: "5px"
         }}
       >
-        <h5 className="titulo">
+        <Typography variant="h6" gutterBottom>
           Servicios de Vehículos Por Pago de Anticipo 50%
-        </h5>
+        </Typography>
         {anticipos.length > 0 ? (
           anticipos.map((anticipo) => (
             <>
@@ -249,9 +250,10 @@ export default function Anticipos() {
           minWidth: 360,
           bgcolor: "background.paper",
           mt: "50px",
+          mb: "5px"
         }}
       >
-        <h5 className="titulo">Servicios de Guias Por Pago deAnticipo 50%</h5>
+        <Typography variant="h6" gutterBottom>Servicios de Guias Por Pago deAnticipo 50%</Typography>
         {anticiposGuias.length > 0 ? (
           anticiposGuias.map((anticipo) => (
             <>

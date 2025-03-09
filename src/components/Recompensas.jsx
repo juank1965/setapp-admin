@@ -75,9 +75,10 @@ export default function Recompensas() {
         maxWidth: 360,
         bgcolor: "background.paper",
         mt: "50px",
+        mb: "5px"
       }}
     >
-      <h5 className="titulo">CONDUCTORES QUE HAN GENERADO RECOMPENSA</h5>
+      <Typography variant="h6" gutterBottom>CONDUCTORES QUE HAN GENERADO RECOMPENSA</Typography>
       {recompensas.length > 0 ? (
         recompensas.map((recompensa) => (
           <>

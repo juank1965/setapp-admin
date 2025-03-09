@@ -94,43 +94,43 @@ export default function ConductoresNuevos() {
                       <Chip
                         color="primary"
                         size="small"
-                        label={conductor.tipo}
+                        label={conductorNuevo.tipo}
                       />{" "}
                       Placas:
                       <Chip
                         color="primary"
                         size="small"
-                        label={conductor.placas}
+                        label={conductorNuevo.placas}
                       />
                       Marca:{" "}
                       <Chip
                         color="primary"
                         size="small"
-                        label={conductor.marca}
+                        label={conductorNuevo.marca}
                       />
                       Modelo:
                       <Chip
                         color="primary"
                         size="small"
-                        label={conductor.modelo}
+                        label={conductorNuevo.modelo}
                       />{" "}
                       Pasajeros:
                       <Chip
                         color="primary"
                         size="small"
-                        label={conductor.capacidad}
+                        label={conductorNuevo.capacidad}
                       />
                       Afiliado a:
                       <Chip
                         color="primary"
                         size="small"
-                        label={conductor.empresa}
+                        label={conductorNuevo.empresa}
                       />{" "}
                       No Interno:
                       <Chip
                         color="primary"
                         size="small"
-                        label={conductor.numeroInterno}
+                        label={conductorNuevo.numeroInterno}
                       />
                     </Typography>
                     <br />
@@ -144,19 +144,19 @@ export default function ConductoresNuevos() {
                       <Chip
                         color="secondary"
                         size="small"
-                        label={conductor.direccion}
+                        label={conductorNuevo.direccion}
                       />
                       Email:{" "}
                       <Chip
                         color="secondary"
                         size="small"
-                        label={conductor.email}
+                        label={conductorNuevo.email}
                       />
                       Telefono:{" "}
                       <Chip
                         color="secondary"
                         size="small"
-                        label={conductor.telefono}
+                        label={conductorNuevo.telefono}
                       />
                     </Typography>
                     <br />
@@ -170,25 +170,25 @@ export default function ConductoresNuevos() {
                       <Chip
                         color="success"
                         size="small"
-                        label={conductor.banco}
+                        label={conductorNuevo.banco}
                       />
                       Tipo Cuenta:
                       <Chip
                         color="success"
                         size="small"
-                        label={conductor.tipocuenta}
+                        label={conductorNuevo.tipocuenta}
                       />
                       No. Cuenta:{" "}
                       <Chip
                         color="success"
                         size="small"
-                        label={conductor.cuenta}
+                        label={conductorNuevo.cuenta}
                       />
                       Titular:{" "}
                       <Chip
                         color="success"
                         size="small"
-                        label={conductor.titular}
+                        label={conductorNuevo.titular}
                       />
                     </Typography>
                   </>
@@ -238,7 +238,7 @@ export default function ConductoresNuevos() {
               navigate("/panel-control/usuarios");
             }}
           >
-            Enviar email de Bienvenida para q suba fotos y docs
+            Enviar email de Bienvenida para que suba fotos y docs
           </Button>
         </Box>
       </Modal>

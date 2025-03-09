@@ -19,6 +19,7 @@ import Operadores from "./Operadores";
 import ListaGuiasNuevos from "./ListaGuiasNuevos";
 import ListaGuiasPorValidar from "./ListaGuiasPorValidar";
 import ListaGuias from "./ListaGuias";
+import { Card, CardContent } from "@mui/material";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -54,7 +55,7 @@ function a11yProps(index) {
 }
 
 function Usuarios() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(1);
 
   const handleValue = (newValue) => {
     setValue(newValue);
@@ -69,55 +70,90 @@ function Usuarios() {
           margin: 1,
           flexWrap: "wrap",
           justifyContent: "center",
+          backgroundColor: "#999999",
         }}
       >
-        <Box
+        <Card
           sx={{
             display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
             flexWrap: "wrap",
             justifyContent: "space-around",
+            margin: "1px",
+            backgroundColor: "#1565c0",
           }}
         >
-          <ListaConductoresNuevos change={handleValue} />
-          <ListaConductoresPorValidar change={handleValue} />
-          <ListaConductores change={handleValue} />
-        </Box>
+          <Box sx={{ display: "flex" }}>
+          <Typography color={"white"} gutterBottom variant="h6" component="div">
+            Conductores
+          </Typography>
+          </Box>          
+          <Box sx={{ display: "flex" }}>
+            <ListaConductoresNuevos change={handleValue} />
+            <ListaConductoresPorValidar change={handleValue} />
+            <ListaConductores change={handleValue} />
+          </Box>
+        </Card>
         <Divider />
-        <Box
+        <Card
           sx={{
             display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
             flexWrap: "wrap",
             justifyContent: "space-around",
+            margin: "1px",
+            backgroundColor: "#7b1fa2",
           }}
         >
+          <Box sx={{ display: "flex" }}>
+          <Typography color={"white"} gutterBottom variant="h6" component="div">
+            Operadores Turísticos
+          </Typography>
+          </Box>
+          <Box sx={{ display: "flex" }}>
           <ListaUsuariosNuevos change={handleValue} />
           <ListaUsuarios change={handleValue} />
-        </Box>
+          </Box>
+          
+        </Card>
         <Divider />
-        <Box
+        <Card
           sx={{
             display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
             flexWrap: "wrap",
             justifyContent: "space-around",
+            margin: "1px",
+            backgroundColor: "green",
           }}
         >
+          <Box sx={{ display: "flex" }}>
+          <Typography color={"white"} gutterBottom variant="h6" component="div">
+            Guías de Turismo
+          </Typography>
+          </Box>
+          <Box sx={{ display: "flex" }}>
           <ListaGuiasNuevos change={handleValue} />
           <ListaGuiasPorValidar change={handleValue} />
           <ListaGuias change={handleValue} />
-        </Box>
-        
+          </Box>
+          
+        </Card>
       </Box>
       <Divider />
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          {value === 1 && <ConductoresNuevos />}
-          {value === 2 && <ConductoresPorValidar />}
-          {value === 3 && <Conductores />}
-          {value === 4 && <OperadoresNuevos />}
-          {value === 5 && <Operadores />}
-          {value === 6 && <GuiasNuevos />}
-          {value === 7 && <GuiasPorValidar />}
-          {value === 8 && <Guias />}
-        </Box>
+      <Card sx={{ display: "flex", justifyContent: "center" }}>
+        {value === 1 && <ConductoresNuevos />}
+        {value === 2 && <ConductoresPorValidar />}
+        {value === 3 && <Conductores />}
+        {value === 4 && <OperadoresNuevos />}
+        {value === 5 && <Operadores />}
+        {value === 6 && <GuiasNuevos />}
+        {value === 7 && <GuiasPorValidar />}
+        {value === 8 && <Guias />}
+      </Card>
     </div>
   );
 }

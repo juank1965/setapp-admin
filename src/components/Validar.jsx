@@ -62,7 +62,7 @@ export default function Validar() {
           mt: "50px",
         }}
       >
-        <h5 className="titulo">Validar Pagos de Reservas vía EPAYCO</h5>
+        <Typography variant="h6" gutterBottom>Validar Pagos de Reservas vía EPAYCO</Typography>
         {validar.length > 0 ? (
           validar.map((valida, i) => (
             <>
