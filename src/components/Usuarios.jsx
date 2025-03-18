@@ -54,7 +54,7 @@ function a11yProps(index) {
 }
 
 function Usuarios() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(1);
 
   const handleValue = (newValue) => {
     setValue(newValue);

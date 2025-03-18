@@ -78,7 +78,7 @@ function GestionaPagos() {
         <PagoSaldos change={handleValue} />
         <PagoRecompensas change={handleValue} />
       </Box>
-      <Divider component="li" />
+      <Divider />
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         {value === 1 && <Anticipos />}
         {value === 2 && <Saldos />}

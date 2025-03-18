@@ -68,7 +68,7 @@ function GestionaReservas() {
         <ReservasEpayco change={handleValue} />
         <ReservasTranferencia change={handleValue} />
       </Box>
-      <Divider component="li" />
+      <Divider />
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         {value === 1 && <ValidarEpayco />}
         {value === 2 && <ValidarTransferencia />}

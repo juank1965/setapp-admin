@@ -68,7 +68,7 @@ function ServiciosEnCurso() {
         <ListaServiciosConfirmados change={handleValue} />
         <ListaServiciosFinalizados change={handleValue} />
       </Box>
-      <Divider component="li" />
+      <Divider />
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         {value === 1 && <ListaServiciosPedidos />}
         {value === 2 && <ListaServiciosReservados />}

@@ -55,7 +55,7 @@ export default function ListaServiciosReservados() {
         mt: "50px",
       }}
     >
-      <h5 className="titulo">Lista de Reservas</h5>
+      <Typography variant="h6" gutterBottom>Lista de Reservas</Typography>
       {reservas.length > 0 ? (
         reservas.map((reserva) => (
           <>

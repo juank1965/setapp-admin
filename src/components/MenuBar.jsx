@@ -24,7 +24,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import ManageHistoryIcon from "@mui/icons-material/ManageHistory";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
-import setapp from "../assets/set-app.png";
+import setapp from "../assets/setapp.png";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db, salir } from "../assets/firebase/configuracion";
 import Alert from "@mui/material/Alert";
@@ -117,7 +117,7 @@ export default function MenuBar() {
           >
             <MenuIcon />
           </IconButton>
-          <img src={setapp} alt="logo" height="18px" width="80px" />
+          <img src={setapp} alt="logo" height="60px" width="180px" />
 
           <Avatar
             alt="Nombre del Usuario"
@@ -160,167 +160,7 @@ export default function MenuBar() {
               <AccountCircleIcon />
             </ListItemIcon>
             <ListItemText primary="Perfil de Usuario" />
-          </ListItemButton>
-          <ListItem>
-            <Box>
-              <ListItemText primary="Gestionar Usuarios" />
-              <Box>
-                <ListItemText primary="Operadores turísticos" />
-                <ListItemButton
-                  component={Link}
-                  to="/panel-control/perfil"
-                  onClick={handleDrawerClose}
-                >
-                  <ListItemIcon>
-                    <AccountCircleIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Nuevos" />
-                </ListItemButton>
-                <ListItemButton
-                  component={Link}
-                  to="/panel-control/perfil"
-                  onClick={handleDrawerClose}
-                >
-                  <ListItemIcon>
-                    <AccountCircleIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Registrados" />
-                </ListItemButton>
-              </Box>
-              <Box>
-                <ListItemText primary="Conductores" />
-                <ListItemButton
-                  component={Link}
-                  to="/panel-control/perfil"
-                  onClick={handleDrawerClose}
-                >
-                  <ListItemIcon>
-                    <AccountCircleIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Nuevos" />
-                </ListItemButton>
-                <ListItemButton
-                  component={Link}
-                  to="/panel-control/perfil"
-                  onClick={handleDrawerClose}
-                >
-                  <ListItemIcon>
-                    <AccountCircleIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Sin Validar" />
-                </ListItemButton>
-                <ListItemButton
-                  component={Link}
-                  to="/panel-control/perfil"
-                  onClick={handleDrawerClose}
-                >
-                  <ListItemIcon>
-                    <AccountCircleIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Validados" />
-                </ListItemButton>
-              </Box>
-            </Box>
-          </ListItem>
-          <ListItem>
-            <Box>
-              <ListItemText primary="Gestionar Pagos" />
-              <Box>
-                <ListItemText primary="Pago de Reservas" />
-                <ListItemButton
-                  component={Link}
-                  to="/panel-control/perfil"
-                  onClick={handleDrawerClose}
-                >
-                  <ListItemIcon>
-                    <AccountCircleIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Por Epayco" />
-                </ListItemButton>
-                <ListItemButton
-                  component={Link}
-                  to="/panel-control/perfil"
-                  onClick={handleDrawerClose}
-                >
-                  <ListItemIcon>
-                    <AccountCircleIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Transferencia" />
-                </ListItemButton>
-              </Box>
-              <Box>
-                <ListItemText primary="Pago a Conductores" />
-                <ListItemButton
-                  component={Link}
-                  to="/panel-control/perfil"
-                  onClick={handleDrawerClose}
-                >
-                  <ListItemIcon>
-                    <AccountCircleIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Anticipos" />
-                </ListItemButton>
-                <ListItemButton
-                  component={Link}
-                  to="/panel-control/perfil"
-                  onClick={handleDrawerClose}
-                >
-                  <ListItemIcon>
-                    <AccountCircleIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Saldo Final" />
-                </ListItemButton>
-                <ListItemButton
-                  component={Link}
-                  to="/panel-control/perfil"
-                  onClick={handleDrawerClose}
-                >
-                  <ListItemIcon>
-                    <AccountCircleIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Recompensas" />
-                </ListItemButton>
-              </Box>
-            </Box>
-          </ListItem>
-          <ListItem>
-            <Box>
-              <ListItemText primary="Monitoreo de Servicios" />
-              <Box>
-                <ListItemText primary="Lista de Reservas" />
-                <ListItemButton
-                  component={Link}
-                  to="/panel-control/perfil"
-                  onClick={handleDrawerClose}
-                >
-                  <ListItemIcon>
-                    <AccountCircleIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Lista de Salidas" />
-                </ListItemButton>
-                <ListItemButton
-                  component={Link}
-                  to="/panel-control/perfil"
-                  onClick={handleDrawerClose}
-                >
-                  <ListItemIcon>
-                    <AccountCircleIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Finalizados" />
-                </ListItemButton>
-                <ListItemButton
-                  component={Link}
-                  to="/panel-control/perfil"
-                  onClick={handleDrawerClose}
-                >
-                  <ListItemIcon>
-                    <AccountCircleIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Mapa en Tiempo Real" />
-                </ListItemButton> 
-              </Box>              
-            </Box>
-          </ListItem>
+          </ListItemButton>          
           <ListItemButton onClick={handleSalir}>
             <ListItemIcon>
               <LogoutIcon />

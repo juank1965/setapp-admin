@@ -54,7 +54,7 @@ export default function ListaViajesFinalizados() {
         mt: "50px",
       }}
     >
-      <h5 className="titulo">Seguimiento a servicios</h5>
+      <Typography variant="h6" gutterBottom>Servicios Finalizados</Typography>
       {viajesFinalizados.length > 0 ? (
         viajesFinalizados.map((viaje) => (
           <>

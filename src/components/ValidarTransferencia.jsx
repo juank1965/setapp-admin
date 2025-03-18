@@ -93,7 +93,7 @@ export default function ValidarTransferencia() {
         padding: "10px"
       }}
     >
-      <h5 className="titulo">Validar Pagos de Reserva Vehículos vía transferencias</h5>
+      <Typography variant="h6" gutterBottom>Validar Pagos de Reserva Vehículos vía transferencias</Typography>
       {validar.length > 0 ? (
         validar.map((valida) => (
           <>
@@ -213,7 +213,7 @@ export default function ValidarTransferencia() {
         padding: "10px",        
       }}
     >
-      <h5 className="titulo">Validar Pagos de Reserva Servicio de Guias vía transferencias</h5>
+      <Typography variant="h6" gutterBottom>Validar Pagos de Reserva Servicio de Guias vía transferencias</Typography>
       {validarGuia.length > 0 ? (
         validarGuia.map((valida) => (
           <>
