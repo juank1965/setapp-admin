@@ -28,6 +28,7 @@ import setapp from "../assets/setapp.png";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db, salir } from "../assets/firebase/configuracion";
 import Alert from "@mui/material/Alert";
+import MapIcon from '@mui/icons-material/Map';
 
 const drawerWidth = 240;
 
@@ -160,6 +161,16 @@ export default function MenuBar() {
               <AccountCircleIcon />
             </ListItemIcon>
             <ListItemText primary="Perfil de Usuario" />
+          </ListItemButton>
+          <ListItemButton
+            component={Link}
+            to="/panel-control/monitor-map"
+            onClick={handleDrawerClose}
+          >
+            <ListItemIcon>
+              <MapIcon />
+            </ListItemIcon>
+            <ListItemText primary="Mapa de Monitoreo" />
           </ListItemButton>          
           <ListItemButton onClick={handleSalir}>
             <ListItemIcon>

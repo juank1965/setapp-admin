@@ -54,8 +54,7 @@ export const getUsuario = async (id) => {
 // Metodo para obtener listado de Nuevos Operadores Registrados
 export const getUsuariosNuevos = (actualizar) => {
   const q = query(
-    collection(db, "usuarios"),
-    where("perfil", "==", true),
+    collection(db, "usuarios"),    
     where("nuevo", "==", true)
   );
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -139,8 +138,7 @@ export const getConductoresNuevos = (actualizar) => {
     collection(db, "conductores"),
     where("validado", "==", false),
     where("fotosVehiculo", "==", false),
-    where("documentosVehiculo", "==", false),
-    where("perfil", "==", true)
+    where("documentosVehiculo", "==", false),    
   );
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const conductores = [];
@@ -167,6 +165,7 @@ export const getConductoresPorValidar = (actualizar) => {
     collection(db, "conductores"),
     where("validado", "==", false),
     where("fotosVehiculo", "==", true),
+    where("documentosVehiculo", "==", true),
     where("perfil", "==", true)
   );
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -653,9 +652,8 @@ export const getGuias = (actualizar) => {
 export const getGuiasNuevos = (actualizar) => {
   const q = query(
     collection(db, "guias"),
-    where("validado", "==", false),    
-    where("documentosGuia", "==", false),
-    where("perfil", "==", true)
+    where("validado", "==", false),   
+    where("perfil", "==", false)
   );
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const guias = [];

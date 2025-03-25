@@ -123,3 +123,22 @@
   color: #4a4242;
   margin: 5px;
 }
+
+/* Estilos generales responsivos */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 12px;
+  }
+  h2 {
+    font-size: 18px;
+  }
+}

@@ -80,3 +80,17 @@
 .footer {
   margin-top: 5px;
 }
+
+/* Estilos responsivos para el Login */
+@media (max-width: 600px) {
+  .bordes {
+    padding: 20px;
+    width: 90%;
+  }
+  .myInput {
+    width: 100%;
+  }
+  .myButton {
+    width: 100%;
+  }
+}

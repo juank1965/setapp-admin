@@ -14,6 +14,7 @@ import styles from "./MenuDown.module.css";
 import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 
+
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
     right: -5,
@@ -57,6 +58,12 @@ export default function MenuDown() {
             icon={<NoCrashIcon />}
             component={Link}
             to="/panel-control/reservas"
+          />
+          <BottomNavigationAction
+            label="Mapa de Monitoreo"
+            icon={<MapIcon />}
+            component={Link}
+            to="/panel-control/monitor-map"
           />
           <BottomNavigationAction
             label="Gestionar Pagos"

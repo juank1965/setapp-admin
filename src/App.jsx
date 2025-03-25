@@ -36,6 +36,7 @@ import Recompensas from "./components/Recompensas";
 import Guias from "./components/Guias";
 import GuiasNuevos from "./components/GuiasNuevos";
 import ListaGuiasPorValidar from "./components/ListaGuiasPorValidar";
+import MonitorMap from "./components/MonitorMap";
 
 function App() {
   return (
@@ -79,6 +80,7 @@ function App() {
           <Route path="historial" element={<Historial />} />
           <Route path="perfil" element={<Perfil />} />
           <Route path="salir" element={<Salir />} />
+          <Route path="monitor-map" element={<MonitorMap />} />
         </Route>
       </Routes>
       <Toaster

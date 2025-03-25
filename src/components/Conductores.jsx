@@ -128,6 +128,12 @@ export default function Conductores() {
                         size="small"
                         label={conductor.numeroInterno}
                       />
+                      Código Referidos:
+                      <Chip
+                        color="primary"
+                        size="small"
+                        label={conductor.codigo}
+                      />
                     </Typography>
                     <br />
                     <Typography

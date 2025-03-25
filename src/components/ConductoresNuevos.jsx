@@ -126,11 +126,11 @@ export default function ConductoresNuevos() {
                         size="small"
                         label={conductorNuevo.empresa}
                       />{" "}
-                      No Interno:
+                      Código Referidos:
                       <Chip
                         color="primary"
                         size="small"
-                        label={conductorNuevo.numeroInterno}
+                        label={conductorNuevo.codigo}
                       />
                     </Typography>
                     <br />
