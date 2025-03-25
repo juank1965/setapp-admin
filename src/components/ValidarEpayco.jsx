@@ -95,16 +95,21 @@ export default function ValidarEpayco() {
           maxWidth: 360,
           bgcolor: "background.paper",
           mt: "50px",
+          alignItems: "center"
         }}
       >
+<<<<<<< HEAD
         <Typography variant="h6" gutterBottom>Validar Pagos de Reservas Vehículos vía EPAYCO</Typography>
+=======
+        <Typography variant="h6" gutterBottom>Validar Reservas Vehículos vía EPAYCO</Typography>
+>>>>>>> dbd5f5555036f987592748616dfb985b6f69daf3
         {validar.length > 0 ? (
           validar.map((valida) => (
             <>
               {valida.metodPago === "epayco" && (
                 <>
                   <ListItem
-                    alignItems="flex-start"
+                    alignItems="center"
                     key={valida.id}
                     disableGutters
                     secondaryAction={
@@ -217,7 +222,11 @@ export default function ValidarEpayco() {
           mt: "50px",
         }}
       >
+<<<<<<< HEAD
         <Typography variant="h6" gutterBottom>Validar Pagos de Reservas servicios de Guía turístico vía EPAYCO</Typography>
+=======
+        <Typography variant="h6" gutterBottom>Validar Reservas Servicios de Guías de turismo vía EPAYCO</Typography>
+>>>>>>> dbd5f5555036f987592748616dfb985b6f69daf3
         {validarGuia.length > 0 ? (
           validarGuia.map((valida) => (
             <>
@@ -285,7 +294,7 @@ export default function ValidarEpayco() {
             </>
           ))
         ) : (
-          <h6 className="titulo">No hay Pagos Epayco a Guías para Validar</h6>
+          <h6 className="titulo">No hay Pagos Epayco a Guías por Validar</h6>
         )}
         <Modal
           open={openGuia}

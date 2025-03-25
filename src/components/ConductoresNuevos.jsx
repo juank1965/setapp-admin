@@ -130,7 +130,11 @@ export default function ConductoresNuevos() {
                       <Chip
                         color="primary"
                         size="small"
+<<<<<<< HEAD
                         label={conductorNuevo.codigo}
+=======
+                        label={conductorNuevo.numeroInterno}
+>>>>>>> dbd5f5555036f987592748616dfb985b6f69daf3
                       />
                     </Typography>
                     <br />

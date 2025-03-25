@@ -19,7 +19,7 @@ import ReservasEpayco from "./ReservasEpayco";
 import ReservasTranferencia from "./ReservasTransferencia";
 import ValidarEpayco from "./ValidarEpayco";
 import ValidarTransferencia from "./ValidarTransferencia";
-import { Divider } from "@mui/material";
+import { Card, Divider } from "@mui/material";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -63,10 +63,42 @@ function GestionaReservas() {
 
   return (
     <div className="bodypanel bodycontent">
-      <Box sx={{ display: 'flex', flexDirection: "row", margin: 1, flexWrap: "wrap",
-    justifyContent: "center" }}>
-        <ReservasEpayco change={handleValue} />
-        <ReservasTranferencia change={handleValue} />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          margin: 1,
+          flexWrap: "wrap",
+          justifyContent: "center",
+          backgroundColor: "#808080",
+        }}
+      >
+        <Card
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+            margin: "1px",
+            backgroundColor: "#808080",
+          }}
+        >
+          <Box sx={{ display: "flex" }}>
+            <Typography
+              color={"white"}
+              gutterBottom
+              variant="h6"
+              component="div"
+            >
+              Pagos Por Validar
+            </Typography>
+          </Box>
+          <Box sx={{ display: "flex" }}>
+            <ReservasEpayco change={handleValue} />
+            <ReservasTranferencia change={handleValue} />
+          </Box>
+        </Card>
       </Box>
       <Divider />
       <Box sx={{ display: "flex", justifyContent: "center" }}>

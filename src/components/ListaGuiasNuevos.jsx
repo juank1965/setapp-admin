@@ -1,6 +1,7 @@
 import * as React from "react";
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
+import { Card, CardActionArea, CardActions, CardContent, Typography } from "@mui/material";
 
 export default function ListaGuiasNuevos({ change }) {
   function handleChange() {
@@ -9,8 +10,20 @@ export default function ListaGuiasNuevos({ change }) {
   }
 
   return (
-    <Stack direction="row" spacing={1} sx={{m:1}}>
-      <Chip color="info" label="Guias Nuevos" onClick={handleChange} />      
-    </Stack> 
+    <Card sx={{ maxWidth: 200, margin: 1 }}>
+      <CardActionArea onClick={handleChange}>        
+        <CardContent>
+          <Typography gutterBottom variant="h6" component="div">
+            Nuevos
+          </Typography>
+          <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+            Muestra lista de Guías de turismo recien registrados
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+      <Chip color="success" label="Ver Lista" onClick={handleChange} />
+      </CardActions>
+    </Card> 
   );
 }

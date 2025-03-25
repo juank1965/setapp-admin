@@ -87,6 +87,7 @@ export default function Saldos() {
         maxWidth: 360,
         bgcolor: "background.paper",
         mt: "50px",
+        mb: "5px"
       }}
     >
       <Typography variant="h6" gutterBottom>
@@ -226,10 +227,15 @@ export default function Saldos() {
       maxWidth: 360,
       bgcolor: "background.paper",
       mt: "50px",
+      mb:"5px"
     }}
   >
     <Typography variant="h6" gutterBottom>
+<<<<<<< HEAD
       Servicios Por Pago de Saldo Final del 50% a GUÍAS TURÍSTICOS
+=======
+      Servicios Por Pago de Saldo Final del 50% a Guías De Turismo
+>>>>>>> dbd5f5555036f987592748616dfb985b6f69daf3
     </Typography>
     {saldosGuia.length > 0 ? (
       saldosGuia.map((saldo) => (

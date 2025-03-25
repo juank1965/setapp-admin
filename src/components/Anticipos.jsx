@@ -98,6 +98,7 @@ export default function Anticipos() {
           minWidth: 360,
           bgcolor: "background.paper",
           mt: "50px",
+          mb: "5px"
         }}
       >
         <Typography variant="h6" gutterBottom>
@@ -249,6 +250,7 @@ export default function Anticipos() {
           minWidth: 360,
           bgcolor: "background.paper",
           mt: "50px",
+          mb: "5px"
         }}
       >
         <Typography variant="h6" gutterBottom>Servicios de Guias Por Pago deAnticipo 50%</Typography>

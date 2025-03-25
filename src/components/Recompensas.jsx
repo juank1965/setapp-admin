@@ -75,6 +75,7 @@ export default function Recompensas() {
         maxWidth: 360,
         bgcolor: "background.paper",
         mt: "50px",
+        mb: "5px"
       }}
     >
       <Typography variant="h6" gutterBottom>CONDUCTORES QUE HAN GENERADO RECOMPENSA</Typography>

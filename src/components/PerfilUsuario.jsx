@@ -10,30 +10,98 @@ import {
   TextField,
 } from "@mui/material";
 
+import { auth, updateUsuario } from "../assets/firebase/configuracion";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+
 const states = [
+  {
+    value: "ARMENIA",
+    label: "Armenia",
+  },  
   {
     value: "CALI",
     label: "Santiago de Cali",
   },
   {
-    value: "BUENAVENTURA",
-    label: "Buenaventura",
+    value: "CARTAGENA",
+    label: "Cartagena",
   },
   {
-    value: "ARMENIA",
-    label: "Armenia",
+    value: "BARRANQUILLA",
+    label: "Barranquilla",
+  },
+  {
+    value: "BOGOTA",
+    label: "Bogota",
+  },
+  {
+    value: "MANIZALES",
+    label: "Manizales",
+  },
+  {
+    value: "MEDELLIN",
+    label: "medellin",
+  },
+  {
+    value: "PASTO",
+    label: "Pasto",
+  },
+  {
+    value: "PEREIRA",
+    label: "Pereira",
+  },
+  {
+    value: "SANTA MARTHA",
+    label: "Santa Martha",
+  },
+];
+
+const jobs = [
+  {
+    value: "CEO",
+    label: "Ceo",
+  },
+  {
+    value: "CFO",
+    label: "Cfo",
+  },
+  {
+    value: "CMO",
+    label: "Cmo",
+  },
+  {
+    value: "CTO",
+    label: "Ceo",
+  },
+  {
+    value: "ASISTENTE CONTABLE",
+    label: "Asistente Contable",
+  },
+  {
+    value: "ASISTENTE COMERCIAL",
+    label: "Asistente Comercial",
+  },
+  {
+    value: "DESARROLLADOR",
+    label: "Desarrollador",
   },
 ];
 
 export const PerfilUsuario = (props) => {
+
+  const [user, setUser] = useState(auth.currentUser);
   const [values, setValues] = useState({
-    Nombres: "Juan Carlos",
-    Apellido: "Bastidas",
+    nombres: "Juan Carlos",
+    apellidos: "Bastidas",
+    puesto: "CEO",
     email: "juancarlosbastidasq@gmail.com",
     telefono: "3167599985",
     direccion: "Calle 31A 12-124 Apto 102C",
     ciudad: "CALI",
   });
+
+  let navigate = useNavigate();
 
   const handleChange = (event) => {
     setValues({
@@ -41,6 +109,15 @@ export const PerfilUsuario = (props) => {
       [event.target.name]: event.target.value,
     });
   };
+
+  const handleActualizar = ()=> {           
+    updateUsuario(user.uid, values)
+    toast("Perfil actualizado con éxito")
+    setTimeout(() => {
+      navigate("/panel-control/usuarios")
+    }, "2000");    
+           
+  }
 
   return (
     <form autoComplete="off" noValidate {...props}>
@@ -52,7 +129,7 @@ export const PerfilUsuario = (props) => {
         <Divider />
         <CardContent>
           <Grid container spacing={3}>
-            <Grid item md={6} xs={12}>
+            <Grid item md={3} xs={12}>
               <TextField
                 fullWidth
                 helperText="Por favor especificque su nombre"
@@ -60,11 +137,11 @@ export const PerfilUsuario = (props) => {
                 name="nombres"
                 onChange={handleChange}
                 required
-                value={values.Nombres}
+                value={values.nombres}
                 variant="outlined"
               />
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item md={3} xs={12}>
               <TextField
                 fullWidth
                 label="Apellidos"
@@ -75,7 +152,7 @@ export const PerfilUsuario = (props) => {
                 variant="outlined"
               />
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item md={3} xs={12}>
               <TextField
                 fullWidth
                 label="Correo Electronico"
@@ -84,9 +161,10 @@ export const PerfilUsuario = (props) => {
                 required
                 value={values.email}
                 variant="outlined"
+                disabled
               />
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item md={3} xs={12}>
               <TextField
                 fullWidth
                 label="Numero de Telefono"
@@ -97,7 +175,7 @@ export const PerfilUsuario = (props) => {
                 variant="outlined"
               />
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item md={4} xs={12}>
               <TextField
                 fullWidth
                 label="Direccion"
@@ -108,7 +186,7 @@ export const PerfilUsuario = (props) => {
                 variant="outlined"
               />
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item md={4} xs={12}>
               <TextField
                 fullWidth
                 label="Select la Ciudad"
@@ -127,6 +205,25 @@ export const PerfilUsuario = (props) => {
                 ))}
               </TextField>
             </Grid>
+            <Grid item md={4} xs={12}>
+              <TextField
+                fullWidth
+                label="Puesto de Trabajo"
+                name="puesto"
+                onChange={handleChange}
+                required
+                select
+                SelectProps={{ native: true }}
+                value={values.puesto}
+                variant="outlined"
+              >
+                {jobs.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </TextField>
+            </Grid>
           </Grid>
         </CardContent>
         <Divider />
@@ -137,7 +234,7 @@ export const PerfilUsuario = (props) => {
             p: 2,
           }}
         >
-          <Button color="primary" variant="contained">
+          <Button color="primary" variant="contained" onClick={handleActualizar}>
             Actualizar perfil
           </Button>
         </Box>

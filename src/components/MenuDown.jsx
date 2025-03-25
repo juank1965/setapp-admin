@@ -54,12 +54,13 @@ export default function MenuDown() {
             to="/panel-control/usuarios"
           />
           <BottomNavigationAction
-            label="Gestionar Reservas"
+            label="Gestión de Reservas"
             icon={<NoCrashIcon />}
             component={Link}
             to="/panel-control/reservas"
           />
           <BottomNavigationAction
+<<<<<<< HEAD
             label="Mapa de Monitoreo"
             icon={<MapIcon />}
             component={Link}
@@ -67,6 +68,9 @@ export default function MenuDown() {
           />
           <BottomNavigationAction
             label="Gestionar Pagos"
+=======
+            label="Pago Proveedores"
+>>>>>>> dbd5f5555036f987592748616dfb985b6f69daf3
             icon={
               <Badge badgeContent={0} color="secondary">
                 <MonetizationOnIcon />

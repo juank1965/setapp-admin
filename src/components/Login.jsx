@@ -24,10 +24,17 @@ function Login() {
           userData.then((usuario) => {
             // Ingresa al panel que corresponde
             if (usuario.perfil) {
+<<<<<<< HEAD
               toast.success("Bievenido !!");
               navigate("/panel-control/monitor-map");
             } else {
               toast.error("Completa tu perfil");
+=======
+              toast("Bievenido !!");
+              navigate("/panel-control/usuarios");
+            } else {
+              toast("Completa tu perfil");
+>>>>>>> dbd5f5555036f987592748616dfb985b6f69daf3
               navigate("/panel-control/perfil");
             }
           });
@@ -38,7 +45,7 @@ function Login() {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(`${errorMessage}`);
+        toast(`${errorMessage}`);
       });
   };
 

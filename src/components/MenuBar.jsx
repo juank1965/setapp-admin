@@ -27,8 +27,12 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import setapp from "../assets/setapp.png";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db, salir } from "../assets/firebase/configuracion";
+<<<<<<< HEAD
 import Alert from "@mui/material/Alert";
 import MapIcon from '@mui/icons-material/Map';
+=======
+import toast from "react-hot-toast";
+>>>>>>> dbd5f5555036f987592748616dfb985b6f69daf3
 
 const drawerWidth = 240;
 
@@ -90,7 +94,11 @@ export default function MenuBar() {
     if (dataUser && dataUser.imagen !== null) {
       setImagen(dataUser.imagen);
     }
+    if (auth.currentUser){
+      setUser(auth.currentUser)
+    }
   }, []);
+  
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -161,6 +169,7 @@ export default function MenuBar() {
               <AccountCircleIcon />
             </ListItemIcon>
             <ListItemText primary="Perfil de Usuario" />
+<<<<<<< HEAD
           </ListItemButton>
           <ListItemButton
             component={Link}
@@ -171,6 +180,8 @@ export default function MenuBar() {
               <MapIcon />
             </ListItemIcon>
             <ListItemText primary="Mapa de Monitoreo" />
+=======
+>>>>>>> dbd5f5555036f987592748616dfb985b6f69daf3
           </ListItemButton>          
           <ListItemButton onClick={handleSalir}>
             <ListItemIcon>

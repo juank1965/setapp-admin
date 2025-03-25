@@ -51,6 +51,19 @@ export const getUsuario = async (id) => {
   const data = docSnap.data();
   return data;
 };
+// metodo opara actualizar datos del usuario
+export const updateUsuario = async (id, data) => {
+  const updateUsuarioRef = doc(db, "admin", id);
+  await updateDoc(updateUsuarioRef, {
+    name: data.nombres + data.apellidos,
+    puesto: data.puesto,
+    ciudad: data.ciudad,
+    direccion: data.direccion,    
+    movil: data.telefono,
+    perfil: true,
+    id: id,
+  });
+};
 // Metodo para obtener listado de Nuevos Operadores Registrados
 export const getUsuariosNuevos = (actualizar) => {
   const q = query(

@@ -1,6 +1,10 @@
 import * as React from "react";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
+<<<<<<< HEAD
+=======
+import { Card, CardActionArea, CardActions, CardContent, Typography } from "@mui/material";
+>>>>>>> dbd5f5555036f987592748616dfb985b6f69daf3
 
 export default function ListaDeReservas({change}) {  
 
@@ -11,8 +15,26 @@ export default function ListaDeReservas({change}) {
  }
 
   return (
+<<<<<<< HEAD
     <Stack direction="row" spacing={1} sx={{ m: 1 }}>
       <Chip color="primary" label="Reservas Registradas" onClick={handleChange} />
     </Stack>    
+=======
+    <Card sx={{ maxWidth: 200, margin: 1 }}>
+    <CardActionArea onClick={handleChange}>        
+      <CardContent>
+        <Typography gutterBottom variant="h6" component="div">
+          Reservas
+        </Typography>
+        <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+          Reservas Registradas 
+        </Typography>
+      </CardContent>
+    </CardActionArea>
+    <CardActions>
+    <Chip color="warning" label="Reservas Activas" onClick={handleChange} />
+    </CardActions>
+  </Card>    
+>>>>>>> dbd5f5555036f987592748616dfb985b6f69daf3
   );
 }
